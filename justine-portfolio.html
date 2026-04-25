@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Justine Inacay — Marketing & Creatives Professional</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Syne:wght@400;500;600;700&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg:#07060a;--surface:#100f14;--surface2:#18161e;
+    --gold:#c8a96a;--gold-light:#e0c98a;--gold-dim:#7a6340;
+    --cream:#ede8dc;--cream-dim:#9a9080;--cream-muted:#4a4540;
+    --border:rgba(200,169,106,0.15);--border-dim:rgba(200,169,106,0.07);
+  }
+  *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{background:var(--bg);color:var(--cream);font-family:'Syne',sans-serif;font-size:16px;line-height:1.6;cursor:none;overflow-x:hidden;}
+
+  #cursor-dot{position:fixed;width:6px;height:6px;background:var(--gold);border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:width .15s,height .15s,background .15s;}
+  #cursor-ring{position:fixed;width:36px;height:36px;border:1px solid rgba(200,169,106,0.5);border-radius:50%;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:width .35s cubic-bezier(.23,1,.32,1),height .35s cubic-bezier(.23,1,.32,1),border-color .35s;}
+  body.hovering #cursor-dot{width:10px;height:10px;background:var(--gold-light);}
+  body.hovering #cursor-ring{width:56px;height:56px;border-color:rgba(200,169,106,0.35);}
+
+  nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:28px 60px;display:flex;justify-content:space-between;align-items:center;transition:background .4s,padding .4s;}
+  nav.scrolled{background:rgba(7,6,10,0.88);backdrop-filter:blur(16px);padding:18px 60px;border-bottom:1px solid var(--border-dim);}
+  .nav-logo{font-family:'Cormorant Garamond',serif;font-size:1.3rem;font-weight:600;letter-spacing:.04em;color:var(--cream);text-decoration:none;}
+  .nav-logo span{color:var(--gold);}
+  .nav-links{display:flex;gap:40px;list-style:none;}
+  .nav-links a{font-size:.8rem;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:var(--cream-dim);text-decoration:none;position:relative;transition:color .3s;cursor:none;}
+  .nav-links a::after{content:'';position:absolute;bottom:-4px;left:0;right:100%;height:1px;background:var(--gold);transition:right .35s cubic-bezier(.23,1,.32,1);}
+  .nav-links a:hover{color:var(--gold);}
+  .nav-links a:hover::after{right:0;}
+
+  #hero{min-height:100vh;display:flex;flex-direction:column;justify-content:flex-end;padding:0 60px 80px;position:relative;overflow:hidden;}
+  .hero-bg-lines{position:absolute;inset:0;pointer-events:none;background-image:linear-gradient(90deg,rgba(200,169,106,0.04) 1px,transparent 1px),linear-gradient(0deg,rgba(200,169,106,0.03) 1px,transparent 1px);background-size:80px 80px;mask-image:radial-gradient(ellipse 80% 70% at 50% 50%,black,transparent);}
+  .hero-eyebrow{font-family:'DM Mono',monospace;font-size:.7rem;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);margin-bottom:32px;display:flex;align-items:center;gap:16px;opacity:0;transform:translateY(20px);animation:revealUp .7s .2s forwards;}
+  .hero-eyebrow::before{content:'';display:block;width:40px;height:1px;background:var(--gold-dim);}
+  .hero-name{font-family:'Cormorant Garamond',serif;font-size:clamp(4.5rem,11vw,11rem);font-weight:600;line-height:.92;letter-spacing:-.02em;color:var(--cream);overflow:hidden;margin-bottom:32px;}
+  .hero-name-inner{display:block;transform:translateY(110%);animation:revealSlide .9s .4s cubic-bezier(.23,1,.32,1) forwards;}
+  .hero-name span{color:var(--gold);font-style:italic;}
+  .hero-sub{display:flex;align-items:flex-start;gap:60px;opacity:0;transform:translateY(20px);animation:revealUp .7s .85s forwards;}
+  .hero-tagline{font-size:1rem;color:var(--cream-dim);max-width:420px;line-height:1.75;font-weight:400;}
+  .hero-tagline strong{color:var(--cream);font-weight:500;}
+  .hero-cta-group{display:flex;gap:16px;align-items:center;margin-top:4px;}
+  .btn-primary{display:inline-flex;align-items:center;gap:10px;padding:14px 28px;background:var(--gold);color:var(--bg);font-family:'Syne',sans-serif;font-size:.8rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;text-decoration:none;border:none;cursor:none;transition:background .3s,transform .2s;clip-path:polygon(0 0,calc(100% - 12px) 0,100% 12px,100% 100%,12px 100%,0 calc(100% - 12px));}
+  .btn-primary:hover{background:var(--gold-light);transform:translateY(-2px);}
+  .btn-ghost{display:inline-flex;align-items:center;gap:10px;padding:14px 28px;color:var(--cream-dim);font-family:'Syne',sans-serif;font-size:.8rem;font-weight:500;letter-spacing:.1em;text-transform:uppercase;text-decoration:none;border:1px solid var(--border);transition:color .3s,border-color .3s;cursor:none;}
+  .btn-ghost:hover{color:var(--gold);border-color:var(--gold-dim);}
+  .hero-scroll-hint{position:absolute;right:60px;bottom:80px;display:flex;flex-direction:column;align-items:center;gap:12px;opacity:0;animation:revealUp .6s 1.3s forwards;}
+  .scroll-line{width:1px;height:60px;background:linear-gradient(to bottom,transparent,var(--gold-dim));position:relative;overflow:hidden;}
+  .scroll-line::after{content:'';position:absolute;inset:0;background:var(--gold);animation:scrollDrop 2s 1.8s ease-in-out infinite;}
+  @keyframes scrollDrop{0%{transform:translateY(-100%);}100%{transform:translateY(100%);}}
+  .scroll-label{font-family:'DM Mono',monospace;font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;color:var(--cream-muted);writing-mode:vertical-rl;}
+
+  .ticker-wrap{border-top:1px solid var(--border-dim);border-bottom:1px solid var(--border-dim);padding:16px 0;overflow:hidden;background:var(--surface);}
+  .ticker-track{display:flex;white-space:nowrap;animation:ticker 35s linear infinite;}
+  .ticker-item{display:inline-flex;align-items:center;gap:24px;padding:0 36px;font-family:'DM Mono',monospace;font-size:.7rem;letter-spacing:.18em;text-transform:uppercase;color:var(--cream-muted);}
+  .ticker-dot{width:4px;height:4px;border-radius:50%;background:var(--gold-dim);flex-shrink:0;}
+  @keyframes ticker{from{transform:translateX(0);}to{transform:translateX(-50%);}}
+
+  section{padding:120px 60px;}
+  .section-label{font-family:'DM Mono',monospace;font-size:.65rem;letter-spacing:.25em;text-transform:uppercase;color:var(--gold);display:flex;align-items:center;gap:14px;margin-bottom:48px;}
+  .section-label::before{content:'';display:block;width:30px;height:1px;background:var(--gold-dim);}
+  .reveal-up{opacity:0;transform:translateY(40px);transition:opacity .8s cubic-bezier(.23,1,.32,1),transform .8s cubic-bezier(.23,1,.32,1);}
+  .reveal-up.visible{opacity:1;transform:translateY(0);}
+  .stagger-1{transition-delay:.05s!important;}.stagger-2{transition-delay:.15s!important;}.stagger-3{transition-delay:.25s!important;}.stagger-4{transition-delay:.35s!important;}
+
+  #about{background:var(--surface);}
+  .about-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start;}
+  .about-heading{font-family:'Cormorant Garamond',serif;font-size:clamp(2.2rem,4vw,3.6rem);font-weight:600;line-height:1.1;letter-spacing:-.01em;color:var(--cream);margin-bottom:32px;}
+  .about-heading em{color:var(--gold);font-style:italic;}
+  .about-body{color:var(--cream-dim);line-height:1.8;font-size:.95rem;margin-bottom:20px;font-weight:400;}
+  .geo-tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:28px;}
+  .geo-tag{padding:6px 14px;border:1px solid var(--border);font-family:'DM Mono',monospace;font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;color:var(--cream-muted);}
+  .about-values{list-style:none;}
+  .about-values li{display:flex;align-items:flex-start;gap:16px;padding:20px 0;border-bottom:1px solid var(--border-dim);color:var(--cream-dim);font-size:.9rem;line-height:1.6;transition:color .3s;}
+  .about-values li:first-child{padding-top:0;}
+  .about-values li:hover{color:var(--cream);}
+  .val-num{font-family:'DM Mono',monospace;font-size:.65rem;letter-spacing:.1em;color:var(--gold);min-width:28px;padding-top:3px;}
+  .val-title{font-weight:600;font-size:.85rem;color:var(--cream);margin-bottom:4px;letter-spacing:.04em;}
+
+  #stats{padding:80px 60px;border-top:1px solid var(--border-dim);border-bottom:1px solid var(--border-dim);background:linear-gradient(90deg,rgba(200,169,106,0.03) 0%,transparent 50%,rgba(200,169,106,0.03) 100%);}
+  .stats-grid{display:grid;grid-template-columns:repeat(4,1fr);}
+  .stat-item{padding:40px 32px;border-right:1px solid var(--border-dim);text-align:center;}
+  .stat-item:last-child{border-right:none;}
+  .stat-num{font-family:'Cormorant Garamond',serif;font-size:clamp(2.8rem,4vw,4.5rem);font-weight:600;color:var(--gold);line-height:1;display:block;margin-bottom:10px;}
+  .stat-label{font-family:'DM Mono',monospace;font-size:.62rem;letter-spacing:.16em;text-transform:uppercase;color:var(--cream-muted);line-height:1.5;}
+
+  #experience{}
+  .exp-header{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:64px;}
+  .exp-heading{font-family:'Cormorant Garamond',serif;font-size:clamp(2rem,3.5vw,3rem);font-weight:600;letter-spacing:-.01em;color:var(--cream);line-height:1.1;}
+  .exp-heading em{color:var(--gold);font-style:italic;}
+  .exp-list{display:flex;flex-direction:column;gap:2px;}
+  .exp-card{padding:40px 44px;background:var(--surface);border:1px solid var(--border-dim);cursor:none;position:relative;overflow:hidden;transition:border-color .4s;}
+  .exp-card::before{content:'';position:absolute;left:0;top:0;bottom:0;width:2px;background:var(--gold);transform:scaleY(0);transform-origin:bottom;transition:transform .4s cubic-bezier(.23,1,.32,1);}
+  .exp-card:hover{border-color:var(--border);}
+  .exp-card:hover::before{transform:scaleY(1);}
+  .exp-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:6px;}
+  .exp-role{font-size:1.05rem;font-weight:600;color:var(--cream);letter-spacing:.02em;line-height:1.2;}
+  .exp-period{font-family:'DM Mono',monospace;font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;color:var(--gold-dim);white-space:nowrap;padding-top:4px;}
+  .exp-company{font-family:'DM Mono',monospace;font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);margin-bottom:20px;}
+  .exp-location{color:var(--cream-muted);margin-left:8px;}
+  .exp-bullets{list-style:none;}
+  .exp-bullets li{display:flex;gap:14px;color:var(--cream-dim);font-size:.88rem;line-height:1.7;padding:4px 0;}
+  .exp-bullets li::before{content:'—';color:var(--gold-dim);flex-shrink:0;}
+  .exp-bullets li strong{color:var(--cream);font-weight:600;}
+  .exp-tag-row{display:flex;flex-wrap:wrap;gap:7px;margin-top:20px;}
+  .exp-tag{padding:4px 12px;border:1px solid var(--border-dim);font-family:'DM Mono',monospace;font-size:.58rem;letter-spacing:.12em;text-transform:uppercase;color:var(--cream-muted);transition:color .3s,border-color .3s;}
+  .exp-card:hover .exp-tag{color:var(--gold-dim);border-color:var(--gold-dim);}
+
+  #skills{background:var(--surface);}
+  .skills-layout{display:grid;grid-template-columns:320px 1fr;gap:80px;align-items:start;}
+  .skills-heading{font-family:'Cormorant Garamond',serif;font-size:clamp(2rem,3vw,2.8rem);font-weight:600;letter-spacing:-.01em;color:var(--cream);line-height:1.15;margin-bottom:24px;}
+  .skills-heading em{color:var(--gold);font-style:italic;}
+  .skills-body{color:var(--cream-dim);font-size:.9rem;line-height:1.8;font-weight:400;}
+  .skills-categories{display:flex;flex-direction:column;gap:36px;}
+  .skill-cat-title{font-family:'DM Mono',monospace;font-size:.65rem;letter-spacing:.22em;text-transform:uppercase;color:var(--gold-dim);margin-bottom:14px;}
+  .skill-pills{display:flex;flex-wrap:wrap;gap:8px;}
+  .skill-pill{padding:9px 18px;background:var(--bg);border:1px solid var(--border-dim);font-size:.8rem;font-weight:500;color:var(--cream-dim);letter-spacing:.03em;cursor:none;position:relative;overflow:hidden;transition:background .3s,color .3s,border-color .3s,transform .2s;}
+  .skill-pill:hover{background:rgba(200,169,106,0.07);color:var(--cream);border-color:var(--gold-dim);transform:translateY(-2px);}
+
+  #certs{padding:80px 60px;border-top:1px solid var(--border-dim);}
+  .certs-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:2px;margin-top:48px;}
+  .cert-card{padding:32px 28px;background:var(--surface);border:1px solid var(--border-dim);transition:border-color .3s;}
+  .cert-card:hover{border-color:var(--border);}
+  .cert-issuer{font-family:'DM Mono',monospace;font-size:.6rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold-dim);margin-bottom:12px;}
+  .cert-name{font-size:.9rem;font-weight:600;color:var(--cream);line-height:1.4;letter-spacing:.02em;}
+  .cert-year{font-family:'DM Mono',monospace;font-size:.6rem;color:var(--cream-muted);margin-top:10px;}
+
+  #contact{text-align:center;position:relative;overflow:hidden;}
+  .contact-bg{position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse 60% 60% at 50% 50%,rgba(200,169,106,0.06),transparent);}
+  .contact-heading{font-family:'Cormorant Garamond',serif;font-size:clamp(3rem,7vw,7rem);font-weight:600;letter-spacing:-.03em;color:var(--cream);line-height:.95;margin-bottom:32px;}
+  .contact-heading em{color:var(--gold);font-style:italic;}
+  .contact-sub{color:var(--cream-dim);font-size:1rem;max-width:480px;margin:0 auto 48px;line-height:1.75;}
+  .contact-links{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;margin-bottom:64px;}
+
+  footer{padding:32px 60px;border-top:1px solid var(--border-dim);display:flex;justify-content:space-between;align-items:center;background:var(--surface);}
+  .footer-copy{font-family:'DM Mono',monospace;font-size:.65rem;letter-spacing:.12em;color:var(--cream-muted);}
+  .footer-brand{font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-weight:600;color:var(--gold-dim);letter-spacing:.04em;}
+
+  @keyframes revealUp{to{opacity:1;transform:translateY(0);}}
+  @keyframes revealSlide{to{transform:translateY(0);}}
+
+  @media(max-width:900px){
+    nav{padding:24px;} nav.scrolled{padding:16px 24px;} .nav-links{display:none;}
+    section{padding:80px 24px;} #hero{padding:0 24px 60px;}
+    #stats,#certs{padding:60px 24px;}
+    .about-grid,.skills-layout{grid-template-columns:1fr;gap:40px;}
+    .stats-grid{grid-template-columns:1fr 1fr;}
+    .certs-grid{grid-template-columns:1fr 1fr;}
+    .stat-item{border-right:none;border-bottom:1px solid var(--border-dim);}
+    .hero-sub{flex-direction:column;gap:24px;}
+    .exp-top{flex-direction:column;gap:6px;}
+    footer{flex-direction:column;gap:12px;text-align:center;}
+  }
+</style>
+</head>
+<body>
+
+<div id="cursor-dot"></div>
+<div id="cursor-ring"></div>
+
+<nav id="nav">
+  <a href="#" class="nav-logo">J<span>.</span>Inacay</a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<section id="hero">
+  <div class="hero-bg-lines"></div>
+  <div class="hero-eyebrow">Marketing · Creatives · Multi-Brand Campaigns</div>
+  <h1 class="hero-name">
+    <span class="hero-name-inner">Justine <span>Inacay</span></span>
+  </h1>
+  <div class="hero-sub">
+    <p class="hero-tagline">
+      Marketing &amp; Creatives Professional.<br>
+      <strong>Integrated campaigns. Data-driven results.</strong><br>
+      Scaling brands across Canada and the Philippines — from paid media to viral content.
+    </p>
+    <div class="hero-cta-group">
+      <a href="#experience" class="btn-primary">View Experience →</a>
+      <a href="#contact" class="btn-ghost">Let's Talk</a>
+    </div>
+  </div>
+  <div class="hero-scroll-hint">
+    <div class="scroll-line"></div>
+    <span class="scroll-label">Scroll</span>
+  </div>
+</section>
+
+<div class="ticker-wrap">
+  <div class="ticker-track">
+    <span class="ticker-item"><span class="ticker-dot"></span>Paid Media Strategy</span>
+    <span class="ticker-item"><span class="ticker-dot"></span>Meta &amp; Google Ads</span>
+    <span class="ticker-item"><span class="ticker-dot"></span>Viral Content</span>
+    <span class="ticker-item"><span class="ticker-dot"></span>Brand Development</span>
+    <span class="ticker-item"><span class="ticker-dot"></span>SEO / SEM</span>
+    <span class="ticker-item"><span class="ticker-dot"></span>Influencer Campaigns</span>
+    <span class="ticker-item"><span class="ticker-dot"></span>Social Media Growth</span>
+    <span class="ticker-item"><span class="ticker-dot"></span>Campaign Analytics</span>
+    <span class="ticker-item"><span class="ticker-dot"></span>Creative Direction</span>
+    <span class="ticker-item"><span class="ticker-dot"></span>Email Marketing</span>
+    <span class="ticker-item"><span class="ticker-dot"></span>Paid Media Strategy</span>
+    <span class="ticker-item"><span class="ticker-dot"></span>Meta &amp; Google Ads</span>
+    <span class="ticker-item"><span class="ticker-dot"></span>Viral Content</span>
+    <span class="ticker-item"><span class="ticker-dot"></span>Brand Development</span>
+    <span class="ticker-item"><span class="ticker-dot"></span>SEO / SEM</span>
+    <span class="ticker-item"><span class="ticker-dot"></span>Influencer Campaigns</span>
+    <span class="ticker-item"><span class="ticker-dot"></span>Social Media Growth</span>
+    <span class="ticker-item"><span class="ticker-dot"></span>Campaign Analytics</span>
+    <span class="ticker-item"><span class="ticker-dot"></span>Creative Direction</span>
+    <span class="ticker-item"><span class="ticker-dot"></span>Email Marketing</span>
+  </div>
+</div>
+
+<section id="about">
+  <div class="section-label">About</div>
+  <div class="about-grid">
+    <div class="reveal-up stagger-1">
+      <h2 class="about-heading">Results-driven.<br>Creatively <em>bold.</em><br>Data-backed.</h2>
+      <p class="about-body">I'm Justine — a Marketing and Creatives Professional with a track record of building integrated campaigns that move real numbers. From slashing cost-per-lead on paid ads to engineering viral content moments, I work at the intersection of strategy and execution.</p>
+      <p class="about-body">With experience across Canada and the Philippines, I've managed multi-brand portfolios, led creative teams, owned full ad budgets, and delivered measurable growth across F&B, automotive, interior design, manpower, and tech sectors.</p>
+      <div class="geo-tags">
+        <span class="geo-tag">Philippines</span>
+        <span class="geo-tag">Canada (Remote)</span>
+        <span class="geo-tag">USA (Remote)</span>
+        <span class="geo-tag">Israel (Remote)</span>
+        <span class="geo-tag">MBA Candidate</span>
+      </div>
+    </div>
+    <div class="reveal-up stagger-2">
+      <ul class="about-values">
+        <li>
+          <span class="val-num">01</span>
+          <div><div class="val-title">Integrated Campaign Thinking</div>Every campaign I build is designed to create a unified brand experience across all touchpoints — digital and offline working as one.</div>
+        </li>
+        <li>
+          <span class="val-num">02</span>
+          <div><div class="val-title">Performance Obsessed</div>CPL, ROAS, engagement rate, foot traffic — I track what matters and optimize relentlessly until the numbers tell a better story.</div>
+        </li>
+        <li>
+          <span class="val-num">03</span>
+          <div><div class="val-title">Multi-Brand Portfolio Management</div>Managing multiple brand identities simultaneously, keeping each voice distinct while campaigns stay coordinated and efficient.</div>
+        </li>
+        <li>
+          <span class="val-num">04</span>
+          <div><div class="val-title">Creative That Converts</div>Strong creative instincts anchored in strategy — content that doesn't just look good, but drives action and builds lasting brand equity.</div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<div id="stats">
+  <div class="stats-grid">
+    <div class="stat-item reveal-up stagger-1">
+      <span class="stat-num" data-target="262" data-suffix="K+">0</span>
+      <span class="stat-label">Instagram views<br>in 1 month</span>
+    </div>
+    <div class="stat-item reveal-up stagger-2">
+      <span class="stat-num" data-target="70" data-suffix="%">0</span>
+      <span class="stat-label">CPL reduction via<br>paid ad optimization</span>
+    </div>
+    <div class="stat-item reveal-up stagger-3">
+      <span class="stat-num" data-target="75" data-suffix="%+">0</span>
+      <span class="stat-label">Increase in<br>job applications</span>
+    </div>
+    <div class="stat-item reveal-up stagger-4">
+      <span class="stat-num" data-target="51" data-suffix="%">0</span>
+      <span class="stat-label">Monthly store<br>traffic increase</span>
+    </div>
+  </div>
+</div>
+
+<section id="experience">
+  <div class="exp-header reveal-up">
+    <div>
+      <div class="section-label">Experience</div>
+      <h2 class="exp-heading">Where <em>strategy</em><br>met real results.</h2>
+    </div>
+  </div>
+  <div class="exp-list">
+
+    <div class="exp-card reveal-up stagger-1">
+      <div class="exp-top">
+        <div>
+          <div class="exp-role">Sales &amp; Marketing Manager</div>
+          <div class="exp-company">RemotelineUS<span class="exp-location">— Miami, Florida, USA (Remote)</span></div>
+        </div>
+        <span class="exp-period">Mar 2026 – Present</span>
+      </div>
+      <ul class="exp-bullets">
+        <li>Generated <strong>2–12 qualified leads per day</strong> through structured paid campaigns across Meta and LinkedIn.</li>
+        <li>Drove CPL from <strong>~$20 down to $6–$8</strong> — a 60–70% cost reduction during optimization phases.</li>
+        <li>Managed a <strong>$4,000–$4,500 monthly ad budget</strong> across Meta, LinkedIn, and Google Ads.</li>
+        <li>Increased total lead volume by <strong>40–60%</strong> by expanding beyond cold outreach into paid and organic channels.</li>
+        <li>Improved landing page conversion rates by <strong>20–30%</strong> through optimized CTAs and form restructuring.</li>
+        <li>Transitioned the company from cold-lead-heavy to a <strong>scalable digital-first lead generation system.</strong></li>
+      </ul>
+      <div class="exp-tag-row">
+        <span class="exp-tag">Meta Ads</span><span class="exp-tag">LinkedIn Ads</span><span class="exp-tag">Google Ads</span><span class="exp-tag">CRM Automation</span><span class="exp-tag">Lead Gen</span><span class="exp-tag">Landing Page CRO</span>
+      </div>
+    </div>
+
+    <div class="exp-card reveal-up stagger-2">
+      <div class="exp-top">
+        <div>
+          <div class="exp-role">Marketing Manager</div>
+          <div class="exp-company">Columbus Consultancy Agency<span class="exp-location">— Tel Aviv, Israel</span></div>
+        </div>
+        <span class="exp-period">Mar 2026 – Present</span>
+      </div>
+      <ul class="exp-bullets">
+        <li>Increased lead generation by implementing <strong>multi-channel campaigns</strong> across Meta, LinkedIn, and Google Ads.</li>
+        <li>Improved conversion rates by refining sales scripts, client onboarding processes, and marketing funnels.</li>
+        <li>Strengthened brand presence through <strong>consistent content rollout</strong> and strategic positioning.</li>
+        <li>Contributed to revenue growth by aligning marketing strategies tightly with sales objectives.</li>
+      </ul>
+      <div class="exp-tag-row">
+        <span class="exp-tag">Multi-Channel</span><span class="exp-tag">Funnel Optimization</span><span class="exp-tag">Brand Positioning</span><span class="exp-tag">Sales Alignment</span>
+      </div>
+    </div>
+
+    <div class="exp-card reveal-up stagger-3">
+      <div class="exp-top">
+        <div>
+          <div class="exp-role">Marketing Manager</div>
+          <div class="exp-company">Chainsmoker Urban Halal BBQ<span class="exp-location">— Canada (Remote)</span></div>
+        </div>
+        <span class="exp-period">Oct 2025 – Present</span>
+      </div>
+      <ul class="exp-bullets">
+        <li>Led multi-channel campaigns resulting in a <strong>51% increase in monthly store traffic and online orders.</strong></li>
+        <li>Scaled social media presence to <strong>262.4K Instagram views and 21.2K Facebook views</strong> in a single month.</li>
+        <li>Optimized paid ads from <strong>$600/month down to $120/month</strong> while maintaining equivalent results.</li>
+        <li>Increased delivery platform sales (Uber Eats, DoorDash, Skip) by <strong>48%</strong> through targeted promos.</li>
+        <li>Executed influencer campaigns generating <strong>120K+ organic views per collaboration.</strong></li>
+        <li>Enhanced website via WordPress and Framer, strengthening CTAs for franchisees and online ordering.</li>
+      </ul>
+      <div class="exp-tag-row">
+        <span class="exp-tag">Social Media</span><span class="exp-tag">Influencer Marketing</span><span class="exp-tag">Paid Ads</span><span class="exp-tag">WordPress</span><span class="exp-tag">Framer</span><span class="exp-tag">F&amp;B</span>
+      </div>
+    </div>
+
+    <div class="exp-card reveal-up stagger-1">
+      <div class="exp-top">
+        <div>
+          <div class="exp-role">Marketing Manager</div>
+          <div class="exp-company">Sweet Heart Cafe<span class="exp-location">— Canada (Remote)</span></div>
+        </div>
+        <span class="exp-period">Oct 2025 – Present</span>
+      </div>
+      <ul class="exp-bullets">
+        <li>Increased store foot traffic by <strong>35%+</strong> through seasonal campaigns and product launches.</li>
+        <li>Boosted social media engagement by <strong>60%+</strong>, reaching over <strong>200K+ monthly views</strong> across platforms.</li>
+        <li>Reduced cost per engagement by <strong>30–40%</strong> through optimized targeting and creatives.</li>
+        <li>Grew average order value by <strong>20%+</strong> through bundling strategies and limited-time offers.</li>
+        <li>Generated <strong>100K+ organic reach per campaign</strong> through influencer collaborations.</li>
+      </ul>
+      <div class="exp-tag-row">
+        <span class="exp-tag">Content Strategy</span><span class="exp-tag">Influencer Campaigns</span><span class="exp-tag">Paid Ads</span><span class="exp-tag">AOV Optimization</span>
+      </div>
+    </div>
+
+    <div class="exp-card reveal-up stagger-2">
+      <div class="exp-top">
+        <div>
+          <div class="exp-role">Assistant Marketing Manager</div>
+          <div class="exp-company">David Visual Interior Designing<span class="exp-location">— Canada (Remote)</span></div>
+        </div>
+        <span class="exp-period">Oct 2025 – Present</span>
+      </div>
+      <ul class="exp-bullets">
+        <li>Supported campaigns driving a <strong>35% increase in client inquiries</strong> for residential &amp; commercial projects within 5 months.</li>
+        <li>Managed content and social strategy, improving engagement rates by <strong>36%+</strong> across Facebook, Instagram, and LinkedIn.</li>
+        <li>Analyzed campaign data to improve conversion rates by <strong>20% throughout Canada.</strong></li>
+      </ul>
+      <div class="exp-tag-row">
+        <span class="exp-tag">B2B Marketing</span><span class="exp-tag">Social Media</span><span class="exp-tag">Campaign Analytics</span>
+      </div>
+    </div>
+
+    <div class="exp-card reveal-up stagger-3">
+      <div class="exp-top">
+        <div>
+          <div class="exp-role">Head of Marketing &amp; Creatives</div>
+          <div class="exp-company">W. Bridges Manpower Corporation<span class="exp-location">— Pasay City, Philippines</span></div>
+        </div>
+        <span class="exp-period">Apr 2025 – Sep 2025</span>
+      </div>
+      <ul class="exp-bullets">
+        <li>Led campaigns that increased job applications and walk-ins by <strong>75%+</strong> during peak hiring periods.</li>
+        <li>Improved social media engagement <strong>3x</strong> across Facebook, Instagram, TikTok, Threads, and LinkedIn.</li>
+        <li>Directed job fair campaigns generating hundreds of qualified applicants with <strong>30% onboarding conversion.</strong></li>
+        <li>Strengthened internal branding initiatives, improving employee engagement and participation company-wide.</li>
+      </ul>
+      <div class="exp-tag-row">
+        <span class="exp-tag">Recruitment Marketing</span><span class="exp-tag">Event Campaigns</span><span class="exp-tag">Multi-Platform</span><span class="exp-tag">Internal Branding</span>
+      </div>
+    </div>
+
+    <div class="exp-card reveal-up stagger-1">
+      <div class="exp-top">
+        <div>
+          <div class="exp-role">Marketing Supervisor</div>
+          <div class="exp-company">Autohub Group — Suzuki &amp; MG<span class="exp-location">— Taguig City, Philippines</span></div>
+        </div>
+        <span class="exp-period">Apr 2024 – May 2025</span>
+      </div>
+      <ul class="exp-bullets">
+        <li>Increased showroom traffic and inquiries by <strong>30%+</strong> through integrated digital and on-ground campaigns across vehicle brands.</li>
+        <li>Boosted social media engagement by <strong>60%+</strong> through analytics-driven content on Facebook, Instagram, and TikTok.</li>
+        <li>Executed mall displays and showroom events contributing to consistent <strong>monthly sales growth of 20%.</strong></li>
+        <li>Reduced marketing costs by <strong>15%</strong> through vendor optimization without sacrificing campaign output.</li>
+      </ul>
+      <div class="exp-tag-row">
+        <span class="exp-tag">Multi-Brand</span><span class="exp-tag">On-Ground Events</span><span class="exp-tag">Analytics</span><span class="exp-tag">Vendor Management</span><span class="exp-tag">Automotive</span>
+      </div>
+    </div>
+
+    <div class="exp-card reveal-up stagger-2">
+      <div class="exp-top">
+        <div>
+          <div class="exp-role">Marketing Manager</div>
+          <div class="exp-company">Autoflare Corporation<span class="exp-location">— Muntinlupa City, Philippines</span></div>
+        </div>
+        <span class="exp-period">Dec 2023 – Apr 2024</span>
+      </div>
+      <ul class="exp-bullets">
+        <li>Led marketing strategy and campaign execution across <strong>multiple brands</strong> in automotive and wellness sectors.</li>
+        <li>Managed digital advertising on Meta and Google, focusing on lead generation and brand awareness.</li>
+        <li>Developed <strong>data-driven media plans</strong> to optimize budget allocation and campaign performance.</li>
+        <li>Oversaw content creation, social media strategy, and promotional campaigns to drive engagement and inquiries.</li>
+      </ul>
+      <div class="exp-tag-row">
+        <span class="exp-tag">Multi-Brand Strategy</span><span class="exp-tag">Meta Ads</span><span class="exp-tag">Google Ads</span><span class="exp-tag">Media Planning</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section id="skills">
+  <div class="section-label">Expertise</div>
+  <div class="skills-layout">
+    <div class="reveal-up">
+      <h2 class="skills-heading">A full-stack<br><em>marketer's</em><br>toolkit.</h2>
+      <p class="skills-body">From strategy to execution — paid ads to organic growth, data analysis to creative direction. Everything needed to run campaigns that consistently convert.</p>
+    </div>
+    <div class="skills-categories reveal-up stagger-2">
+      <div>
+        <div class="skill-cat-title">Marketing Strategy</div>
+        <div class="skill-pills">
+          <div class="skill-pill">Digital Marketing</div>
+          <div class="skill-pill">Integrated Campaigns</div>
+          <div class="skill-pill">Brand Development</div>
+          <div class="skill-pill">Budget Ownership</div>
+          <div class="skill-pill">Email Marketing</div>
+          <div class="skill-pill">Community Engagement</div>
+        </div>
+      </div>
+      <div>
+        <div class="skill-cat-title">Paid &amp; Performance</div>
+        <div class="skill-pills">
+          <div class="skill-pill">Meta Ads</div>
+          <div class="skill-pill">Google Ads</div>
+          <div class="skill-pill">LinkedIn Ads</div>
+          <div class="skill-pill">SEO / SEM</div>
+          <div class="skill-pill">Landing Page CRO</div>
+          <div class="skill-pill">Campaign Analytics</div>
+        </div>
+      </div>
+      <div>
+        <div class="skill-cat-title">Content &amp; Creative</div>
+        <div class="skill-pills">
+          <div class="skill-pill">Viral Content Strategy</div>
+          <div class="skill-pill">Social Media Marketing</div>
+          <div class="skill-pill">Influencer Marketing</div>
+          <div class="skill-pill">Video Production &amp; Editing</div>
+          <div class="skill-pill">Graphic Design</div>
+          <div class="skill-pill">Creative Team Oversight</div>
+        </div>
+      </div>
+      <div>
+        <div class="skill-cat-title">Tools &amp; Platforms</div>
+        <div class="skill-pills">
+          <div class="skill-pill">Adobe Creative Cloud</div>
+          <div class="skill-pill">HubSpot</div>
+          <div class="skill-pill">Google Analytics</div>
+          <div class="skill-pill">Salesforce</div>
+          <div class="skill-pill">Canva</div>
+          <div class="skill-pill">WordPress</div>
+          <div class="skill-pill">Zapier</div>
+          <div class="skill-pill">Zoho</div>
+          <div class="skill-pill">Notion</div>
+          <div class="skill-pill">ClickUp</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div id="certs">
+  <div class="section-label">Certifications &amp; Education</div>
+  <div class="certs-grid">
+    <div class="cert-card reveal-up stagger-1">
+      <div class="cert-issuer">Google</div>
+      <div class="cert-name">Google Ads Measurement Certification</div>
+      <div class="cert-year">2023</div>
+    </div>
+    <div class="cert-card reveal-up stagger-2">
+      <div class="cert-issuer">Microsoft</div>
+      <div class="cert-name">Career Essentials in Administrative</div>
+      <div class="cert-year">2023</div>
+    </div>
+    <div class="cert-card reveal-up stagger-3">
+      <div class="cert-issuer">Civil Service Commission</div>
+      <div class="cert-name">Civil Service Professional</div>
+      <div class="cert-year">2024</div>
+    </div>
+    <div class="cert-card reveal-up stagger-4">
+      <div class="cert-issuer">Southville International Colleges</div>
+      <div class="cert-name">Master of Business Administration (MBA)</div>
+      <div class="cert-year">Dec 2025 – Dec 2027</div>
+    </div>
+  </div>
+</div>
+
+<section id="contact">
+  <div class="contact-bg"></div>
+  <div class="section-label" style="justify-content:center;">Get In Touch</div>
+  <h2 class="contact-heading reveal-up">Let's build campaigns<br>that <em>convert.</em></h2>
+  <p class="contact-sub reveal-up stagger-1">Looking for a marketing professional who combines strategic thinking with creative execution — and shows up with the numbers to prove it.</p>
+  <div class="contact-links reveal-up stagger-2">
+    <a href="mailto:justineluisinacay@gmail.com" class="btn-primary">justineluisinacay@gmail.com</a>
+    <a href="https://linkedin.com/in/justineinacay" class="btn-ghost" target="_blank">LinkedIn ↗</a>
+  </div>
+</section>
+
+<footer>
+  <span class="footer-copy">© 2025 Justine Luis Inacay</span>
+  <span class="footer-brand">Marketing &amp; Creatives Professional</span>
+  <span class="footer-copy">Philippines · Canada · Global Remote</span>
+</footer>
+
+<script>
+const dot=document.getElementById('cursor-dot'),ring=document.getElementById('cursor-ring');
+let mx=window.innerWidth/2,my=window.innerHeight/2,rx=mx,ry=my;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;dot.style.left=mx+'px';dot.style.top=my+'px';});
+(function animRing(){rx+=(mx-rx)*.12;ry+=(my-ry)*.12;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(animRing);})();
+document.querySelectorAll('a,button,.exp-card,.skill-pill,.cert-card').forEach(el=>{
+  el.addEventListener('mouseenter',()=>document.body.classList.add('hovering'));
+  el.addEventListener('mouseleave',()=>document.body.classList.remove('hovering'));
+});
+const nav=document.getElementById('nav');
+window.addEventListener('scroll',()=>nav.classList.toggle('scrolled',window.scrollY>60));
+const obs=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible');}),{threshold:0.12});
+document.querySelectorAll('.reveal-up,.section-label').forEach(el=>obs.observe(el));
+const cObs=new IntersectionObserver(entries=>{
+  entries.forEach(entry=>{
+    if(!entry.isIntersecting)return;
+    const el=entry.target,target=+el.dataset.target,suffix=el.dataset.suffix||'+';
+    let s=0;const step=target/60;
+    const iv=setInterval(()=>{s=Math.min(s+step,target);el.textContent=Math.floor(s)+suffix;if(s>=target)clearInterval(iv);},16);
+    cObs.unobserve(el);
+  });
+},{threshold:0.5});
+document.querySelectorAll('.stat-num[data-target]').forEach(el=>cObs.observe(el));
+</script>
+</body>
+</html>
