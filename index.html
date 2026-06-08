@@ -61,6 +61,9 @@
 
   #about{background:var(--surface);}
   .about-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start;}
+  .about-image-container{border-radius:24px;overflow:hidden;position:relative;width:100%;aspect-ratio:3/4;}
+  .about-image-container img{width:100%;height:100%;object-fit:cover;object-position:center;transition:transform 0.6s cubic-bezier(.23,1,.32,1);}
+  .about-image-container:hover img{transform:scale(1.03);}
   .about-heading{font-size:clamp(2.2rem,4vw,3.6rem);font-weight:600;line-height:1.1;letter-spacing:-.01em;color:var(--cream);margin-bottom:32px;}
   .about-heading em{color:var(--accent);font-style:italic;}
   .about-body{color:var(--cream-dim);line-height:1.8;font-size:.95rem;margin-bottom:20px;font-weight:400;}
@@ -87,7 +90,35 @@
   .exp-list{display:flex;flex-direction:column;gap:16px;}
   .exp-card{padding:40px 44px;background:var(--surface);border:1px solid var(--border);border-radius:18px;position:relative;overflow:hidden;transition:border-color .4s,box-shadow .4s;}
   .exp-card:hover{border-color:var(--accent-dim);box-shadow:0 4px 12px rgba(0,0,0,0.05);}
-  .exp-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:6px;}
+  .exp-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:0;}
+
+  .exp-card { cursor: pointer; -webkit-tap-highlight-color: transparent; }
+  .exp-top { margin-bottom: 0; transition: margin-bottom 0.4s cubic-bezier(.23,1,.32,1); }
+  .exp-card.expanded .exp-top { margin-bottom: 24px; }
+
+  .exp-period-wrapper { display: flex; align-items: center; gap: 16px; }
+  .exp-toggle-icon {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    background: url('data:image/svg+xml;utf8,<svg fill="none" stroke="%2386868b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M6 9l6 6 6-6"/></svg>') center/contain no-repeat;
+    transition: transform 0.4s cubic-bezier(.23,1,.32,1);
+  }
+  .exp-card.expanded .exp-toggle-icon { transform: rotate(180deg); }
+  .exp-card:hover .exp-toggle-icon { background-image: url('data:image/svg+xml;utf8,<svg fill="none" stroke="%230066cc" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M6 9l6 6 6-6"/></svg>'); }
+
+  .exp-content {
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows 0.4s cubic-bezier(.23,1,.32,1);
+  }
+  .exp-card.expanded .exp-content {
+    grid-template-rows: 1fr;
+  }
+  .exp-content-inner {
+    overflow: hidden;
+  }
+
   .exp-role{font-size:1.05rem;font-weight:600;color:var(--cream);letter-spacing:.02em;line-height:1.2;}
   .exp-period{font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;color:var(--accent-dim);white-space:nowrap;padding-top:4px;}
   .exp-company{font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);margin-bottom:20px;}
@@ -225,6 +256,9 @@
       </div>
     </div>
     <div class="reveal-up stagger-2">
+      <div class="about-image-container" style="margin-bottom: 40px;">
+        <img src="assets/profile.png" alt="Justine Luis Inacay Corporate Photo" loading="lazy">
+      </div>
       <ul class="about-values">
         <li>
           <span class="val-num">01</span>
@@ -276,83 +310,99 @@
     </div>
   </div>
   <div class="exp-list">
-    <div class="exp-card reveal-up stagger-1">
+    <div class="exp-card reveal-up stagger-1" onclick="this.classList.toggle('expanded')">
       <div class="exp-top">
         <div>
           <div class="exp-role">Assistant Marketing Manager</div>
           <div class="exp-company">David Visual Interior Designing<span class="exp-location">— Canada (Remote)</span></div>
         </div>
-        <span class="exp-period">Oct 2025 – Present</span>
+        <div class="exp-period-wrapper"><span class="exp-period">Oct 2025 – Present</span><span class="exp-toggle-icon"></span></div>
       </div>
-      <ul class="exp-bullets">
-        <li>Supported campaigns resulting in a <strong>35% increase in client inquiries</strong> for both residential and commercial projects within five months.</li>
+      <div class="exp-content">
+        <div class="exp-content-inner">
+          <ul class="exp-bullets">
+            <li>Supported campaigns resulting in a <strong>35% increase in client inquiries</strong> for both residential and commercial projects within five months.</li>
         <li>Managed and streamlined content creation and social media strategy, increasing overall engagement rates by <strong>36%+</strong> across Facebook, Instagram, and LinkedIn.</li>
         <li>Analyzed campaign performance data to refine target audiences, resulting in a <strong>20% improvement in conversion rates</strong> across Canada.</li>
         <li>Communicated consistently with internal teams and external stakeholders through Slack and Asana, ensuring campaigns launched on time.</li>
-      </ul>
-      <div class="exp-tag-row">
-        <span class="exp-tag">B2B Marketing</span><span class="exp-tag">Social Media</span><span class="exp-tag">Campaign Analytics</span><span class="exp-tag">Project Management</span>
+          </ul>
+          <div class="exp-tag-row">
+            <span class="exp-tag">B2B Marketing</span><span class="exp-tag">Social Media</span><span class="exp-tag">Campaign Analytics</span><span class="exp-tag">Project Management</span>
+          </div>
+        </div>
       </div>
     </div>
 
-    <div class="exp-card reveal-up stagger-2">
+    <div class="exp-card reveal-up stagger-2" onclick="this.classList.toggle('expanded')">
       <div class="exp-top">
         <div>
           <div class="exp-role">Head of Marketing &amp; Creatives</div>
           <div class="exp-company">W. Bridges Manpower Corporation<span class="exp-location">— Pasay City, Philippines</span></div>
         </div>
-        <span class="exp-period">Apr 2025 – Sep 2025</span>
+        <div class="exp-period-wrapper"><span class="exp-period">Apr 2025 – Sep 2025</span><span class="exp-toggle-icon"></span></div>
       </div>
-      <ul class="exp-bullets">
-        <li>Managed the planning and implementation of large-scale recruitment marketing campaigns, resulting in a <strong>75%+ increase in daily applicant walk-ins</strong> during peak periods.</li>
+      <div class="exp-content">
+        <div class="exp-content-inner">
+          <ul class="exp-bullets">
+            <li>Managed the planning and implementation of large-scale recruitment marketing campaigns, resulting in a <strong>75%+ increase in daily applicant walk-ins</strong> during peak periods.</li>
         <li>Spearheaded organic social media initiatives that grew followers and improved engagement by <strong>3x</strong> across Facebook, Instagram, Tiktok, Threads, and Linkedin.</li>
         <li>Developed an employer branding strategy that improved applicant quality and positioning.</li>
         <li>Directed job fair campaigns (e.g., Balik Eskwela Job Fair) generating hundreds of qualified applicants per event and <strong>30% conversion for onboarding</strong>.</li>
         <li>Strengthened internal branding initiatives, improving employee engagement and participation.</li>
-      </ul>
-      <div class="exp-tag-row">
-        <span class="exp-tag">Recruitment Marketing</span><span class="exp-tag">Event Campaigns</span><span class="exp-tag">Multi-Platform</span><span class="exp-tag">Internal Branding</span>
+          </ul>
+          <div class="exp-tag-row">
+            <span class="exp-tag">Recruitment Marketing</span><span class="exp-tag">Event Campaigns</span><span class="exp-tag">Multi-Platform</span><span class="exp-tag">Internal Branding</span>
+          </div>
+        </div>
       </div>
     </div>
 
-    <div class="exp-card reveal-up stagger-3">
+    <div class="exp-card reveal-up stagger-3" onclick="this.classList.toggle('expanded')">
       <div class="exp-top">
         <div>
           <div class="exp-role">Marketing Supervisor</div>
           <div class="exp-company">Autohub Group of Companies (Suzuki, MG)<span class="exp-location">— Taguig City, Philippines</span></div>
         </div>
-        <span class="exp-period">Apr 2024 – May 2025</span>
+        <div class="exp-period-wrapper"><span class="exp-period">Apr 2024 – May 2025</span><span class="exp-toggle-icon"></span></div>
       </div>
-      <ul class="exp-bullets">
-        <li>Increased showroom traffic and inquiries by <strong>30%+</strong> through integrated digital and on-ground campaigns in collaboration with other vehicle brands across the company.</li>
+      <div class="exp-content">
+        <div class="exp-content-inner">
+          <ul class="exp-bullets">
+            <li>Increased showroom traffic and inquiries by <strong>30%+</strong> through integrated digital and on-ground campaigns in collaboration with other vehicle brands across the company.</li>
         <li>Boosted social media engagement by <strong>60%+</strong> through analytics-driven content strategy through Facebook, Instagram, and Tiktok.</li>
         <li>Successfully executed mall displays and showroom events contributing to consistent <strong>monthly sales growth by 20%</strong>.</li>
         <li>Managed vendor partnerships and campaigns while reducing marketing costs by <strong>15%</strong> through optimization.</li>
         <li>Led a team and improved productivity and campaign turnaround time using productivity and collaborative applications such as Notion and Monday.com.</li>
-      </ul>
-      <div class="exp-tag-row">
-        <span class="exp-tag">Multi-Brand</span><span class="exp-tag">On-Ground Events</span><span class="exp-tag">Analytics</span><span class="exp-tag">Vendor Management</span><span class="exp-tag">Automotive</span>
+          </ul>
+          <div class="exp-tag-row">
+            <span class="exp-tag">Multi-Brand</span><span class="exp-tag">On-Ground Events</span><span class="exp-tag">Analytics</span><span class="exp-tag">Vendor Management</span><span class="exp-tag">Automotive</span>
+          </div>
+        </div>
       </div>
     </div>
 
-    <div class="exp-card reveal-up stagger-4">
+    <div class="exp-card reveal-up stagger-4" onclick="this.classList.toggle('expanded')">
       <div class="exp-top">
         <div>
           <div class="exp-role">Marketing Manager</div>
           <div class="exp-company">Autoflare Corporation<span class="exp-location">— Muntinlupa City, Philippines</span></div>
         </div>
-        <span class="exp-period">Dec 2023 – Apr 2024</span>
+        <div class="exp-period-wrapper"><span class="exp-period">Dec 2023 – Apr 2024</span><span class="exp-toggle-icon"></span></div>
       </div>
-      <ul class="exp-bullets">
-        <li>Led marketing strategy and campaign execution across <strong>multiple brands</strong> in the automotive and wellness sectors.</li>
+      <div class="exp-content">
+        <div class="exp-content-inner">
+          <ul class="exp-bullets">
+            <li>Led marketing strategy and campaign execution across <strong>multiple brands</strong> in the automotive and wellness sectors.</li>
         <li>Managed digital advertising initiatives on Meta and Google, focusing on lead generation and brand awareness.</li>
         <li>Developed <strong>data-driven media plans</strong> to optimize budget allocation and campaign performance.</li>
         <li>Collaborated with internal teams and external partners to ensure consistent branding and messaging.</li>
         <li>Oversaw content creation, social media strategy, and promotional campaigns to drive engagement and inquiries.</li>
         <li>Monitored campaign performance and provided actionable insights to improve ROI and conversions.</li>
-      </ul>
-      <div class="exp-tag-row">
-        <span class="exp-tag">Multi-Brand Strategy</span><span class="exp-tag">Meta Ads</span><span class="exp-tag">Google Ads</span><span class="exp-tag">Media Planning</span>
+          </ul>
+          <div class="exp-tag-row">
+            <span class="exp-tag">Multi-Brand Strategy</span><span class="exp-tag">Meta Ads</span><span class="exp-tag">Google Ads</span><span class="exp-tag">Media Planning</span>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -457,29 +507,35 @@
 <section id="leadership">
   <div class="section-label">Leadership and Involvement</div>
   <div class="exp-list">
-    <div class="exp-card reveal-up stagger-1">
+    <div class="exp-card reveal-up stagger-1" onclick="this.classList.toggle('expanded')">
       <div class="exp-top">
         <div>
           <div class="exp-role">Co-Owner &amp; Chief Operating Officer</div>
           <div class="exp-company">Remotelink Technologies</div>
         </div>
-        <span class="exp-period">Aug 2024 – Jan 2026</span>
+        <div class="exp-period-wrapper"><span class="exp-period">Aug 2024 – Jan 2026</span><span class="exp-toggle-icon"></span></div>
       </div>
-      <ul class="exp-bullets">
-        <li>Co-led operations and marketing contributing to early-stage business growth.</li>
-      </ul>
+      <div class="exp-content">
+        <div class="exp-content-inner">
+          <ul class="exp-bullets">
+            <li>Co-led operations and marketing contributing to early-stage business growth.</li>
+          </ul>
+        </div>
+      </div>
     </div>
 
-    <div class="exp-card reveal-up stagger-2">
+    <div class="exp-card reveal-up stagger-2" onclick="this.classList.toggle('expanded')">
       <div class="exp-top">
         <div>
           <div class="exp-role">District Director</div>
           <div class="exp-company">Christian Brotherhood International</div>
         </div>
-        <span class="exp-period">Mar 2016 – Oct 2023</span>
+        <div class="exp-period-wrapper"><span class="exp-period">Mar 2016 – Oct 2023</span><span class="exp-toggle-icon"></span></div>
       </div>
-      <ul class="exp-bullets">
-        <li>Spearhead education-related activities aimed at promoting learning and academic success within the community.</li>
+      <div class="exp-content">
+        <div class="exp-content-inner">
+          <ul class="exp-bullets">
+            <li>Spearhead education-related activities aimed at promoting learning and academic success within the community.</li>
         <li>Establish and oversee chapters to provide support, resources, and mentorship to individuals seeking assistance with their studies.</li>
         <li>Conduct financial webinars on topics such as investments, financial literacy, and digital banking to empower community members with essential financial knowledge.</li>
         <li>Initiate and facilitate monthly meetings with a diverse demographic to address community needs, gather feedback, and foster collaboration.</li>
@@ -487,7 +543,9 @@
         <li>Coordinate and lead workshops for students on various subjects, including but not limited to baybayin (ancient Filipino script) workshop, sign language workshop, and stenography workshop.</li>
         <li>Collaborate with other volunteers and stakeholders to identify opportunities for community engagement and outreach efforts.</li>
         <li>Maintain records, track progress, and provide regular reports on the impact of education and outreach programs.</li>
-      </ul>
+          </ul>
+        </div>
+      </div>
     </div>
   </div>
 </section>
