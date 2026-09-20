@@ -138,3 +138,45 @@ body{padding:0!important}
 .home-showcase .showcase-brands>div{position:static!important;grid-column:1!important;grid-row:1/3!important;display:flex!important;flex-direction:row!important;align-self:start!important;width:auto!important;height:auto!important;gap:6px!important}
 .home-showcase .showcase-brands>.eyebrow{grid-column:2!important;grid-row:1!important;margin:0!important}.home-showcase .showcase-brands>h2{grid-column:2!important;grid-row:2!important}.home-showcase .showcase-brands>p:not(.eyebrow){grid-column:2!important;grid-row:3!important}.home-showcase .showcase-brands>.text-link{grid-column:2!important;grid-row:4!important;justify-self:start!important}
 }
+
+/* Final polish: consistent light surfaces, compact proof cards, and unclipped JOB content. */
+@media(min-width:821px){
+[data-view-panel=home] .home-showcase>article{display:grid!important;grid-template-rows:auto auto minmax(0,1fr) auto!important;align-content:stretch!important}
+[data-view-panel=home] .home-showcase>article>.text-link{align-self:end!important;justify-self:start!important;margin-top:10px!important}
+[data-theme=light] .hero-copy{color:#112947!important;border-color:#aec4df!important;background:linear-gradient(90deg,rgba(247,250,255,.99) 0%,rgba(240,246,253,.97) 46%,rgba(226,237,249,.86) 70%,rgba(213,228,244,.76) 100%),url("hero-earth.png") center right/cover no-repeat!important;box-shadow:0 20px 54px -42px rgba(28,87,154,.55)!important}
+[data-theme=light] .hero-copy .eyebrow,[data-theme=light] .hero-copy h1,[data-theme=light] .hero-copy .hero-summary,[data-theme=light] .hero-copy .hero-detail{color:#112947!important}
+[data-theme=light] .hero-copy h1 span,[data-theme=light] .hero-copy .hero-detail strong,[data-theme=light] .hero-copy .hero-proof strong{color:#245fc5!important}
+[data-theme=light] .hero-copy .hero-summary,[data-theme=light] .hero-copy .hero-detail span{color:#516781!important}
+[data-theme=light] .hero-copy::after{color:rgba(17,41,71,.62)!important}
+[data-theme=light] .hero-copy .hero-proof span{border-color:#a9bdd7!important;background:rgba(255,255,255,.72)!important;box-shadow:0 8px 24px -20px rgba(24,67,116,.7)}
+[data-theme=light] .hero-copy .home-actions button:not(:first-child){color:#112947!important;border-color:#a9bdd7!important;background:rgba(255,255,255,.86)!important}
+.home-showcase .showcase-brands{grid-template-rows:auto auto minmax(0,1fr) auto!important}
+.home-showcase .showcase-brands>.text-link{align-self:end!important;margin-top:10px!important}
+}
+
+@media(min-width:821px) and (max-height:900px){
+[data-view-panel=jobs] .mock-columns section{display:grid!important;grid-template-rows:auto auto auto auto auto!important;align-content:start!important}
+[data-view-panel=jobs] .mock-columns section h4{margin:0 0 5px!important}
+[data-view-panel=jobs] .mock-columns section h5{margin:5px 0 4px!important;font-size:.94rem!important;line-height:1.18!important}
+[data-view-panel=jobs] .mock-columns section p{margin:0!important;font-size:.76rem!important;line-height:1.32!important}
+[data-view-panel=jobs] .mock-columns section .mock-progress{margin:7px 0 5px!important}
+[data-view-panel=jobs] .mock-columns section small{display:block!important;font-size:.72rem!important;line-height:1.2!important}
+}
+
+@media(min-width:821px) and (max-height:760px){
+[data-view-panel=home] .home-showcase .showcase-brands{padding:10px 13px!important}
+[data-view-panel=jobs] .jobs-mockup{grid-template-rows:minmax(0,1fr)!important}
+[data-view-panel=jobs] .mock-main{height:auto!important;min-height:0!important;align-self:stretch!important;padding:10px!important;gap:6px!important;grid-template-rows:auto auto auto auto minmax(0,1fr) auto!important;align-items:start!important;overflow:hidden!important}
+[data-view-panel=jobs] .mock-main h3{font-size:1.42rem!important;line-height:1.1!important}
+[data-view-panel=jobs] .mock-subtitle{font-size:.76rem!important;line-height:1.25!important}
+[data-view-panel=jobs] .mock-stats{gap:6px!important}
+[data-view-panel=jobs] .mock-stats>div{padding:6px 12px!important}
+[data-view-panel=jobs] .mock-stats strong{font-size:1.2rem!important;line-height:1.1!important}
+[data-view-panel=jobs] .mock-stats span{font-size:.7rem!important}
+[data-view-panel=jobs] .mock-columns{height:100%!important;gap:6px!important;overflow:hidden!important}
+[data-view-panel=jobs] .mock-columns section{padding:9px!important}
+[data-view-panel=jobs] .mock-tasks li{padding:4px 0!important;font-size:.72rem!important}
+[data-view-panel=jobs] .mock-timeline{padding:8px 10px!important}
+[data-view-panel=jobs] .mock-timeline h4{margin:0 0 4px!important;font-size:.78rem!important}
+[data-view-panel=jobs] .mock-timeline>div{gap:6px!important;font-size:.7rem!important}
+}
