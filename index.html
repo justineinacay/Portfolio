@@ -697,7 +697,7 @@ html[data-large-text] .contact-layout{min-height:0}
 }
 </style>
 <link rel="stylesheet" href="Portfolio-assets/portfolio-system.css?v=20260914-01">
-  <link rel="stylesheet" href="Portfolio-assets/portfolio-responsive.css?v=20261001-03">
+  <link rel="stylesheet" href="Portfolio-assets/portfolio-responsive.css?v=20261009-01">
 </head><body data-view="home"><a class="skip-link" href="#main">Skip to content</a><canvas id="ambient" aria-hidden="true"></canvas>
 <header class="topbar"><a class="brand-mark" href="#home" data-view-link="home" aria-label="Justine Inacay home"><img src="Portfolio-assets/portfolio-image-01.webp" alt="" width="36" height="36"></a><nav class="site-nav" aria-label="Main navigation"><a href="#home" data-view-link="home">Home</a><a href="#about" data-view-link="about">About</a><a href="#services" data-view-link="services">Services</a><a href="#projects" data-view-link="projects">Projects</a><a href="#jobs" data-view-link="jobs">JOBSystems</a><a href="#contact" data-view-link="contact">Contact</a></nav><a class="mobile-jobs-link" href="#jobs" data-view-link="jobs" aria-label="Open J.O.B Systems">J.O.B</a><div class="nav-settings"><button type="button" popovertarget="accessibility-popover" class="preferences-button" aria-label="Accessibility settings" aria-controls="accessibility-popover" aria-expanded="false">Aa</button><button type="button" class="theme-button" aria-label="Switch to light mode"><span aria-hidden="true"></span></button></div></header>
 <nav class="mobile-tabbar" aria-label="Mobile navigation">
@@ -798,13 +798,31 @@ function placeMobilePill(animate=true){
  }
  mobilePillState=next;
 }
+function clearRouteAnimations(){
+ routeAnimations.splice(0).forEach(animation=>animation.cancel());
+ pageAnimation=null;
+}
 function animateRoute(target,level){
- routeAnimations.forEach(animation=>animation.cancel());routeAnimations=[];
- if(!target||level===0)return;
- pageAnimation=target.animate([{opacity:.45,transform:'translate3d(0,8px,0)'},{opacity:1,transform:'translate3d(0,0,0)'}],{duration:220+level*35,easing:'cubic-bezier(.2,.8,.2,1)'});
+ clearRouteAnimations();
+ if(!target||level===0||reduceMotion.matches)return;
+ /* Keep the panel itself still. Moving the panel and its cards together caused
+    a visible double-jump when switching quickly between pages. */
+ pageAnimation=target.animate([{opacity:.82},{opacity:1}],{
+  duration:150+level*18,easing:'cubic-bezier(.23,1,.32,1)'
+ });
  routeAnimations.push(pageAnimation);
  const items=[...target.querySelectorAll('.metrics article,.home-showcase article,.company-card,.education-strip,.service-group,.project-grid>article,.project-grid>a,.jobs-mockup,.contact-intro,.contact-panel')].filter(item=>!item.hidden).slice(0,12);
- items.forEach((item,index)=>routeAnimations.push(item.animate([{opacity:.2,transform:'translate3d(0,10px,0)'},{opacity:1,transform:'translate3d(0,0,0)'}],{duration:240+level*35,delay:Math.min(index*24,144),easing:'cubic-bezier(.2,.8,.2,1)'})));
+ items.forEach((item,index)=>{
+  const animation=item.animate([
+   {opacity:.72,transform:'translate3d(0,6px,0)'},
+   {opacity:1,transform:'translate3d(0,0,0)'}
+  ],{
+   duration:190+level*18,
+   delay:Math.min(index*18,90),
+   easing:'cubic-bezier(.23,1,.32,1)'
+  });
+  routeAnimations.push(animation);
+ });
 }
 function navigate(next,remember=true,animate=true){
  if(next==='experience'||next==='role')next='about';if(next==='jobsystems')next='jobs';
@@ -817,7 +835,7 @@ function navigate(next,remember=true,animate=true){
   requestAnimationFrame(()=>{placeMobilePill(animate);if(animate)animateRoute(target,level)});
  };
  document.querySelector('#accessibility-popover').hidePopover?.();
- pageAnimation?.cancel();
+ clearRouteAnimations();
  commit();
 }
 document.querySelectorAll('[data-view-link]').forEach(a=>a.addEventListener('click',e=>{e.preventDefault();navigate(a.dataset.viewLink,true,e.detail!==0)}));
@@ -873,16 +891,66 @@ form.querySelectorAll('input,textarea').forEach(f=>f.addEventListener('input',()
 form.addEventListener('submit',async e=>{e.preventDefault();if(!validate())return;submit.disabled=true;status.textContent='Sending…';const controller=new AbortController(),timeout=setTimeout(()=>controller.abort(),12000);try{const response=await fetch('https://formsubmit.co/ajax/justineluisinacay@gmail.com',{method:'POST',headers:{Accept:'application/json'},body:new FormData(form),signal:controller.signal});if(!response.ok)throw Error();const result=await response.json();if(result.success!==true&&result.success!=='true')throw Error();form.reset();status.textContent='Thanks. Your message is on its way.'}catch{status.innerHTML='Could not send. <a href="mailto:justineluisinacay@gmail.com">Email Justine directly</a>.'}finally{clearTimeout(timeout);submit.disabled=false}});
 // Ambient light, particles, and a sparse constellation network; all local and decorative.
 const canvas=document.querySelector('#ambient'),ctx=canvas.getContext('2d');let cw=0,ch=0;
-const points=Array.from({length:48},(_,i)=>({x:(i*0.61803398875)%1,y:(i*.41421356237)%1,phase:i*1.7,r:.8+(i%3)*.4}));
-function resizeAmbient(){cw=innerWidth;ch=innerHeight;const d=Math.min(devicePixelRatio||1,2);canvas.width=cw*d;canvas.height=ch*d;ctx?.setTransform(d,0,0,d,0,0)}
-function paint(ms){if(!ctx)return;const level=prefs.motion,t=ms*.00011,light=root.dataset.theme==='light';ctx.clearRect(0,0,cw,ch);const intensity=[0,.018,.04,.065][level];for(let j=0;j<2;j++){const x=cw*(.28+j*.42)+Math.sin(t+j*2)*cw*.1,y=ch*(.22+j*.28)+Math.cos(t*.7+j)*ch*.12;const g=ctx.createRadialGradient(x,y,0,x,y,cw*.4);g.addColorStop(0,`rgba(${j?'32,127,230':'88,72,220'},${intensity})`);g.addColorStop(1,'rgba(20,70,180,0)');ctx.fillStyle=g;ctx.fillRect(0,0,cw,ch)}const count=[0,12,24,36][level],pos=points.slice(0,count).map(p=>({x:((p.x+Math.sin(t+p.phase)*.02*level+1)%1)*cw,y:((p.y+Math.cos(t*.8+p.phase)*.016*level+1)%1)*ch,p}));if(level>1){ctx.lineWidth=.55;for(let i=0;i<count;i++)for(let j=i+1;j<count;j++){const a=pos[i],b=pos[j],d=Math.hypot(a.x-b.x,a.y-b.y);if(d<150){ctx.strokeStyle=`rgba(80,160,240,${(1-d/150)*.08*(level-1)})`;ctx.beginPath();ctx.moveTo(a.x,a.y);ctx.lineTo(b.x,b.y);ctx.stroke()}}}pos.forEach(({x,y,p})=>{ctx.beginPath();ctx.fillStyle=`rgba(${light?'35,105,195':'115,190,255'},${(.12+(.5+.5*Math.sin(t*3+p.phase))*.2)*level/3})`;ctx.arc(x,y,p.r,0,Math.PI*2);ctx.fill()});paintSky(ms,light,level);frame=requestAnimationFrame(paint)}
+const points=Array.from({length:72},(_,i)=>({
+ x:(i*.61803398875)%1,y:(i*.41421356237)%1,phase:i*1.73,
+ r:.65+(i%4)*.32,depth:.35+(i%5)*.16,
+ vx:.0015+(i%7)*.00038,vy:.001+(i%6)*.0003
+}));
+const ambientPointer={x:0,y:0,targetX:0,targetY:0};
+function resizeAmbient(){cw=innerWidth;ch=innerHeight;const d=Math.min(devicePixelRatio||1,1.75);canvas.width=cw*d;canvas.height=ch*d;ctx?.setTransform(d,0,0,d,0,0)}
+function paint(ms){
+ if(!ctx)return;
+ const level=prefs.motion,t=ms/1000,light=root.dataset.theme==='light';
+ ambientPointer.x+=(ambientPointer.targetX-ambientPointer.x)*.035;
+ ambientPointer.y+=(ambientPointer.targetY-ambientPointer.y)*.035;
+ ctx.clearRect(0,0,cw,ch);
+ const intensity=[0,.024,.052,.078][level];
+ for(let j=0;j<3;j++){
+  const depth=.45+j*.25;
+  const x=cw*(.18+j*.34)+Math.sin(t*(.045+j*.012)+j*2.1)*cw*.09+ambientPointer.x*cw*.035*depth;
+  const y=ch*(.2+j*.25)+Math.cos(t*(.038+j*.01)+j)*ch*.1+ambientPointer.y*ch*.035*depth;
+  const radius=Math.max(cw,ch)*(.34+j*.035),g=ctx.createRadialGradient(x,y,0,x,y,radius);
+  const color=j===1?'32,127,230':j===2?'30,185,210':'88,72,220';
+  g.addColorStop(0,`rgba(${color},${intensity*(1-j*.14)})`);
+  g.addColorStop(1,'rgba(20,70,180,0)');
+  ctx.fillStyle=g;ctx.fillRect(0,0,cw,ch);
+ }
+ const count=[0,28,48,68][level];
+ const pos=points.slice(0,count).map(p=>({
+  x:((p.x+t*p.vx*level+Math.sin(t*.12+p.phase)*.009*p.depth+ambientPointer.x*.022*p.depth+1)%1)*cw,
+  y:((p.y+t*p.vy*level+Math.cos(t*.1+p.phase)*.008*p.depth+ambientPointer.y*.022*p.depth+1)%1)*ch,p
+ }));
+ if(level>1){
+  const reach=Math.min(190,125+Math.min(cw,ch)*.035);
+  ctx.lineWidth=.55;
+  for(let i=0;i<count;i++)for(let j=i+1;j<count;j++){
+   const a=pos[i],b=pos[j],d=Math.hypot(a.x-b.x,a.y-b.y);
+   if(d<reach){ctx.strokeStyle=`rgba(80,160,240,${(1-d/reach)*.075*(level-1)})`;ctx.beginPath();ctx.moveTo(a.x,a.y);ctx.lineTo(b.x,b.y);ctx.stroke()}
+  }
+ }
+ pos.forEach(({x,y,p})=>{
+  const pulse=.52+.48*Math.sin(t*(.6+p.depth*.55)+p.phase);
+  ctx.beginPath();ctx.fillStyle=`rgba(${light?'35,105,195':'145,207,255'},${(.13+pulse*.34)*level/3})`;
+  ctx.arc(x,y,p.r*(.82+pulse*.28),0,Math.PI*2);ctx.fill();
+ });
+ paintSky(ms,light,level);frame=requestAnimationFrame(paint);
+}
 function paintSky(ms,light,level){
  if(!level)return;const t=ms/1000,power=level/3;ctx.save();
- for(let i=0;i<110*power;i++){const x=((i*.618034)%1)*cw,y=((i*.414214)%1)*ch,a=(.38+.62*(.5+.5*Math.sin(t*.8+i)))*power;ctx.fillStyle=light?`rgba(50,113,180,${a*.8})`:`rgba(218,237,255,${a})`;ctx.beginPath();ctx.arc(x,y,i%5===0?1.8:1,0,Math.PI*2);ctx.fill();}
- /* Keep the background atmospheric without the distracting sun glare. */
+ const dust=Math.round(52+level*16);
+ for(let i=0;i<dust;i++){
+  const depth=.3+(i%5)*.16;
+  const x=((((i*.754877666)%1)+t*(.00065+(i%4)*.00022)*level+ambientPointer.x*.012*depth)%1)*cw;
+  const y=((((i*.569840296)%1)+t*(.0004+(i%3)*.00018)*level+ambientPointer.y*.012*depth)%1)*ch;
+  const a=(.18+.32*(.5+.5*Math.sin(t*(.35+(i%4)*.06)+i)))*power;
+  ctx.fillStyle=light?`rgba(50,113,180,${a*.62})`:`rgba(218,237,255,${a})`;
+  ctx.beginPath();ctx.arc(x,y,i%9===0?1.45:.72,0,Math.PI*2);ctx.fill();
+ }
  ctx.restore();
- if(level>1){const cycle=t%9;if(cycle<1.3){const x=cw*(.72-cycle*.3),y=ch*(.12+cycle*.24);ctx.save();const trail=ctx.createLinearGradient(x,y,x+150,y-75);trail.addColorStop(0,light?'rgba(58,122,201,.7)':'rgba(229,245,255,.9)');trail.addColorStop(1,'transparent');ctx.strokeStyle=trail;ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(x,y);ctx.lineTo(x+150,y-75);ctx.stroke();ctx.restore();}}
+ if(level>1){const cycle=t%14;if(cycle<1.05){const x=cw*(.82-cycle*.38),y=ch*(.08+cycle*.28);ctx.save();const trail=ctx.createLinearGradient(x,y,x+120,y-60);trail.addColorStop(0,light?'rgba(58,122,201,.5)':'rgba(229,245,255,.72)');trail.addColorStop(1,'transparent');ctx.strokeStyle=trail;ctx.lineWidth=1.4;ctx.beginPath();ctx.moveTo(x,y);ctx.lineTo(x+120,y-60);ctx.stroke();ctx.restore();}}
 }
+window.addEventListener('pointermove',event=>{if(!cw||!ch)return;ambientPointer.targetX=event.clientX/cw-.5;ambientPointer.targetY=event.clientY/ch-.5},{passive:true});
+document.documentElement.addEventListener('pointerleave',()=>{ambientPointer.targetX=0;ambientPointer.targetY=0});
 function startAmbient(){cancelAnimationFrame(frame);if(ctx)ctx.clearRect(0,0,cw,ch);if(prefs.motion>0&&!document.hidden)frame=requestAnimationFrame(paint)}
 document.addEventListener('visibilitychange',startAmbient);let resizeFrame;window.addEventListener('resize',()=>{cancelAnimationFrame(resizeFrame);resizeFrame=requestAnimationFrame(()=>{fit();resizeAmbient()})});
 resizeAmbient();navigate(location.hash.slice(1)==='role'?'about':location.hash.slice(1),false);applyPreferences(false);document.fonts.ready.then(fit);
