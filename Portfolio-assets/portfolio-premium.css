@@ -1,0 +1,998 @@
+/* Portfolio enhancement layer — 2026-10-16
+   One intentional authority for rhythm, hierarchy, responsive pages, and rail state. */
+:root{
+  --premium-space-1:8px;
+  --premium-space-2:12px;
+  --premium-space-3:16px;
+  --premium-space-4:24px;
+  --premium-space-5:32px;
+  --premium-radius:16px;
+  --premium-border:color-mix(in srgb,var(--blue) 22%,var(--line));
+  --rail-open:clamp(248px,18vw,296px);
+  --rail-closed:76px;
+}
+
+@media (min-width:821px){
+  :root{--rail:var(--rail-open)}
+  html[data-rail-collapsed="true"]{--rail:var(--rail-closed)}
+  body{padding-bottom:40px!important}
+  #main{align-items:stretch!important;min-height:calc(100dvh - 92px)!important}
+  #main>.persistent-profile{top:78px!important;height:calc(100dvh - 92px)!important;padding:12px!important;border:1px solid var(--premium-border)!important;border-radius:20px!important;background:color-mix(in srgb,var(--panel) 95%,transparent)!important;transition:width .28s cubic-bezier(.22,1,.36,1),padding .28s cubic-bezier(.22,1,.36,1)!important}
+  #main>.view{min-height:calc(100dvh - 92px)!important;padding:clamp(20px,2vw,30px)!important;border-color:var(--premium-border)!important;background:color-mix(in srgb,var(--panel) 93%,transparent)!important}
+  .rail-collapse{position:absolute;z-index:6;right:10px;top:10px;width:34px;height:34px;display:grid;place-items:center;padding:0;border:1px solid var(--line);border-radius:10px;background:color-mix(in srgb,var(--panel2) 92%,transparent);color:var(--blue);transition:transform .2s ease,background .2s ease}
+  .rail-collapse:hover{background:color-mix(in srgb,var(--blue) 14%,var(--panel2))}
+  .rail-collapse svg{width:17px;height:17px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+  .persistent-profile .profile-copy>p:not(.profile-role){display:-webkit-box!important;-webkit-box-orient:vertical!important;-webkit-line-clamp:3!important;overflow:hidden!important}
+  html[data-rail-collapsed="true"] .rail-collapse{right:20px;transform:rotate(180deg)}
+  html[data-rail-collapsed="true"] .persistent-profile{padding:10px!important;gap:10px!important}
+  html[data-rail-collapsed="true"] .persistent-profile .profile-card{background:transparent!important;overflow:visible!important}
+  html[data-rail-collapsed="true"] .persistent-profile .portrait-stage{width:48px!important;height:48px!important;min-height:48px!important;flex:0 0 48px!important;margin:42px auto 0!important;border-radius:14px!important}
+  html[data-rail-collapsed="true"] .persistent-profile .portrait-stage img{object-fit:cover!important;object-position:center top!important}
+  html[data-rail-collapsed="true"] .persistent-profile .profile-copy,
+  html[data-rail-collapsed="true"] .persistent-profile .profile-socials,
+  html[data-rail-collapsed="true"] .desktop-side-menu .rail-opportunity,
+  html[data-rail-collapsed="true"] .desktop-side-menu .nav-settings{display:none!important}
+  html[data-rail-collapsed="true"] .desktop-side-menu{margin-top:2px!important}
+  html[data-rail-collapsed="true"] .desktop-side-menu .site-nav{gap:8px!important}
+  html[data-rail-collapsed="true"] .desktop-side-menu .site-nav a{justify-content:center!important;width:46px!important;min-height:44px!important;margin-inline:auto!important;padding:0!important}
+  html[data-rail-collapsed="true"] .desktop-side-menu .site-nav a .nav-icon{display:block!important;width:18px!important;height:18px!important}
+  html[data-rail-collapsed="true"] .desktop-side-menu .site-nav a>span{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+  html[data-rail-collapsed="true"] .desktop-side-menu .site-nav a::before{display:none!important}
+}
+
+/* Compact laptop viewport (roughly 1366–1512 × 700–900 CSS px).
+   Scale the whole composition by available height so the rail and active
+   workspace remain a single, fully visible screen at the browser default. */
+@media (min-width:821px) and (max-height:900px){
+  html,body{
+    height:100%!important;
+    min-height:0!important;
+    overflow:hidden!important;
+  }
+  body{padding:8px 12px 0!important}
+  #main{
+    height:calc(100dvh - 16px)!important;
+    min-height:0!important;
+    overflow:hidden!important;
+  }
+  #main>.view,
+  #main>.persistent-profile{
+    height:100%!important;
+    min-height:0!important;
+    overflow:hidden!important;
+  }
+  #main>.view{
+    padding:14px 16px!important;
+    gap:8px!important;
+  }
+
+  #main>.persistent-profile{
+    top:8px!important;
+    padding:8px!important;
+    gap:5px!important;
+  }
+  .persistent-profile .profile-card{
+    height:auto!important;
+    min-height:0!important;
+    overflow:hidden!important;
+  }
+  .persistent-profile .portrait-stage{
+    height:145px!important;
+    flex:0 0 145px!important;
+  }
+  .persistent-profile .profile-copy{padding:8px 10px 6px!important}
+  .persistent-profile .profile-copy h2{font-size:1.22rem!important;line-height:1.12!important}
+  .persistent-profile .profile-role{
+    margin:3px auto!important;
+    font-size:.74rem!important;
+    line-height:1.22!important;
+  }
+  .persistent-profile .profile-copy>p:not(.profile-role){
+    display:-webkit-box!important;
+    margin:6px auto 0!important;
+    overflow:hidden!important;
+    -webkit-box-orient:vertical!important;
+    -webkit-line-clamp:4!important;
+    font-size:.66rem!important;
+    line-height:1.3!important;
+  }
+  .persistent-profile .profile-meta{
+    margin-top:6px!important;
+    gap:4px 8px!important;
+    font-size:.62rem!important;
+    line-height:1.25!important;
+  }
+  .persistent-profile .desktop-side-menu{
+    flex:1 1 auto!important;
+    min-height:0!important;
+    overflow:hidden!important;
+  }
+  .desktop-side-menu .site-nav{gap:2px!important}
+  .desktop-side-menu .site-nav a{
+    min-height:29px!important;
+    padding:4px 10px!important;
+    font-size:.68rem!important;
+  }
+  .desktop-side-menu .site-nav .nav-icon{width:15px!important;height:15px!important}
+  .persistent-profile>.nav-settings{
+    flex-basis:32px!important;
+    min-height:32px!important;
+    margin:2px 0!important;
+    gap:5px!important;
+  }
+  .persistent-profile>.nav-settings>*{
+    width:30px!important;
+    min-width:30px!important;
+    height:30px!important;
+    min-height:30px!important;
+  }
+  .persistent-profile>.nav-settings .portfolio-support img{width:24px!important;height:24px!important}
+  .persistent-profile>.nav-settings .portfolio-support span,
+  .persistent-profile>.nav-settings .visit-counter span{display:none!important}
+  .persistent-profile>.nav-settings .visit-counter{width:auto!important;padding:0 9px!important}
+  .persistent-profile .profile-socials{gap:6px!important}
+  .persistent-profile .profile-socials a{
+    min-height:32px!important;
+    padding:5px 7px!important;
+    font-size:.68rem!important;
+  }
+  .persistent-profile .profile-socials svg{width:15px!important;height:15px!important}
+
+  .view-heading{padding-bottom:7px!important}
+  .view-heading h1{font-size:clamp(1.55rem,2.1vw,2rem)!important}
+  .view-heading p:not(.eyebrow){margin-top:3px!important;font-size:.75rem!important;line-height:1.35!important}
+  .eyebrow{margin-bottom:4px!important;font-size:.68rem!important}
+
+  body[data-view="home"] #main>.home-view .home-content{
+    grid-template-rows:minmax(220px,45%) minmax(0,55%)!important;
+    gap:7px!important;
+  }
+  body[data-view="home"] .hero-copy{padding:12px 28px!important}
+  body[data-view="home"] .hero-copy h1{font-size:clamp(2.2rem,3.7vw,3.35rem)!important}
+  body[data-view="home"] .hero-summary{margin-top:8px!important;font-size:.83rem!important;line-height:1.4!important}
+  body[data-view="home"] .home-actions{margin-top:10px!important}
+  body[data-view="home"] #main>.home-view .home-evidence{
+    grid-template-rows:78px minmax(0,1fr) 40px!important;
+    gap:6px!important;
+  }
+  body[data-view="home"] .metrics,
+  body[data-view="home"] .metrics article{height:78px!important}
+  body[data-view="home"] .metrics article{padding:9px 12px!important}
+  body[data-view="home"] .metrics strong{font-size:1.35rem!important}
+  body[data-view="home"] .featured-work__title{margin-bottom:3px!important}
+  body[data-view="home"] .home-proof-banner{min-height:40px!important}
+
+  body[data-view="about"],body[data-view="services"],body[data-view="projects"]{
+    height:100dvh!important;
+    min-height:0!important;
+    overflow:hidden!important;
+    padding-bottom:0!important;
+  }
+  body[data-view="about"] #main,
+  body[data-view="services"] #main,
+  body[data-view="projects"] #main{height:calc(100dvh - 16px)!important;min-height:0!important}
+  body[data-view="about"] #main>.view,
+  body[data-view="services"] #main>.view,
+  body[data-view="projects"] #main>.view{height:100%!important;min-height:0!important;overflow:hidden!important}
+
+  body[data-view="about"] .about-overview{
+    grid-template-columns:minmax(0,1.35fr) repeat(3,minmax(0,.55fr))!important;
+    gap:7px!important;
+  }
+  body[data-view="about"] .about-overview__intro,
+  body[data-view="about"] .about-overview__metric{padding:9px 11px!important}
+  body[data-view="about"] .about-overview__intro h2{font-size:1.02rem!important}
+  body[data-view="about"] .about-overview__intro p{
+    display:-webkit-box!important;
+    margin-top:4px!important;
+    overflow:hidden!important;
+    -webkit-box-orient:vertical!important;
+    -webkit-line-clamp:2!important;
+    font-size:.67rem!important;
+    line-height:1.35!important;
+  }
+  body[data-view="about"] .about-overview__metric strong{font-size:1.15rem!important}
+  body[data-view="about"] .about-overview__metric span{font-size:.58rem!important}
+  body[data-view="about"] .portfolio-filter,
+  body[data-view="projects"] .portfolio-filter{margin:0!important;gap:6px!important}
+  body[data-view="about"] .portfolio-filter button,
+  body[data-view="projects"] .portfolio-filter button{
+    min-height:30px!important;
+    padding:4px 10px!important;
+    font-size:.64rem!important;
+  }
+  body[data-view="about"] .about-layout{flex:1 1 auto!important;min-height:0!important;gap:7px!important}
+  body[data-view="about"] .company-portfolio-grid.paged-grid{
+    height:100%!important;
+    min-height:0!important;
+    grid-template-columns:repeat(3,minmax(0,1fr))!important;
+    grid-template-rows:repeat(3,minmax(0,1fr))!important;
+    gap:7px!important;
+  }
+  body[data-view="about"] .company-card{
+    min-height:0!important;
+    padding:6px 8px!important;
+    border-radius:11px!important;
+  }
+  body[data-view="about"] .company-card .company-mark{max-width:52px!important;max-height:42px!important}
+  body[data-view="about"] .company-summary strong{font-size:.69rem!important}
+  body[data-view="about"] .company-summary span,
+  body[data-view="about"] .company-summary small{font-size:.54rem!important;line-height:1.2!important}
+  body[data-view="about"] .education-strip{display:none!important}
+
+  body[data-view="services"] .service-groups.paged-grid{
+    flex:1 1 auto!important;
+    height:auto!important;
+    min-height:0!important;
+    grid-template-columns:repeat(2,minmax(0,1fr))!important;
+    grid-template-rows:repeat(5,minmax(0,1fr))!important;
+    gap:7px 10px!important;
+  }
+  body[data-view="services"] .service-group{
+    min-height:0!important;
+    padding:7px 10px!important;
+    gap:4px!important;
+    grid-template-columns:minmax(0,1fr) auto!important;
+    grid-template-rows:auto minmax(0,1fr)!important;
+  }
+  body[data-view="services"] .service-heading{grid-column:1/-1!important}
+  body[data-view="services"] .service-heading h3{font-size:.76rem!important}
+  body[data-view="services"] .service-number{width:24px!important;height:24px!important;font-size:.64rem!important}
+  body[data-view="services"] .service-description{
+    display:-webkit-box!important;
+    align-self:center!important;
+    -webkit-box-orient:vertical!important;
+    -webkit-line-clamp:2!important;
+    font-size:.62rem!important;
+    line-height:1.25!important;
+  }
+  body[data-view="services"] .service-group .tool-list{
+    align-self:center!important;
+    flex-wrap:nowrap!important;
+    gap:5px!important;
+    margin:0!important;
+  }
+  body[data-view="services"] .service-group .tool-list li{width:26px!important}
+  body[data-view="services"] .tool-logo{width:26px!important;height:26px!important;padding:5px!important}
+
+  body[data-view="projects"] #main>[data-view-panel="projects"]{padding:14px 16px!important;gap:8px!important}
+  body[data-view="projects"] #main [data-view-panel="projects"] .project-grid[data-grid="projects"]{
+    flex:1 1 auto!important;
+    height:auto!important;
+    gap:7px 9px!important;
+  }
+  body[data-view="projects"] #main [data-view-panel="projects"] .project-card{
+    display:grid!important;
+    grid-template-columns:31% minmax(0,1fr)!important;
+    grid-template-rows:1fr!important;
+    gap:7px!important;
+    padding:6px!important;
+  }
+  body[data-view="projects"] .project-card .project-visual{
+    grid-column:1!important;
+    grid-row:1!important;
+    width:100%!important;
+    height:100%!important;
+    min-height:0!important;
+    flex:none!important;
+  }
+  body[data-view="projects"] .project-card>.project-copy{
+    grid-column:2!important;
+    grid-row:1!important;
+    justify-content:center!important;
+    height:100%!important;
+    padding:1px!important;
+    gap:2px!important;
+  }
+  body[data-view="projects"] .project-card .project-category{font-size:.45rem!important}
+  body[data-view="projects"] .project-card .project-copy h3{font-size:.78rem!important}
+  body[data-view="projects"] .project-card .project-copy p{
+    -webkit-line-clamp:2!important;
+    font-size:.53rem!important;
+    line-height:1.2!important;
+  }
+  body[data-view="projects"] .project-card .project-role{font-size:.49rem!important}
+  body[data-view="projects"] .project-card .project-status{padding:1px 5px!important;font-size:.46rem!important}
+  body[data-view="projects"] .project-actions{padding-top:2px!important;gap:3px!important;flex-wrap:nowrap!important}
+  body[data-view="projects"] .project-actions button,
+  body[data-view="projects"] .project-actions a{
+    min-height:20px!important;
+    padding:2px 5px!important;
+    font-size:.46rem!important;
+    white-space:nowrap!important;
+  }
+}
+
+/* Refined, quieter interaction language. */
+.view-heading{padding-bottom:14px;border-bottom:1px solid var(--line-soft)}
+.view-heading h1{letter-spacing:-.045em!important}
+.view-heading p:not(.eyebrow){max-width:66ch;color:var(--muted)}
+.primary-button,.secondary-button,.metric-card,.company-card,.project-card,.featured-work__card{transition:transform .2s cubic-bezier(.22,1,.36,1),border-color .2s ease,background-color .2s ease,box-shadow .2s ease!important}
+.primary-button:hover,.secondary-button:hover{transform:translateY(-2px)}
+.metric-card:hover,.company-card:hover,.project-card:hover,.featured-work__card:hover{transform:translateY(-3px)!important;border-color:color-mix(in srgb,var(--blue) 70%,var(--line))!important;box-shadow:0 18px 38px -30px rgba(64,160,255,.72)!important}
+
+/* Executive About page. */
+.about-overview{display:grid;grid-template-columns:minmax(0,1.5fr) repeat(3,minmax(120px,.5fr));gap:12px}
+.about-overview__intro,.about-overview__metric{border:1px solid var(--premium-border);border-radius:var(--premium-radius);background:color-mix(in srgb,var(--panel2) 72%,var(--panel));padding:18px}
+.about-overview__intro{display:flex;flex-direction:column;justify-content:center}
+.about-overview__intro h2{font-size:clamp(1.25rem,1.6vw,1.7rem);line-height:1.18;letter-spacing:-.03em}
+.about-overview__intro p{max-width:68ch;margin-top:8px;color:var(--muted);font-size:.88rem;line-height:1.55}
+.about-overview__metric{display:flex;flex-direction:column;justify-content:center;gap:2px}
+.about-overview__metric strong{color:var(--blue);font-size:clamp(1.28rem,1.7vw,1.85rem);line-height:1}
+.about-overview__metric span{color:var(--muted);font-size:.7rem;line-height:1.35}
+.portfolio-filter{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin:2px 0 12px}
+.portfolio-filter button{min-height:36px;padding:7px 13px;border:1px solid var(--line);border-radius:999px;background:transparent;color:var(--muted);font-size:.75rem;font-weight:750}
+.portfolio-filter button:hover{color:var(--text);border-color:var(--blue)}
+.portfolio-filter button[aria-pressed="true"]{border-color:var(--blue);background:color-mix(in srgb,var(--blue) 14%,var(--panel2));color:var(--text)}
+.company-card.is-filtered-out,.project-card.is-filtered-out{display:none!important}
+.company-card{min-height:108px!important}
+.company-summary em{color:var(--blue)!important;font-style:normal!important}
+
+/* Premium project gallery. */
+[data-view-panel="projects"] .view-heading>span{white-space:nowrap}
+.project-grid.paged-grid{grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:16px!important}
+.project-grid>.project-card{display:flex!important;flex-direction:column!important;min-height:360px!important;padding:10px!important;border:1px solid var(--premium-border)!important;border-radius:var(--premium-radius)!important;background:color-mix(in srgb,var(--panel2) 62%,var(--panel))!important}
+.project-card .project-visual{width:100%!important;height:auto!important;min-height:0!important;aspect-ratio:16/9!important;border-radius:12px!important;overflow:hidden!important;background:#071526!important}
+.project-grid .project-visual>img{width:100%!important;height:100%!important;max-width:none!important;max-height:none!important;padding:0!important;object-fit:cover!important;filter:none!important}
+.project-card[data-project-key="job-collectives"] .project-visual>img,
+.project-card[data-project-key="creative-collectives"] .project-visual>img,
+.project-card[data-project-key="code-collectives"] .project-visual>img,
+.project-card[data-project-key="getsemane"] .project-visual>img{padding:clamp(28px,4vw,52px)!important;object-fit:contain!important;background:radial-gradient(circle at 50% 45%,color-mix(in srgb,var(--project-edge) 16%,transparent),transparent 65%),#071526!important}
+.project-grid>.project-card>.project-copy{display:flex!important;flex:1!important;flex-direction:column!important;justify-content:flex-start!important;width:100%!important;height:auto!important;min-height:0!important;padding:10px 7px 7px!important;gap:6px!important}
+.project-card .project-category{color:var(--blue);font-size:.64rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase}
+.project-card .project-status{align-self:flex-start;margin-top:2px;padding:4px 8px;border:1px solid var(--line);border-radius:999px;color:var(--muted);font-size:.62rem;font-weight:750}
+.project-grid .project-copy h3{font-size:1.15rem!important;line-height:1.15!important}
+.project-grid .project-copy p{font-size:.78rem!important;line-height:1.48!important;color:var(--muted)!important}
+.project-grid .project-role{font-size:.7rem!important;color:var(--text)!important}
+.project-actions{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-top:auto!important;padding-top:10px!important}
+.project-actions button,.project-actions a{min-height:32px;display:inline-flex;align-items:center;padding:6px 9px!important;border:1px solid var(--line)!important;border-radius:8px!important;background:transparent!important;color:var(--blue)!important;text-decoration:none!important;font-weight:750}
+
+/* Keep the atmospheric background visible without reducing readability. */
+#ambient{opacity:1!important;filter:saturate(1.32) contrast(1.08)!important}
+#main>.view,.persistent-profile{backdrop-filter:blur(11px) saturate(1.05)!important}
+
+@media (max-width:1250px) and (min-width:821px){
+  .about-overview{grid-template-columns:repeat(3,1fr)}
+  .about-overview__intro{grid-column:1/-1}
+  .project-grid.paged-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+}
+
+@media (max-width:820px){
+  body{padding-bottom:calc(92px + env(safe-area-inset-bottom))!important}
+  #main>.view{padding:18px!important;border-radius:20px!important}
+  .rail-collapse{display:none!important}
+  .view-heading{align-items:flex-start!important}
+  .view-heading h1{font-size:clamp(1.85rem,7vw,2.65rem)!important}
+  .about-overview{grid-template-columns:repeat(3,1fr)}
+  .about-overview__intro{grid-column:1/-1;padding:16px}
+  .about-overview__metric{padding:13px 10px;text-align:center}
+  .portfolio-filter{flex-wrap:nowrap;overflow-x:auto;padding-bottom:4px;scrollbar-width:none}
+  .portfolio-filter::-webkit-scrollbar{display:none}
+  .portfolio-filter button{flex:0 0 auto}
+  .project-grid.paged-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:12px!important}
+  .project-grid>.project-card{min-height:340px!important}
+}
+
+@media (max-width:620px){
+  #main>.view{padding:16px!important}
+  .view-heading{display:block!important}
+  .view-heading>a,.view-heading>span{display:inline-flex!important;margin-top:10px}
+  .about-overview{grid-template-columns:1fr}
+  .about-overview__intro,.about-overview__metric{grid-column:auto;text-align:left}
+  .about-overview__metric{display:grid;grid-template-columns:85px 1fr;align-items:center;gap:10px;padding:11px 14px}
+  .about-overview__metric strong{font-size:1.25rem}
+  .company-portfolio-grid.paged-grid{grid-template-columns:1fr!important}
+  .company-card{min-height:94px!important}
+  .project-grid.paged-grid{grid-template-columns:1fr!important}
+  .project-grid>.project-card{min-height:0!important}
+  .project-card .project-visual{aspect-ratio:16/10!important}
+  .project-grid>.project-card>.project-copy{padding:10px 5px 6px!important}
+  .project-grid .project-copy p{font-size:.86rem!important}
+  .project-grid .project-copy h3{font-size:1.25rem!important}
+}
+
+@media (prefers-reduced-motion:reduce){
+  .rail-collapse,.primary-button,.secondary-button,.metric-card,.company-card,.project-card,.featured-work__card{transition:none!important}
+}
+
+/* State must beat the legacy grid's display authority. */
+.project-grid>.project-card.is-filtered-out,
+.company-portfolio-grid>.company-card.is-filtered-out{display:none!important}
+
+/* Desktop layout recovery: remove the legacy one-screen crop and keep the
+   profile rail aligned with the active page card. */
+@media (min-width:821px){
+  html,body{
+    height:auto!important;
+    min-height:100%!important;
+    overflow-x:clip!important;
+    overflow-y:auto!important;
+  }
+  body{padding-bottom:24px!important}
+  #main{
+    height:auto!important;
+    min-height:calc(100dvh - 24px)!important;
+    align-items:stretch!important;
+    overflow:visible!important;
+  }
+  #main>.view{
+    height:auto!important;
+    min-height:calc(100dvh - 24px)!important;
+    overflow:visible!important;
+    padding-bottom:30px!important;
+  }
+  #main>.persistent-profile{
+    position:sticky!important;
+    top:12px!important;
+    align-self:start!important;
+    height:calc(100dvh - 24px)!important;
+    min-height:680px!important;
+    overflow:visible!important;
+  }
+  .persistent-profile .profile-card{
+    flex:0 0 auto!important;
+    height:auto!important;
+    min-height:0!important;
+    overflow:visible!important;
+  }
+  .persistent-profile .portrait-stage{
+    flex:0 0 auto!important;
+    height:clamp(210px,27dvh,310px)!important;
+    min-height:0!important;
+  }
+  .persistent-profile .profile-copy{
+    flex:0 0 auto!important;
+    padding:14px 14px 10px!important;
+    text-align:center!important;
+    overflow:visible!important;
+  }
+  .persistent-profile .profile-copy h2,
+  .persistent-profile .profile-role{
+    width:100%!important;
+    max-width:24ch!important;
+    margin-inline:auto!important;
+    text-align:center!important;
+  }
+  .persistent-profile .profile-copy>p:not(.profile-role){
+    display:block!important;
+    max-width:31ch!important;
+    margin:10px auto 0!important;
+    overflow:visible!important;
+    -webkit-line-clamp:unset!important;
+    font-size:clamp(.71rem,.68vw,.81rem)!important;
+    line-height:1.43!important;
+    text-align:center!important;
+  }
+  .persistent-profile .profile-meta{
+    justify-content:center!important;
+    margin-top:9px!important;
+    text-align:center!important;
+  }
+  .persistent-profile .desktop-side-menu{
+    flex:1 1 auto!important;
+    min-height:0!important;
+    overflow:visible!important;
+  }
+  .persistent-profile .profile-socials{
+    flex:0 0 auto!important;
+    width:100%!important;
+    margin-top:auto!important;
+    padding:0!important;
+    overflow:visible!important;
+  }
+  .persistent-profile .profile-socials a{
+    min-width:0!important;
+    min-height:38px!important;
+    overflow:visible!important;
+  }
+
+  [data-view-panel="projects"]{
+    height:auto!important;
+    min-height:calc(100dvh - 24px)!important;
+    overflow:visible!important;
+  }
+  #main [data-view-panel="projects"] .project-grid[data-grid="projects"]{
+    flex:none!important;
+    height:auto!important;
+    min-height:0!important;
+    overflow:visible!important;
+    align-content:start!important;
+    grid-template-rows:none!important;
+    grid-auto-rows:auto!important;
+  }
+  #main [data-view-panel="projects"] .project-grid[data-grid="projects"]>.project-card{
+    height:auto!important;
+    min-height:400px!important;
+    overflow:visible!important;
+  }
+  .project-actions{flex-wrap:wrap!important}
+}
+
+/* Rail utilities: the open rail gets one clean toolbar; the compact rail
+   stacks the same controls so nothing can escape its narrow boundary. */
+@media (min-width:821px){
+  .persistent-profile>.nav-settings{
+    position:relative!important;
+    inset:auto!important;
+    z-index:8!important;
+    display:flex!important;
+    flex:0 0 38px!important;
+    align-items:center!important;
+    justify-content:center!important;
+    width:100%!important;
+    min-height:38px!important;
+    margin:6px 0!important;
+    padding:0!important;
+    transform:none!important;
+    overflow:visible!important;
+  }
+  html[data-rail-collapsed="true"] .persistent-profile>.nav-settings{
+    position:absolute!important;
+    left:50%!important;
+    right:auto!important;
+    top:auto!important;
+    bottom:12px!important;
+    display:grid!important;
+    grid-template-columns:34px!important;
+    grid-auto-rows:34px!important;
+    width:34px!important;
+    height:auto!important;
+    min-height:0!important;
+    margin:0!important;
+    gap:7px!important;
+    transform:translateX(-50%)!important;
+  }
+  html[data-rail-collapsed="true"] .persistent-profile>.nav-settings>*{
+    width:34px!important;
+    min-width:34px!important;
+    max-width:34px!important;
+    height:34px!important;
+    min-height:34px!important;
+    padding:0!important;
+    border-radius:50%!important;
+  }
+  html[data-rail-collapsed="true"] .persistent-profile>.nav-settings .visit-counter{
+    flex:none!important;
+    color:transparent!important;
+    font-size:0!important;
+    gap:0!important;
+  }
+  html[data-rail-collapsed="true"] .persistent-profile>.nav-settings .visit-counter strong{
+    display:none!important;
+  }
+}
+
+@media (min-width:821px) and (max-height:1250px){
+  .desktop-side-menu .rail-opportunity{display:none!important}
+}
+
+/* Home is deliberately a one-screen dashboard on desktop. Other long-form
+   sections, especially Projects, retain natural document scrolling. */
+@media (min-width:821px){
+  body[data-view="home"]{
+    height:100dvh!important;
+    min-height:0!important;
+    overflow:hidden!important;
+    padding-bottom:0!important;
+  }
+  body[data-view="home"] #main{
+    height:calc(100dvh - 24px)!important;
+    min-height:0!important;
+    overflow:hidden!important;
+  }
+  body[data-view="home"] #main>.persistent-profile,
+  body[data-view="home"] #main>.home-view{
+    height:100%!important;
+    min-height:0!important;
+    overflow:hidden!important;
+  }
+  body[data-view="home"] .home-layout,
+  body[data-view="home"] .home-content{
+    height:100%!important;
+    min-height:0!important;
+  }
+  body[data-view="home"] #main>.home-view .home-content{
+    grid-template-rows:minmax(280px,46%) minmax(0,54%)!important;
+    gap:10px!important;
+  }
+  body[data-view="home"] #main>.home-view .home-evidence{
+    grid-template-rows:92px minmax(0,1fr) 48px!important;
+    gap:8px!important;
+    min-height:0!important;
+    overflow:hidden!important;
+  }
+  body[data-view="home"] .metrics,
+  body[data-view="home"] .metrics article{
+    height:92px!important;
+    min-height:0!important;
+  }
+  body[data-view="home"] .featured-work,
+  body[data-view="home"] .featured-work__grid,
+  body[data-view="home"] .featured-work__card{
+    min-height:0!important;
+  }
+  body[data-view="home"] .home-proof-banner{
+    min-height:48px!important;
+  }
+
+  /* Brand-only artwork stays large, uncropped, and consistently landscape. */
+  .project-card[data-project-key="job-collectives"] .project-visual,
+  .project-card[data-project-key="creative-collectives"] .project-visual,
+  .project-card[data-project-key="code-collectives"] .project-visual,
+  .project-card[data-project-key="getsemane"] .project-visual{
+    aspect-ratio:16/9!important;
+  }
+  .project-card[data-project-key="job-collectives"] .project-visual>img,
+  .project-card[data-project-key="creative-collectives"] .project-visual>img,
+  .project-card[data-project-key="code-collectives"] .project-visual>img,
+  .project-card[data-project-key="getsemane"] .project-visual>img{
+    width:100%!important;
+    height:100%!important;
+    padding:clamp(20px,3vw,36px)!important;
+    object-fit:contain!important;
+    object-position:center!important;
+  }
+  .project-grid .project-visual>img[src*="official-"]{
+    width:100%!important;
+    height:100%!important;
+    max-width:none!important;
+    max-height:none!important;
+    padding:0!important;
+    object-fit:contain!important;
+    object-position:center!important;
+    background:var(--project-fill,#071526)!important;
+  }
+  .project-card[data-project-key="diskart-e"]{--project-fill:#ff431f!important}
+  .project-card[data-project-key="pallo"]{--project-fill:#050505!important}
+  .project-card[data-project-key="dingo"]{--project-fill:#ffcf16!important}
+  .project-card[data-project-key="naknak"]{--project-fill:#df0013!important}
+  .project-card[data-project-key="job-collectives"]{--project-fill:#2d31bf!important}
+  .project-card[data-project-key="code-collectives"]{--project-fill:#020d17!important}
+  .project-card[data-project-key="creative-collectives"]{--project-fill:#ffc913!important}
+  .project-card[data-project-key="getsemane"],
+  .project-card[data-project-key="melo"]{--project-fill:#050505!important}
+}
+
+/* Nine-project desktop gallery: one complete screen, three by three. */
+@media (min-width:821px){
+  body[data-view="projects"]{
+    height:100dvh!important;
+    min-height:0!important;
+    overflow:hidden!important;
+    padding-bottom:0!important;
+  }
+  body[data-view="projects"] #main{
+    height:calc(100dvh - 24px)!important;
+    min-height:0!important;
+    overflow:hidden!important;
+  }
+  body[data-view="projects"] #main>.persistent-profile,
+  body[data-view="projects"] #main>[data-view-panel="projects"]{
+    height:100%!important;
+    min-height:0!important;
+    overflow:hidden!important;
+  }
+  body[data-view="projects"] #main>[data-view-panel="projects"]{
+    display:flex!important;
+    flex-direction:column!important;
+    gap:10px!important;
+    padding:18px 20px!important;
+  }
+  body[data-view="projects"] [data-view-panel="projects"] .view-heading{
+    flex:0 0 auto!important;
+    padding-bottom:9px!important;
+  }
+  body[data-view="projects"] [data-view-panel="projects"] .view-heading h1{
+    font-size:clamp(1.8rem,2.25vw,2.55rem)!important;
+  }
+  body[data-view="projects"] [data-view-panel="projects"] .portfolio-filter{
+    flex:0 0 auto!important;
+    margin:0!important;
+  }
+  body[data-view="projects"] #main [data-view-panel="projects"] .project-grid[data-grid="projects"]{
+    display:grid!important;
+    flex:1 1 auto!important;
+    grid-template-columns:repeat(3,minmax(0,1fr))!important;
+    grid-template-rows:repeat(3,minmax(0,1fr))!important;
+    grid-auto-rows:unset!important;
+    gap:10px 12px!important;
+    height:auto!important;
+    min-height:0!important;
+    overflow:hidden!important;
+  }
+  body[data-view="projects"] #main [data-view-panel="projects"] .project-card{
+    display:grid!important;
+    grid-template-columns:34% minmax(0,1fr)!important;
+    grid-template-rows:1fr!important;
+    gap:10px!important;
+    height:auto!important;
+    min-height:0!important;
+    padding:8px!important;
+    overflow:hidden!important;
+  }
+  body[data-view="projects"] .project-card .project-visual{
+    grid-column:1!important;
+    grid-row:1!important;
+    width:100%!important;
+    height:100%!important;
+    min-height:0!important;
+    aspect-ratio:auto!important;
+    border-radius:9px!important;
+  }
+  body[data-view="projects"] .project-card>.project-copy{
+    grid-column:2!important;
+    grid-row:1!important;
+    justify-content:center!important;
+    gap:3px!important;
+    height:100%!important;
+    min-height:0!important;
+    padding:2px!important;
+  }
+  body[data-view="projects"] .project-card .project-category{
+    font-size:.5rem!important;
+  }
+  body[data-view="projects"] .project-card .project-copy h3{
+    font-size:.92rem!important;
+  }
+  body[data-view="projects"] .project-card .project-copy p{
+    display:-webkit-box!important;
+    overflow:hidden!important;
+    -webkit-box-orient:vertical!important;
+    -webkit-line-clamp:2!important;
+    font-size:.62rem!important;
+    line-height:1.28!important;
+  }
+  body[data-view="projects"] .project-card .project-role{
+    font-size:.57rem!important;
+  }
+  body[data-view="projects"] .project-card .project-status{
+    margin-top:1px!important;
+    padding:2px 6px!important;
+    font-size:.52rem!important;
+  }
+  body[data-view="projects"] .project-actions{
+    gap:4px!important;
+    margin-top:auto!important;
+    padding-top:4px!important;
+  }
+  body[data-view="projects"] .project-actions button,
+  body[data-view="projects"] .project-actions a{
+    min-height:24px!important;
+    padding:3px 6px!important;
+    font-size:.54rem!important;
+  }
+}
+
+/* Give the one-screen gallery breathing room: use the full available height
+   and return to a clear visual-first card hierarchy. */
+@media (min-width:821px){
+  body[data-view="projects"] #main [data-view-panel="projects"] .project-grid[data-grid="projects"]{
+    flex:0 0 auto!important;
+    height:calc(100% - 116px)!important;
+    min-height:0!important;
+    align-content:stretch!important;
+  }
+  body[data-view="projects"] #main [data-view-panel="projects"] .project-card{
+    display:flex!important;
+    flex-direction:column!important;
+    gap:7px!important;
+    padding:9px!important;
+  }
+  body[data-view="projects"] .project-card .project-visual{
+    flex:0 0 43%!important;
+    width:100%!important;
+    height:auto!important;
+    min-height:0!important;
+    aspect-ratio:auto!important;
+  }
+  body[data-view="projects"] .project-card>.project-copy{
+    display:flex!important;
+    flex:1 1 auto!important;
+    flex-direction:column!important;
+    justify-content:flex-start!important;
+    width:100%!important;
+    height:auto!important;
+    min-height:0!important;
+    padding:2px 3px!important;
+    gap:3px!important;
+  }
+  body[data-view="projects"] .project-card .project-category{font-size:.55rem!important}
+  body[data-view="projects"] .project-card .project-copy h3{font-size:1rem!important}
+  body[data-view="projects"] .project-card .project-copy p{
+    font-size:.67rem!important;
+    line-height:1.32!important;
+  }
+  body[data-view="projects"] .project-card .project-role{font-size:.61rem!important}
+  body[data-view="projects"] .project-card .project-status{font-size:.55rem!important}
+  body[data-view="projects"] .project-actions button,
+  body[data-view="projects"] .project-actions a{
+    min-height:26px!important;
+    font-size:.57rem!important;
+  }
+}
+
+/* Final short-laptop authority: later gallery rules must not undo the
+   height-aware rail and horizontal project cards above. */
+@media (min-width:821px) and (max-height:900px){
+  #main>.persistent-profile{padding:8px!important;gap:4px!important}
+  .persistent-profile .profile-card{flex:0 0 auto!important;height:auto!important;overflow:hidden!important}
+  .persistent-profile .portrait-stage{
+    flex:0 0 145px!important;
+    height:145px!important;
+    min-height:145px!important;
+  }
+  .persistent-profile .profile-copy{flex:0 0 auto!important;padding:7px 9px 5px!important}
+  .persistent-profile .profile-copy h2{font-size:1.18rem!important;line-height:1.1!important}
+  .persistent-profile .profile-role{margin:3px auto!important;font-size:.72rem!important;line-height:1.2!important}
+  .persistent-profile .profile-copy>p:not(.profile-role){
+    display:-webkit-box!important;
+    margin:5px auto 0!important;
+    overflow:hidden!important;
+    -webkit-box-orient:vertical!important;
+    -webkit-line-clamp:4!important;
+    font-size:.64rem!important;
+    line-height:1.26!important;
+  }
+  .persistent-profile .profile-meta{margin-top:5px!important;font-size:.6rem!important;line-height:1.2!important}
+  .persistent-profile .desktop-side-menu{flex:1 1 auto!important;min-height:0!important;overflow:hidden!important}
+  .desktop-side-menu .site-nav{gap:1px!important}
+  .desktop-side-menu .site-nav a{min-height:28px!important;padding:3px 9px!important;font-size:.66rem!important}
+  .persistent-profile>.nav-settings{
+    flex:0 0 30px!important;
+    min-height:30px!important;
+    margin:1px 0!important;
+    gap:4px!important;
+  }
+  .persistent-profile>.nav-settings>*{height:28px!important;min-height:28px!important}
+  .persistent-profile .profile-socials{gap:5px!important}
+  .persistent-profile .profile-socials a{min-height:30px!important;padding:4px 6px!important;font-size:.66rem!important}
+
+  body[data-view="projects"] #main [data-view-panel="projects"] .project-card{
+    display:grid!important;
+    grid-template-columns:31% minmax(0,1fr)!important;
+    grid-template-rows:minmax(0,1fr)!important;
+    gap:7px!important;
+    padding:6px!important;
+  }
+  body[data-view="projects"] .project-card .project-visual{
+    grid-column:1!important;
+    grid-row:1!important;
+    width:100%!important;
+    height:100%!important;
+    min-height:0!important;
+    flex:none!important;
+    aspect-ratio:auto!important;
+  }
+  body[data-view="projects"] .project-card>.project-copy{
+    grid-column:2!important;
+    grid-row:1!important;
+    justify-content:center!important;
+    width:100%!important;
+    height:100%!important;
+    min-height:0!important;
+    padding:1px!important;
+    gap:2px!important;
+  }
+  body[data-view="projects"] .project-card .project-category{font-size:.45rem!important}
+  body[data-view="projects"] .project-card .project-copy h3{font-size:.78rem!important}
+  body[data-view="projects"] .project-card .project-copy p{
+    display:-webkit-box!important;
+    overflow:hidden!important;
+    -webkit-box-orient:vertical!important;
+    -webkit-line-clamp:2!important;
+    font-size:.52rem!important;
+    line-height:1.2!important;
+  }
+  body[data-view="projects"] .project-card .project-role{font-size:.48rem!important}
+  body[data-view="projects"] .project-card .project-status{padding:1px 5px!important;font-size:.45rem!important}
+  body[data-view="projects"] .project-actions{
+    flex-wrap:nowrap!important;
+    gap:3px!important;
+    margin-top:auto!important;
+    padding-top:2px!important;
+  }
+  body[data-view="projects"] .project-actions button,
+  body[data-view="projects"] .project-actions a{
+    min-height:20px!important;
+    padding:2px 5px!important;
+    font-size:.45rem!important;
+    white-space:nowrap!important;
+  }
+}
+
+/* Render authority: intentionally last. */
+.metric-card,.featured-work__card,.home-proof-banner,
+.about-overview__intro,.about-overview__metric,.company-card,.service-group,
+.project-grid>.project-card,.contact-intro,.contact-panel,.jobs-mockup{
+  background:linear-gradient(145deg,color-mix(in srgb,var(--panel2) 76%,transparent),color-mix(in srgb,var(--panel) 60%,transparent))!important;
+  border-color:color-mix(in srgb,var(--blue) 24%,rgba(255,255,255,.13))!important;
+  -webkit-backdrop-filter:blur(15px) saturate(1.2)!important;
+  backdrop-filter:blur(15px) saturate(1.2)!important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.075),inset 0 -1px 0 rgba(74,156,255,.035),0 18px 38px -34px rgba(35,135,255,.82)!important;
+}
+.service-group{background:linear-gradient(145deg,color-mix(in srgb,var(--service-accent,var(--blue)) 8%,color-mix(in srgb,var(--panel2) 72%,transparent)),color-mix(in srgb,var(--panel) 58%,transparent))!important}
+[data-theme="light"] .metric-card,[data-theme="light"] .featured-work__card,
+[data-theme="light"] .home-proof-banner,[data-theme="light"] .about-overview__intro,
+[data-theme="light"] .about-overview__metric,[data-theme="light"] .company-card,
+[data-theme="light"] .service-group,[data-theme="light"] .project-grid>.project-card,
+[data-theme="light"] .contact-intro,[data-theme="light"] .contact-panel,
+[data-theme="light"] .jobs-mockup{
+  background:linear-gradient(145deg,rgba(255,255,255,.7),rgba(235,245,255,.54))!important;
+  border-color:rgba(62,133,202,.27)!important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.86),0 18px 38px -34px rgba(18,79,139,.42)!important;
+}
+@media (min-width:821px) and (min-height:901px){body[data-view="home"] #main>.home-view .home-evidence{gap:12px!important}}
+@media (min-width:821px) and (min-height:901px) and (max-height:1050px){
+  body[data-view="projects"] #main [data-view-panel="projects"] .project-card{gap:5px!important;padding:7px!important}
+  body[data-view="projects"] .project-card .project-visual{flex-basis:37%!important}
+  body[data-view="projects"] .project-card>.project-copy{gap:2px!important;padding:1px 3px!important}
+  body[data-view="projects"] .project-card .project-copy p{display:-webkit-box!important;overflow:hidden!important;-webkit-box-orient:vertical!important;-webkit-line-clamp:2!important}
+  body[data-view="projects"] .project-actions{padding-top:3px!important}
+  body[data-view="projects"] .project-actions button,
+  body[data-view="projects"] .project-actions a{min-height:24px!important;padding:3px 6px!important}
+}
+
+/* DINGO uses the supplied transparent character artwork over its brand yellow. */
+.project-card[data-project-key="dingo"] .project-visual{
+  background:#ffcf16!important;
+}
+.project-card[data-project-key="dingo"] .project-visual>img{
+  width:100%!important;
+  height:100%!important;
+  padding:clamp(4px,.8vw,10px)!important;
+  object-fit:contain!important;
+  object-position:center!important;
+  background:#ffcf16!important;
+}
+
+/* Profile rail stack: reserve separate rows for the opportunity callout,
+   utilities, and social links so no toolbar can overlap another surface. */
+@media (min-width:821px){
+  .persistent-profile{
+    overflow:hidden!important;
+  }
+  .persistent-profile .desktop-side-menu{
+    display:flex!important;
+    flex:1 1 auto!important;
+    flex-direction:column!important;
+    min-height:0!important;
+    overflow:hidden!important;
+  }
+  .desktop-side-menu .rail-opportunity{
+    position:relative!important;
+    inset:auto!important;
+    flex:0 0 auto!important;
+    width:100%!important;
+    min-height:58px!important;
+    margin:8px 0 0!important;
+    transform:none!important;
+  }
+  .persistent-profile>.nav-settings{
+    position:relative!important;
+    inset:auto!important;
+    z-index:2!important;
+    flex:0 0 38px!important;
+    width:100%!important;
+    min-height:38px!important;
+    margin:7px 0!important;
+    transform:none!important;
+  }
+  .persistent-profile>.profile-socials{
+    position:relative!important;
+    z-index:1!important;
+    flex:0 0 38px!important;
+    width:100%!important;
+    min-height:38px!important;
+    margin:0!important;
+  }
+}
+
+@media (min-width:821px) and (max-height:1050px){
+  .desktop-side-menu .rail-opportunity{display:none!important}
+}
+
+@media (min-width:821px) and (min-height:1251px){
+  .persistent-profile .desktop-side-menu{
+    padding-bottom:62px!important;
+  }
+}
