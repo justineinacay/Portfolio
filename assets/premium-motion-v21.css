@@ -1,0 +1,64 @@
+/* V21 — Typographic choreography + tactile card motion, preserving V20 layout. */
+:root{--v21-ease:cubic-bezier(.19,1,.22,1);--v21-soft:cubic-bezier(.25,.74,.25,1)}
+/* Invisible states are only applied to elements JS explicitly prepares. */
+@media(prefers-reduced-motion:no-preference){
+ html.v21-motion-ready .v21-motion-title .v21-word{
+  display:inline-block;opacity:0;transform:translate3d(0,.58em,0);
+  filter:blur(3px);transition:opacity .64s var(--v21-soft),transform .82s var(--v21-ease),filter .65s ease;
+  transition-delay:calc(var(--v21-word,0) * 32ms + var(--v21-delay,0ms));
+ }
+ html.v21-motion-ready .v21-motion-title.v21-in .v21-word{opacity:1;transform:translate3d(0,0,0);filter:blur(0)}
+ html.v21-motion-ready .v21-motion-copy{opacity:0;transform:translate3d(0,16px,0);transition:opacity .72s var(--v21-soft),transform .82s var(--v21-ease);transition-delay:var(--v21-delay,110ms)}
+ html.v21-motion-ready .v21-motion-copy.v21-in{opacity:1;transform:none}
+ html.v21-motion-ready .v21-motion-card{
+  opacity:0;filter:blur(2.5px);transform:perspective(900px) translate3d(0,29px,0) rotateX(1.8deg) scale(.986);
+  transform-origin:center 90%;backface-visibility:hidden;
+  transition:opacity .76s var(--v21-soft),filter .76s ease,transform .98s var(--v21-ease),border-color .32s ease,box-shadow .38s ease;
+  transition-delay:var(--v21-delay,0ms),var(--v21-delay,0ms),var(--v21-delay,0ms),0ms,0ms;
+ }
+ html.v21-motion-ready .v21-motion-card.v21-in{opacity:1;filter:blur(0);transform:perspective(900px) translate3d(0,0,0) rotateX(0) scale(1)}
+ @media(hover:hover) and (pointer:fine){
+  html.v21-motion-ready .v21-motion-card.v21-in:hover{transform:translate3d(0,-5px,0)}
+ }
+}
+/* A careful lift, never an image crop or heavy glassmorphism overlay. */
+.v16-tool-card,.v16-project-card,.proof-card,.case-tile,.note-card,.v10-selected-item,.v10-archive-item,.v10-story-card,.journal-line{
+ box-shadow:0 9px 26px rgba(20,42,75,.045),inset 0 1px 0 rgba(255,255,255,.28);
+}
+:root[data-theme=dark] .v16-tool-card,:root[data-theme=dark] .v16-project-card,
+:root[data-theme=dark] .proof-card,:root[data-theme=dark] .case-tile,
+:root[data-theme=dark] .note-card,:root[data-theme=dark] .v10-selected-item,
+:root[data-theme=dark] .v10-archive-item{
+ box-shadow:0 11px 29px rgba(0,0,0,.13),inset 0 1px 0 rgba(255,255,255,.025);
+}
+@media(hover:hover) and (pointer:fine){
+ .v16-tool-card:hover,.v16-project-card:hover,.proof-card:hover,.case-tile:hover,
+ .note-card:hover,.v10-selected-item:hover,.v10-archive-item:hover{
+  box-shadow:0 23px 55px rgba(20,51,91,.11);border-color:rgba(79,132,204,.32)
+ }
+ :root[data-theme=dark] .v16-tool-card:hover,:root[data-theme=dark] .v16-project-card:hover,
+ :root[data-theme=dark] .proof-card:hover,:root[data-theme=dark] .case-tile:hover{
+  box-shadow:0 24px 53px rgba(0,0,0,.24);border-color:rgba(140,179,232,.37)
+ }
+}
+.button,.v16-project-action,.v10-open,.underlined-link{
+ transition:transform .38s var(--v21-ease),box-shadow .42s ease,background-color .38s ease,color .38s ease,border-color .38s ease
+}
+@media(hover:hover){.button:hover{transform:translateY(-2px)}}
+/* Hero retains its approved line breaks, with slightly more cinematic pacing. */
+.has-js .hero-heading .line-reveal>span{transition-duration:1.05s;transition-timing-function:var(--v21-ease)}
+.has-js .hero-heading .line-reveal:nth-child(2)>span{transition-delay:.2s!important}
+.has-js .hero-copy .rise:nth-child(3){transition-delay:.31s}
+.has-js .hero-copy .rise:nth-child(4){transition-delay:.44s}
+@media(max-width:760px){
+ @media(prefers-reduced-motion:no-preference){
+  html.v21-motion-ready .v21-motion-card{transform:translate3d(0,18px,0) scale(.993);filter:none;transition-duration:.67s,.67s,.72s,.3s,.3s}
+  html.v21-motion-ready .v21-motion-copy{transform:translate3d(0,10px,0)}
+  html.v21-motion-ready .v21-motion-title .v21-word{filter:none;transform:translate3d(0,.35em,0);transition-duration:.5s,.65s,.5s}
+ }
+}
+@media(prefers-reduced-motion:reduce){
+ .v21-motion-card,.v21-motion-copy,.v21-motion-title,.v21-word{opacity:1!important;filter:none!important;transform:none!important;transition:none!important;animation:none!important}
+ .button{transition:none!important}
+}
+@media print{.v21-motion-card,.v21-motion-copy,.v21-word{opacity:1!important;transform:none!important;filter:none!important}}

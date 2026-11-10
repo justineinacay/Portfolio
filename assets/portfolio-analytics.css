@@ -1,0 +1,22 @@
+/* V18 — restrained analytics micro-interface, theme-aware and accessible */
+[data-public-counter][hidden] { display: none !important; }
+[data-public-counter] {
+  display: inline-flex; align-items: center; gap: 9px;
+  font-size: 12px; letter-spacing: .01em; line-height: 1.5;
+  color: var(--muted, #5f6d80); white-space: nowrap;
+}
+[data-public-counter] svg { width: 15px; height: 15px; flex: 0 0 15px; }
+[data-public-counter] strong { color: var(--navy, #172840); font-weight: 650; font-variant-numeric: tabular-nums; }
+.site-footer .footer-layout { flex-wrap: wrap; }
+.site-footer .footer-analytics {
+  display: flex; align-items: center; flex-wrap: wrap; gap: 18px; width: 100%;
+  padding-top: 14px; border-top: 1px solid var(--line,rgba(0,0,0,.12));
+}
+.footer-analytics a { font-size: 12px; color: var(--muted, #5f6d80); text-decoration: none; }
+.footer-analytics a:hover, .footer-analytics a:focus-visible { color: var(--navy,#172840); text-decoration: underline; }
+.profile-counter {
+  margin-top: 22px; border-top: 1px solid var(--line,rgba(0,0,0,.12));
+  padding-top: 17px;
+}
+[data-theme="dark"] [data-public-counter] strong { color: #f4f7ff; }
+@media(max-width: 600px) { .site-footer .footer-analytics { gap: 12px 18px; } }

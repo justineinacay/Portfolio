@@ -1,0 +1,44 @@
+(()=>{'use strict';
+ document.documentElement.classList.add('has-js');
+ const qs=(s,r=document)=>r.querySelector(s),qsa=(s,r=document)=>[...r.querySelectorAll(s)];
+ const root=document.documentElement;
+ const toggle=qs('#themeToggle');
+ let theme='light';
+ try{theme=localStorage.getItem('justine-theme')||'light';}catch(e){}
+ if(theme!=='light'&&theme!=='dark')theme='light';
+ const setTheme=(value)=>{theme=value;root.dataset.theme=value;document.querySelectorAll('img[data-logo-theme]').forEach(img=>{let src=img.getAttribute('src')||'';img.src=src.replace(/jl-monogram-(navy|white)\.png$/,value==='dark'?'jl-monogram-white.png':'jl-monogram-navy.png');});document.querySelector('meta[name="theme-color"]')?.setAttribute('content',value==='dark'?'#0c1422':'#f7f7f5');if(toggle)toggle.setAttribute('aria-label',value==='dark'?'Switch to light theme':'Switch to dark theme');try{localStorage.setItem('justine-theme',value)}catch(e){}};
+ setTheme(theme);
+ if(toggle)toggle.addEventListener('click',()=>{const next=theme==='dark'?'light':'dark'; if(window.runThemeReveal)window.runThemeReveal(()=>setTheme(next),toggle);else setTheme(next);});
+ const menuToggle=qs('#menuToggle'),menu=qs('#mobileMenu');
+ const backdrop=document.createElement('button');backdrop.type='button';backdrop.className='mobile-menu-backdrop';backdrop.setAttribute('aria-label','Close navigation');document.body.appendChild(backdrop);
+ const closeMenu=(returnFocus=false)=>{if(!menu||!menuToggle)return;menu.hidden=true;menuToggle.setAttribute('aria-expanded','false');menuToggle.setAttribute('aria-label','Open menu');document.body.classList.remove('menu-open');document.documentElement.classList.remove('menu-open');if(returnFocus)menuToggle.focus();};
+ backdrop.addEventListener('click',()=>closeMenu(true));
+ menu?.addEventListener('keydown',e=>{if(e.key!=='Tab')return;const items=qsa('a:not([hidden]),button:not([hidden])',menu);if(!items.length)return;const first=items[0],last=items[items.length-1];if(e.shiftKey&&document.activeElement===first){e.preventDefault();menuToggle.focus();}else if(!e.shiftKey&&document.activeElement===last){e.preventDefault();menuToggle.focus();}});
+ if(menuToggle&&menu){menuToggle.addEventListener('click',()=>{const opened=menuToggle.getAttribute('aria-expanded')==='true';menu.hidden=opened;menuToggle.setAttribute('aria-expanded',String(!opened));menuToggle.setAttribute('aria-label',opened?'Open menu':'Close menu');document.body.classList.toggle('menu-open',!opened);document.documentElement.classList.toggle('menu-open',!opened);if(!opened)qsa('a',menu)[0]?.focus();});qsa('a',menu).forEach(a=>a.addEventListener('click',closeMenu));window.addEventListener('keydown',e=>{if(e.key==='Escape')closeMenu(true)});window.addEventListener('resize',()=>{if(window.innerWidth>960)closeMenu()});}
+ const reduced=window.matchMedia('(prefers-reduced-motion: reduce)').matches;const coarsePointer=window.matchMedia('(pointer:coarse)').matches;const mobileScroll=window.matchMedia('(max-width:760px)').matches;
+ if('IntersectionObserver' in window && !reduced){const observer=new IntersectionObserver(entries=>{entries.forEach(ent=>{if(ent.isIntersecting){ent.target.classList.add('is-visible');observer.unobserve(ent.target);}})},{threshold:.12,rootMargin:'0px 0px 55px 0px'});qsa('.reveal').forEach(el=>observer.observe(el));}else{qsa('.reveal').forEach(el=>el.classList.add('is-visible'))}
+ requestAnimationFrame(()=>root.classList.add('ready'));
+ const updateScroll=()=>{const max=document.documentElement.scrollHeight-window.innerHeight;const pct=max>0?Math.min(100,window.scrollY/max*100):0;const track=qs('#scrollProgress');if(track)track.style.width=`${pct}%`;const header=qs('.site-header');if(header)header.classList.toggle('scrolled',window.scrollY>30);if(!reduced && !coarsePointer && !mobileScroll){const h=qs('.hero-portrait');if(h&&window.scrollY<1100)h.style.setProperty('--photo-shift',`${Math.min(24,window.scrollY*.025).toFixed(1)}px`);qsa('.parallax-image').forEach(el=>{const rect=el.parentElement.getBoundingClientRect(),center=(rect.top+rect.height/2)-window.innerHeight/2;const shift=Math.max(-18,Math.min(18,-center*.018));el.style.setProperty('--photo-shift',`${shift.toFixed(1)}px`);});}};
+ let pending=false;window.addEventListener('scroll',()=>{if(pending)return;pending=true;requestAnimationFrame(()=>{updateScroll();pending=false})},{passive:true});updateScroll();
+ const year=qs('#year');if(year)year.textContent=String(new Date().getFullYear());
+ const tabs=qsa('[role="tab"][data-tab]');if(tabs.length){function activateTab(selected,focus=false){tabs.forEach(t=>{const active=t===selected;t.setAttribute('aria-selected',String(active));t.tabIndex=active?0:-1;const panel=qs(`#panel-${t.dataset.tab}`);if(panel)panel.hidden=!active;});if(focus)selected.focus();}tabs.forEach((tab,i)=>{tab.addEventListener('click',()=>activateTab(tab));tab.addEventListener('keydown',e=>{if(!['ArrowRight','ArrowLeft','Home','End'].includes(e.key))return;e.preventDefault();let index=i;if(e.key==='ArrowRight')index=(i+1)%tabs.length;if(e.key==='ArrowLeft')index=(i-1+tabs.length)%tabs.length;if(e.key==='Home')index=0;if(e.key==='End')index=tabs.length-1;activateTab(tabs[index],true)});});}
+ const processSteps=qsa('[data-process-step]');const track=qs('#processTrackFill');if(processSteps.length){const updateProcess=()=>{const target=window.innerHeight*.45;let best=0,dist=Infinity;processSteps.forEach((el,i)=>{const r=el.getBoundingClientRect();const d=Math.abs((r.top+r.height*.38)-target);if(d<dist){dist=d;best=i;}});processSteps.forEach((el,i)=>el.classList.toggle('is-current',i===best));if(track)track.style.height=`${(best+1)/processSteps.length*100}%`;};window.addEventListener('scroll',updateProcess,{passive:true});updateProcess();}
+ const contact=qs('#contactForm');if(contact){contact.addEventListener('submit',e=>{e.preventDefault();if(!contact.reportValidity())return;const name=qs('#contactName').value.trim(),email=qs('#contactEmail').value.trim(),purpose=qs('#contactPurpose').value,msg=qs('#contactMessage').value.trim();const subject=`Portfolio inquiry: ${purpose}`;const body=`Hello Justine,\n\n${msg}\n\nFrom: ${name}\nReply to: ${email}\nTopic: ${purpose}`;window.location.href=`mailto:justineluisinacay@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;const toast=qs('#toast');if(toast){toast.textContent='Opening your email application…';toast.classList.add('visible');setTimeout(()=>toast.classList.remove('visible'),3000);}});}
+
+ // Tool categories are real, accessible tabs; every control updates useful content.
+ const toolTabs=qsa('[role="tab"][data-tool-tab]');
+ if(toolTabs.length){
+  const activateTool=(tab,focus=false)=>{toolTabs.forEach(t=>{const active=t===tab;t.setAttribute('aria-selected',String(active));t.tabIndex=active?0:-1;const panel=qs(`#tool-${t.dataset.toolTab}`);if(panel)panel.hidden=!active;});if(focus)tab.focus();};
+  toolTabs.forEach((tab,i)=>{tab.addEventListener('click',()=>activateTool(tab));tab.addEventListener('keydown',e=>{if(!['ArrowRight','ArrowLeft','Home','End'].includes(e.key))return;e.preventDefault();let j=i;if(e.key==='ArrowRight')j=(i+1)%toolTabs.length;else if(e.key==='ArrowLeft')j=(i-1+toolTabs.length)%toolTabs.length;else if(e.key==='Home')j=0;else j=toolTabs.length-1;activateTool(toolTabs[j],true);});});
+ }
+ // The invitation links open a meaningful, pre-selected form. Works in both the normal and offline editions.
+ const fragment=(location.hash||'').split('#').pop();
+ const topic={'marketing-role':'Marketing role','freelance-collaboration':'Freelance collaboration','creative-project':'Creative project'}[fragment];
+ const purpose=qs('#contactPurpose');if(topic && purpose){purpose.value=topic;const form=qs('#contactForm');if(form)requestAnimationFrame(()=>{form.scrollIntoView({block:'start',behavior:reduced?'instant':'smooth'});});}
+ // Contact form stays privacy-preserving and uses the installed mail client.
+ const formStatus=qs('#formStatus');if(formStatus && contact){contact.addEventListener('submit',()=>{formStatus.textContent='Your email application should open with the message. If it does not, email justineluisinacay@gmail.com directly.';});}
+
+})();
+
+// Subtle pointer-follow spotlight; visual only, disabled for reduced motion.
+(()=>{const el=document.getElementById('heroSpark');if(!el||window.matchMedia('(prefers-reduced-motion: reduce)').matches||window.matchMedia('(pointer:coarse)').matches)return;const hero=el.closest('.hero');if(!hero)return;hero.addEventListener('pointermove',ev=>{const r=hero.getBoundingClientRect();const x=Math.min(100,Math.max(0,(ev.clientX-r.left)/r.width*100));const y=Math.min(100,Math.max(0,(ev.clientY-r.top)/r.height*100));el.style.setProperty('--mouse-x',x+'%');el.style.setProperty('--mouse-y',y+'%')},{passive:true});})();

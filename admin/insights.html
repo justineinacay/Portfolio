@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en" data-theme="dark"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow,noarchive">
+<title>Portfolio Insights — Justine Inacay</title>
+<link rel="stylesheet" href="insights.css">
+</head><body>
+<header class="topbar"><a class="wordmark" href="../index.html"><img src="../assets/jl-monogram-white.png" alt="" aria-hidden="true" class="monogram"> Justine Inacay</a><span class="top-label">PRIVATE PORTFOLIO INSIGHTS</span><button id="logout" class="subtle" type="button" hidden>Sign out</button></header>
+<main class="dashboard" id="main">
+<section class="intro"><p class="eyebrow">OWNER DASHBOARD / V18</p><h1>Know how your work is being discovered.</h1><p>Real portfolio engagement, without invented counters or invasive visitor profiles.</p></section>
+<section id="setupPanel" class="panel" hidden>
+<h2>Connect a dedicated analytics project</h2><p>This portfolio has not yet been connected to its own Supabase backend. The website will keep counting disabled until configuration is complete. No other business database is used.</p><p>Follow <code>ANALYTICS-SETUP.md</code> in the V18 ZIP, then fill in <code>assets/analytics-config.js</code>. The panel will switch to secure sign-in once configured.</p>
+<a href="../index.html">Return to portfolio ↗</a>
+</section>
+<section id="authPanel" class="panel narrow" hidden>
+<p class="eyebrow">AUTHORIZED ACCESS ONLY</p><h2>Sign in to insights</h2><p>Enter the verified owner email. Only that account is authorized to read analytics.</p>
+<form id="authForm"><label for="email">Email address</label><input type="email" id="email" name="email" autocomplete="email" placeholder="you@example.com" required><button class="primary" type="submit">Email me a sign-in link <span aria-hidden="true">↗</span></button></form>
+<p class="feedback" id="authMessage" role="status" aria-live="polite"></p>
+</section>
+<section id="statsPanel" hidden>
+<div class="stats-toolbar"><div><p class="eyebrow">YOUR PERFORMANCE</p><h2>Portfolio at a glance.</h2></div><div class="filters"><label for="days">Date range</label><select id="days"><option value="7">Last 7 days</option><option value="30" selected>Last 30 days</option><option value="90">Last 90 days</option><option value="365">Last 365 days</option></select><button class="subtle" id="refresh" type="button">Refresh</button></div></div>
+<p class="live-note" id="dataStatus" role="status" aria-live="polite">Loading actual data…</p>
+<div class="metric-grid" aria-label="Engagement metrics">
+<article class="metric"><div class="metric-label">Page views</div><strong id="pageViews">—</strong><p>Visits to your portfolio pages</p></article>
+<article class="metric"><div class="metric-label">Estimated sessions</div><strong id="uniqueSessions">—</strong><p>Browser sessions, not unique individuals</p></article>
+<article class="metric"><div class="metric-label">Profile views</div><strong id="profileViews">—</strong><p>Visits to your About page</p></article>
+<article class="metric"><div class="metric-label">Résumé downloads</div><strong id="resumeDownloads">—</strong><p>Clicks on your résumé file</p></article>
+<article class="metric"><div class="metric-label">Contact interactions</div><strong id="contactClicks">—</strong><p>Email and LinkedIn clicks</p></article>
+<article class="metric"><div class="metric-label">Project opens</div><strong id="projectOpens">—</strong><p>Visitors exploring your work</p></article>
+</div>
+<div class="insights-grid">
+<section class="panel chart-panel"><div class="panel-header"><h3>Page views over time</h3><small>Daily</small></div><div id="dailyChart" class="daily-chart" aria-label="Page views by day"></div></section>
+<section class="panel"><div class="panel-header"><h3>Most viewed pages</h3><small>Top 10</small></div><div id="topPages" class="ranked-list"></div></section>
+<section class="panel"><div class="panel-header"><h3>Traffic sources</h3><small>Referrer / UTM source</small></div><div id="trafficSources" class="ranked-list"></div></section>
+<section class="panel"><div class="panel-header"><h3>Understanding these numbers</h3></div><p>Estimated sessions are based on temporary, per-tab IDs—not persistent personal identifiers. Returning visitors may count as new sessions. Bots and blocked tracking can also affect totals.</p><p>For optional country-level and independent unique-visitor estimates, connect Cloudflare Web Analytics and open its private analytics dashboard.</p><p>Metrics only begin when your site and dedicated backend are configured and deployed.</p></section>
+</div>
+</section>
+</main><footer><span>Justine Inacay · Private insights</span><a href="../privacy.html">Privacy & analytics</a><a href="../index.html">Back to portfolio</a></footer>
+<script src="../assets/analytics-config.js"></script><script type="module" src="insights.js"></script>
+</body></html>

@@ -1,0 +1,258 @@
+[
+  {
+    "id": "posters-01",
+    "title": "July Business Seminar",
+    "description": "Educational event poster for youth entrepreneurs",
+    "category": "posters",
+    "src": "assets/creative-work/posters-01.webp",
+    "source": "PORTFOLIO.pdf · page 3"
+  },
+  {
+    "id": "posters-02",
+    "title": "CBI & ELC Meet",
+    "description": "Community development event poster",
+    "category": "posters",
+    "src": "assets/creative-work/posters-02.webp",
+    "source": "PORTFOLIO.pdf · page 3"
+  },
+  {
+    "id": "posters-03",
+    "title": "Unity Games opening ceremonies",
+    "description": "Community sports event creative",
+    "category": "posters",
+    "src": "assets/creative-work/posters-03.webp",
+    "source": "PORTFOLIO.pdf · page 3"
+  },
+  {
+    "id": "posters-04",
+    "title": "Startup Business Seminar",
+    "description": "Seminar marketing poster",
+    "category": "posters",
+    "src": "assets/creative-work/posters-04.webp",
+    "source": "PORTFOLIO.pdf · page 3"
+  },
+  {
+    "id": "photography-01",
+    "title": "IntraKid apparel photography",
+    "description": "Apparel campaign imagery",
+    "category": "photography",
+    "src": "assets/creative-work/photography-01.webp",
+    "source": "PORTFOLIO.pdf · page 3"
+  },
+  {
+    "id": "photography-02",
+    "title": "SouthKid apparel photography",
+    "description": "Lifestyle campaign imagery",
+    "category": "photography",
+    "src": "assets/creative-work/photography-02.webp",
+    "source": "PORTFOLIO.pdf · page 3"
+  },
+  {
+    "id": "photography-03",
+    "title": "Bridges team portrait",
+    "description": "Corporate portrait photography",
+    "category": "photography",
+    "src": "assets/creative-work/photography-03.webp",
+    "source": "PORTFOLIO.pdf · page 3"
+  },
+  {
+    "id": "photography-04",
+    "title": "Autoflare after-sales team",
+    "description": "Corporate team photography",
+    "category": "photography",
+    "src": "assets/creative-work/photography-04.webp",
+    "source": "PORTFOLIO.pdf · page 3"
+  },
+  {
+    "id": "photography-05",
+    "title": "Warehouse team portrait",
+    "description": "Workplace photography",
+    "category": "photography",
+    "src": "assets/creative-work/photography-05.webp",
+    "source": "PORTFOLIO.pdf · page 3"
+  },
+  {
+    "id": "photography-06",
+    "title": "Delivery team portrait",
+    "description": "Workplace and service photography",
+    "category": "photography",
+    "src": "assets/creative-work/photography-06.webp",
+    "source": "PORTFOLIO.pdf · page 3"
+  },
+  {
+    "id": "photography-07",
+    "title": "Hospitality team portrait",
+    "description": "Food-service workplace photography",
+    "category": "photography",
+    "src": "assets/creative-work/photography-07.webp",
+    "source": "PORTFOLIO.pdf · page 3"
+  },
+  {
+    "id": "advertisements-01",
+    "title": "Suzuki extended warranty",
+    "description": "Dealership service promotion",
+    "category": "advertisements",
+    "src": "assets/creative-work/advertisements-01.webp",
+    "source": "PORTFOLIO.pdf · page 3"
+  },
+  {
+    "id": "advertisements-02",
+    "title": "Suzuki reservation campaign",
+    "description": "Automotive reservation advertisement",
+    "category": "advertisements",
+    "src": "assets/creative-work/advertisements-02.webp",
+    "source": "PORTFOLIO.pdf · page 3"
+  },
+  {
+    "id": "advertisements-03",
+    "title": "Full of Fuels campaign",
+    "description": "Automotive sales promotion",
+    "category": "advertisements",
+    "src": "assets/creative-work/advertisements-03.webp",
+    "source": "PORTFOLIO.pdf · page 3"
+  },
+  {
+    "id": "advertisements-04",
+    "title": "Mix and March",
+    "description": "Dealer sales campaign",
+    "category": "advertisements",
+    "src": "assets/creative-work/advertisements-04.webp",
+    "source": "PORTFOLIO.pdf · page 3"
+  },
+  {
+    "id": "advertisements-05",
+    "title": "MG One offer",
+    "description": "Automotive retail promotion",
+    "category": "advertisements",
+    "src": "assets/creative-work/advertisements-05.webp",
+    "source": "PORTFOLIO.pdf · page 3"
+  },
+  {
+    "id": "advertisements-06",
+    "title": "Dongfeng month-end promo",
+    "description": "Automotive cross-model campaign",
+    "category": "advertisements",
+    "src": "assets/creative-work/advertisements-06.webp",
+    "source": "PORTFOLIO.pdf · page 3"
+  },
+  {
+    "id": "advertisements-07",
+    "title": "Jetour Love Dash Promos",
+    "description": "Automotive promotional artwork",
+    "category": "advertisements",
+    "src": "assets/creative-work/advertisements-07.webp",
+    "source": "PORTFOLIO.pdf · page 3"
+  },
+  {
+    "id": "advertisements-08",
+    "title": "Jetour X70 Travel offer",
+    "description": "Automotive financing promotion",
+    "category": "advertisements",
+    "src": "assets/creative-work/advertisements-08.webp",
+    "source": "PORTFOLIO.pdf · page 3"
+  },
+  {
+    "id": "merchandise-01",
+    "title": "CBI district windbreaker",
+    "description": "Branded outerwear design",
+    "category": "merchandise",
+    "src": "assets/creative-work/merchandise-01.webp",
+    "source": "PORTFOLIO.pdf · page 3"
+  },
+  {
+    "id": "merchandise-02",
+    "title": "District officers polo",
+    "description": "Organization uniform design",
+    "category": "merchandise",
+    "src": "assets/creative-work/merchandise-02.webp",
+    "source": "PORTFOLIO.pdf · page 3"
+  },
+  {
+    "id": "merchandise-03",
+    "title": "WBridges team polo",
+    "description": "Corporate uniform design",
+    "category": "merchandise",
+    "src": "assets/creative-work/merchandise-03.webp",
+    "source": "PORTFOLIO.pdf · page 3"
+  },
+  {
+    "id": "merchandise-04",
+    "title": "CBI organizational shirt",
+    "description": "Community apparel design",
+    "category": "merchandise",
+    "src": "assets/creative-work/merchandise-04.webp",
+    "source": "PORTFOLIO.pdf · page 3"
+  },
+  {
+    "id": "merchandise-05",
+    "title": "Basketball jersey set",
+    "description": "Sportswear concept and mockup",
+    "category": "merchandise",
+    "src": "assets/creative-work/merchandise-05.webp",
+    "source": "PORTFOLIO.pdf · page 3"
+  },
+  {
+    "id": "merchandise-06",
+    "title": "Kadiwa team jersey",
+    "description": "Organization sportswear design",
+    "category": "merchandise",
+    "src": "assets/creative-work/merchandise-06.webp",
+    "source": "PORTFOLIO.pdf · page 3"
+  },
+  {
+    "id": "events-01",
+    "title": "Juanapbuhay job fair",
+    "description": "Recruitment event promotion",
+    "category": "events",
+    "src": "assets/creative-work/events-01.webp",
+    "source": "PORTFOLIO.pdf · page 3"
+  },
+  {
+    "id": "events-02",
+    "title": "Suzuki dealer gathering",
+    "description": "Event documentation",
+    "category": "events",
+    "src": "assets/creative-work/events-02.webp",
+    "source": "PORTFOLIO.pdf · page 3"
+  },
+  {
+    "id": "events-03",
+    "title": "Suzuki test-drive event",
+    "description": "Automotive experiential campaign",
+    "category": "events",
+    "src": "assets/creative-work/events-03.webp",
+    "source": "PORTFOLIO.pdf · page 3"
+  },
+  {
+    "id": "events-04",
+    "title": "Suzuki Megamall campaign",
+    "description": "Automotive retail activation",
+    "category": "events",
+    "src": "assets/creative-work/events-04.webp",
+    "source": "PORTFOLIO.pdf · page 3"
+  },
+  {
+    "id": "events-05",
+    "title": "Jetour mall display",
+    "description": "Mall-based product activation",
+    "category": "events",
+    "src": "assets/creative-work/events-05.webp",
+    "source": "PORTFOLIO.pdf · page 3"
+  },
+  {
+    "id": "events-06",
+    "title": "Jetour on-site promotion",
+    "description": "Customer-facing activation",
+    "category": "events",
+    "src": "assets/creative-work/events-06.webp",
+    "source": "PORTFOLIO.pdf · page 3"
+  },
+  {
+    "id": "events-07",
+    "title": "Jetour Dashing showcase",
+    "description": "Vehicle presentation and event",
+    "category": "events",
+    "src": "assets/creative-work/events-07.webp",
+    "source": "PORTFOLIO.pdf · page 3"
+  }
+]

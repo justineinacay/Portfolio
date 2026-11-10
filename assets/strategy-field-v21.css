@@ -1,0 +1,29 @@
+/* V21 — Editorial strategy field. A quiet signal-and-connection motif,
+   replacing animated topographic contours without changing the V20 layout. */
+:root { --v12-sweep-duration: 1450ms; --theme-x: 90vw; --theme-y: 36px; --theme-r: 160vmax; }
+.hero,.page-hero,.inner-hero,.closing-section {position:relative;isolation:isolate;overflow:hidden}
+.strategy-field-v21 {position:absolute;inset:0;width:100%;height:100%;z-index:0;pointer-events:none;display:block;opacity:1}
+.hero>.container,.page-hero>.container,.inner-hero>.container,.closing-section>.container {position:relative;z-index:2}
+/* Legacy ornamentation must not overlap the new professional motif. */
+.hero-motion-field,.motion-aura,.motion-orbit,.motion-beam,.contour-canvas-v12 {display:none!important}
+/* Keep the deliberate 1.45-second circular transition approved in V12. */
+@supports (view-transition-name:root){
+ :root[data-theme-sweep="on"]::view-transition-old(root),
+ :root[data-theme-sweep="on"]::view-transition-new(root){animation:none;mix-blend-mode:normal}
+ :root[data-theme-sweep="on"]::view-transition-old(root){z-index:1}
+ :root[data-theme-sweep="on"]::view-transition-new(root){z-index:2;animation:v21ThemeReveal var(--v12-sweep-duration) cubic-bezier(.42,0,.16,1) both}
+}
+@keyframes v21ThemeReveal{from{clip-path:circle(0 at var(--theme-x) var(--theme-y))}to{clip-path:circle(var(--theme-r) at var(--theme-x) var(--theme-y))}}
+:root.v12-theme-fallback body,:root.v12-theme-fallback .site-header,
+:root.v12-theme-fallback section,:root.v12-theme-fallback article,
+:root.v12-theme-fallback a,:root.v12-theme-fallback button,
+:root.v12-theme-fallback .card,:root.v12-theme-fallback footer {
+ transition:color 1.18s ease,background-color 1.18s ease,border-color 1.18s ease,box-shadow 1.18s ease!important;
+}
+.theme-toggle{transition:border-color .45s ease,background-color .55s ease,transform .3s ease!important}
+.theme-toggle[aria-busy="true"]{pointer-events:none}
+.theme-toggle svg{transition:transform .8s cubic-bezier(.22,1,.36,1),opacity .65s ease!important}
+@media(prefers-reduced-motion:reduce){
+ ::view-transition-new(root),::view-transition-old(root){animation:none!important}
+ .theme-toggle,.theme-toggle svg{transition:none!important}
+}

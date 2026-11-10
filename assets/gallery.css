@@ -1,0 +1,113 @@
+
+/* V7: Creative-work library — no external assets or third-party scripts. */
+.portfolio-spotlight {background:var(--surface,#f6f7f8);position:relative;overflow:hidden}
+.portfolio-spotlight-intro,.portfolio-library-header {display:grid;grid-template-columns:1.3fr .7fr;align-items:end;gap:55px;margin-bottom:38px}
+.portfolio-spotlight-intro h2,.portfolio-library-header h2 {font-size:clamp(42px,5vw,78px);line-height:1.02;letter-spacing:-.055em;margin:18px 0 0}
+.portfolio-spotlight-intro p,.portfolio-library-header p {max-width:520px;line-height:1.75;color:var(--muted);font-size:clamp(15px,1.3vw,18px)}
+.portfolio-highlight-grid,.portfolio-art-grid {display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:22px}
+.portfolio-art-card {padding:0;text-align:left;min-width:0;display:flex;flex-direction:column;cursor:pointer;background:var(--card,#fff);color:var(--ink,var(--text,#15263d));border:1px solid var(--border,#dce1e7);border-radius:20px;overflow:hidden;transition:transform .4s cubic-bezier(.2,.8,.2,1),border-color .25s,box-shadow .25s;box-shadow:0 12px 30px rgba(18,35,54,.025);font-family:inherit}
+.portfolio-art-card:hover {transform:translateY(-5px);box-shadow:0 22px 42px rgba(8,20,35,.09);border-color:var(--accent,#2765ca)}
+.portfolio-art-card:focus-visible,.gallery-filter:focus-visible,.portfolio-lightbox-close:focus-visible {outline:3px solid #81b1ff;outline-offset:3px}
+.portfolio-art-image {display:block;overflow:hidden;position:relative;aspect-ratio:1.3;background:#dbe4ef}
+.portfolio-art-image img {display:block;width:100%;height:100%;object-fit:cover;transition:transform .65s cubic-bezier(.2,.8,.2,1)}
+.portfolio-art-card:hover .portfolio-art-image img {transform:scale(1.045)}
+.portfolio-art-body {display:flex;flex:1;flex-direction:column;align-items:flex-start;padding:21px 22px 23px;gap:8px}
+.portfolio-art-kicker {font-size:10px;letter-spacing:.16em;font-weight:750;color:var(--accent,#2765ca)}
+.portfolio-art-body strong {font-size:clamp(17px,1.6vw,21px);letter-spacing:-.025em;line-height:1.2}
+.portfolio-art-body small {font-size:13px;line-height:1.55;color:var(--muted);font-weight:400}
+.portfolio-art-view {display:block;color:var(--accent,#2765ca);font-size:12px;font-weight:700;margin-top:auto;padding-top:14px}
+.portfolio-spotlight-end {display:flex;gap:20px;align-items:center;justify-content:space-between;padding-top:30px}
+.portfolio-spotlight-end p {font-size:14px;color:var(--muted);line-height:1.6;max-width:480px}
+.portfolio-library {background:var(--surface,#f6f7f8)}
+.portfolio-library-header {align-items:end}
+.portfolio-library-header p {margin-top:15px}
+.portfolio-library-total {display:flex;flex-direction:column;align-items:flex-end;margin:0!important}
+.portfolio-library-total strong {font-size:72px;line-height:1;letter-spacing:-.07em;color:var(--text,#182f4b)}
+.portfolio-library-total span {font-size:13px;text-transform:uppercase;letter-spacing:.12em;color:var(--muted)}
+.portfolio-library-filter {display:flex;flex-wrap:wrap;gap:9px;margin-bottom:28px}
+.gallery-filter {border:1px solid var(--border,#d5dce5);background:var(--card,#fff);color:var(--text,#16283d);padding:11px 16px;border-radius:100px;font-family:inherit;font-size:13px;font-weight:650;cursor:pointer;min-height:44px;transition:background .2s,border-color .2s,color .2s}
+.gallery-filter span {opacity:.58;margin-left:7px;font-size:11px}
+.gallery-filter:hover,.gallery-filter.is-active {background:var(--accent,#2563be);color:#fff;border-color:var(--accent,#2563be)}
+.portfolio-art-card[hidden] {display:none!important}
+.portfolio-library-note {margin-top:25px;font-size:12px;line-height:1.6;color:var(--muted)}
+.portfolio-lightbox {border:0;padding:0;border-radius:18px;background:var(--card,#fff);color:var(--text,#152842);width:min(95vw,1100px);max-height:92dvh;box-shadow:0 35px 125px rgba(0,0,0,.45)}
+.portfolio-lightbox::backdrop {background:rgba(5,14,28,.88);backdrop-filter:blur(12px)}
+.portfolio-lightbox-shell {display:flex;flex-direction:column;max-height:92dvh}
+.portfolio-lightbox-bar {padding:19px 23px;display:flex;justify-content:space-between;align-items:center;gap:24px;border-bottom:1px solid var(--border,#d5dce5)}
+.portfolio-lightbox-bar h2 {font-size:clamp(21px,3vw,29px);margin:6px 0 0;letter-spacing:-.035em}
+.portfolio-lightbox-close {border:1px solid var(--border,#d5dce5);border-radius:999px;background:var(--surface,#f5f6f7);color:var(--text,#192c45);padding:10px 16px;font:inherit;font-size:13px;font-weight:650;white-space:nowrap;cursor:pointer}
+.portfolio-lightbox-image {padding:20px 24px;min-height:0;display:flex;align-items:center;justify-content:center;overflow:auto;background:var(--surface,#f5f6f7)}
+.portfolio-lightbox-image img {object-fit:contain;max-width:100%;max-height:68dvh;display:block;border-radius:5px}
+.portfolio-lightbox-footer {padding:14px 24px 19px;display:flex;align-items:center;justify-content:space-between;gap:14px}
+.portfolio-lightbox-footer p {color:var(--muted);line-height:1.5;font-size:13px;margin:0}
+.portfolio-lightbox-footer a {white-space:nowrap;color:var(--accent,#2563be);font-size:13px;font-weight:650}
+/* Increase contrast in the existing dark-mode icon tiles across tools */
+html[data-theme="dark"] .tool-mark img[src*="github"], html[data-theme="dark"] .tool-mark img[src*="notion"],html[data-theme="dark"] .tool-mark img[src*="vercel"] {filter:brightness(0) invert(1)}
+html[data-theme="dark"] .portfolio-spotlight,html[data-theme="dark"] .portfolio-library {background:#101c2e}
+html[data-theme="dark"] .portfolio-art-card {background:#142237;border-color:#34445c;color:#f4f6fa}
+html[data-theme="dark"] .portfolio-lightbox {background:#17243a;color:#f7f8fb}
+html[data-theme="dark"] .portfolio-lightbox-close {background:#23354c;color:#f5f6fa;border-color:#495a72}
+html[data-theme="dark"] .portfolio-lightbox-image {background:#0b1728}
+html[data-theme="dark"] .gallery-filter {background:#16253b;color:#f5f6fa;border-color:#45566c}
+html[data-theme="dark"] .gallery-filter.is-active {background:#6b9deb;color:#0b1728}
+@media(max-width:960px){.portfolio-highlight-grid,.portfolio-art-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.portfolio-spotlight-intro,.portfolio-library-header{grid-template-columns:1fr;gap:5px}.portfolio-library-total{display:none}}
+@media(max-width:620px){.portfolio-highlight-grid,.portfolio-art-grid{grid-template-columns:1fr;gap:17px}.portfolio-spotlight-intro h2,.portfolio-library-header h2 {font-size:clamp(38px,12vw,54px)}.portfolio-spotlight-end {align-items:stretch;flex-direction:column}.portfolio-art-image {aspect-ratio:1.35}.portfolio-art-body {padding:19px}.portfolio-lightbox-bar {padding:14px;align-items:flex-start}.portfolio-lightbox-image {padding:12px}.portfolio-lightbox-footer {padding:14px;align-items:flex-start;flex-direction:column}}
+@media(prefers-reduced-motion:reduce){.portfolio-art-card,.portfolio-art-image img{transition:none!important;transform:none!important}}
+
+/* A purposeful, less-empty closing invitation with an authentic professional portrait. */
+.closing-section {position:relative;overflow:hidden;background:radial-gradient(ellipse at 84% 30%,rgba(65,127,209,.2),transparent 45%),linear-gradient(125deg,#0d1a2b,#142e50)}
+.closing-section::after {content:"";pointer-events:none;position:absolute;right:-15vw;top:-20vw;width:60vw;aspect-ratio:1;border:1px solid rgba(192,213,245,.13);border-radius:50%;box-shadow:0 0 0 6vw rgba(192,213,245,.025)}
+.closing-section .closing-inner {display:grid;grid-template-columns:minmax(0,1.3fr) minmax(260px,.7fr);align-items:center;gap:clamp(40px,6vw,110px);position:relative;z-index:1;min-height:0}
+.closing-copy h2 {max-width:740px}
+.closing-portrait-card {min-width:0;display:grid;grid-template-columns:112px 1fr;align-items:center;gap:16px;padding:13px 17px 13px 13px;background:rgba(255,255,255,.045);border:1px solid rgba(210,229,249,.17);border-radius:18px}
+.closing-portrait-photo {aspect-ratio:.9;border-radius:11px;overflow:hidden;background:#f7f8f8}
+.closing-portrait-photo img {width:100%;height:100%;object-fit:cover;object-position:center 22%;display:block}
+.closing-portrait-footer {display:flex;flex-direction:column;gap:8px;color:#f4f6fb}
+.closing-portrait-footer span {font-size:10px;letter-spacing:.17em;font-weight:750;color:#99b9e3}
+.closing-portrait-footer strong {font-size:19px;line-height:1.2;letter-spacing:-.025em}
+.closing-portrait-footer small {font-size:12px;line-height:1.55;color:#b9cce2}
+@media(max-width:940px){.closing-section .closing-inner{grid-template-columns:1fr}.closing-portrait-card{max-width:550px}}
+@media(max-width:540px){.closing-portrait-card{grid-template-columns:85px 1fr;gap:14px}.closing-portrait-footer strong{font-size:16px}.closing-section .closing-inner{gap:36px}}
+
+/* Preserve every supplied poster / design without cropping its edges. */
+.portfolio-art-image {background:#edf2f8;display:flex;align-items:center;justify-content:center}
+.portfolio-art-image img {object-fit:contain;width:100%;height:100%}
+html[data-theme="dark"] .portfolio-art-image {background:#0a1526}
+
+/* Home toolkit: black brand paths remain legible in dark mode. */
+html[data-theme="dark"] .tool-logo-chip img[src*="github"],
+html[data-theme="dark"] .tool-logo-chip img[src*="notion"],
+html[data-theme="dark"] .tool-logo-chip img[src*="vercel"] {filter:brightness(0) invert(1)}
+
+
+/* V8 — THE WORK BEHIND THE WORK / SOURCE-PROPORTION GALLERY */
+.portfolio-spotlight,.portfolio-library {background:var(--surface,#f6f7f8)}
+.portfolio-spotlight-intro h2,.portfolio-library-header h2 {font-size:clamp(40px,5.7vw,78px);line-height:1.08;letter-spacing:-.048em}
+.portfolio-editorial-note {font-size:13px;line-height:1.7;max-width:710px;color:var(--muted);margin:12px 0 27px}
+.portfolio-art-grid {display:block;columns:3 285px;column-gap:22px}
+.portfolio-art-grid .portfolio-art-card {display:inline-flex;vertical-align:top;break-inside:avoid;page-break-inside:avoid;width:100%;margin:0 0 22px;transform:none!important}
+.portfolio-highlight-grid {display:grid;grid-template-columns:repeat(3,minmax(0,1fr));align-items:start;gap:20px}
+.portfolio-art-card {border-radius:15px;overflow:hidden;box-shadow:none;transition:border-color .2s,box-shadow .2s;align-self:start}
+.portfolio-art-card:hover {box-shadow:0 16px 38px rgba(8,20,35,.1);transform:none}
+.portfolio-art-image,.portfolio-highlight-grid .portfolio-art-image,.portfolio-art-grid .portfolio-art-image {aspect-ratio:auto!important;width:100%;height:auto!important;min-height:0;max-height:none!important;overflow:visible;display:block;background:transparent}
+.portfolio-art-image img,.portfolio-highlight-grid .portfolio-art-image img,.portfolio-art-grid .portfolio-art-image img {display:block;object-fit:contain!important;object-position:center;width:100%!important;height:auto!important;max-height:none!important;aspect-ratio:auto!important;transform:none!important;transition:none}
+.portfolio-art-card:hover .portfolio-art-image img{transform:none!important}
+.portfolio-art-card:focus-visible{outline:3px solid #82acfa;outline-offset:4px}
+.portfolio-art-body {gap:7px;padding:18px 19px 20px}
+.portfolio-art-body strong {font-size:clamp(17px,1.4vw,20px);line-height:1.34}
+.portfolio-art-body small {font-size:13px;line-height:1.6}
+.portfolio-work-featured {display:flex;gap:14px;align-items:center;color:var(--muted);font-size:13px;line-height:1.6;margin:20px 0 26px}
+.portfolio-work-featured::before{content:'';flex:0 0 34px;height:1px;background:var(--accent,#2765ca)}
+.portfolio-library-filter {position:relative;z-index:1;gap:9px;margin:0 0 25px}
+.portfolio-lightbox {max-width:min(96vw,1260px);width:96vw;max-height:96dvh;border-radius:18px}
+.portfolio-lightbox-shell {max-height:96dvh}
+.portfolio-lightbox-image {min-height:0;padding:16px;overflow:auto;overscroll-behavior:contain}
+.portfolio-lightbox-image img {width:auto;height:auto;max-width:100%;max-height:73dvh;object-fit:contain;box-shadow:0 10px 35px rgba(0,0,0,.09)}
+.portfolio-art-brief {display:block;font-size:11px;letter-spacing:.07em;font-weight:600;color:var(--muted);margin-top:1px}
+.portfolio-work-provenance {font-size:12px;line-height:1.7;margin:22px 0 0;color:var(--muted);max-width:720px}
+html[data-theme="dark"] .portfolio-art-image,html[data-theme="dark"] .portfolio-highlight-grid .portfolio-art-image {background:transparent}
+html[data-theme="dark"] .portfolio-art-card {background:#142237;border-color:#394b60}
+html[data-theme="dark"] .portfolio-work-featured,html[data-theme="dark"] .portfolio-work-provenance {color:#c5d1e0}
+@media(max-width:980px){.portfolio-art-grid {columns:2 260px}.portfolio-highlight-grid {grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:620px){.portfolio-art-grid {columns:1}.portfolio-highlight-grid {grid-template-columns:1fr}.portfolio-art-grid .portfolio-art-card {margin-bottom:18px}.portfolio-art-body {padding:16px 17px 19px}.portfolio-work-featured {margin-top:12px}.portfolio-lightbox {width:100vw;max-width:100vw;max-height:100dvh;border-radius:0}.portfolio-lightbox-shell {max-height:100dvh}.portfolio-lightbox-image img {max-height:68dvh}.portfolio-lightbox-footer {gap:8px}}
+@media(prefers-reduced-motion:reduce){.portfolio-art-card{transition:none}}

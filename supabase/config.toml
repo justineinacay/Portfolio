@@ -1,0 +1,4 @@
+# Analytics is intentionally a public function with strict origin checks and
+# an independently authenticated admin query; no Supabase secret is exposed.
+[functions.portfolio-analytics]
+verify_jwt = false

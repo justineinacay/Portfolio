@@ -1,0 +1,160 @@
+/* Justine Inacay Portfolio V15 — consistent text contrast + editorial experience timeline.
+   This stylesheet is intentionally last so older V13/V14 rules cannot reintroduce dark text. */
+
+/* Stable, readable experience presentation in BOTH themes */
+.experience-detail { color:var(--ink); }
+.experience-detail .v13-exp-filters {
+  display:flex; flex-wrap:wrap; gap:10px; margin:0 0 clamp(30px,4vw,48px);
+  padding:4px 0; overflow:visible;
+}
+.experience-detail .v13-exp-filters button,
+.experience-detail .v13-exp-filters button[aria-pressed="false"] {
+  font: 650 13px/1.35 var(--sans,system-ui,sans-serif) !important;
+  letter-spacing:0 !important;
+  min-height:48px; padding:12px 22px;
+  color:#203552 !important;
+  background:#f1f5fa !important;
+  border:1px solid #c9d5e6 !important;
+  box-shadow:none !important;
+  border-radius:100px;
+  opacity:1 !important;
+  transition:background-color .32s ease,color .32s ease,border-color .32s ease,transform .32s ease,box-shadow .32s ease;
+}
+.experience-detail .v13-exp-filters button[aria-pressed="true"] {
+  color:#ffffff !important;
+  background:#2459c7 !important;
+  border-color:#2459c7 !important;
+  box-shadow:0 5px 18px rgba(36,89,199,.17) !important;
+}
+.experience-detail .v13-exp-filters button:hover { transform:translateY(-2px);border-color:#4c7ce3 !important; }
+.experience-detail .v13-exp-filters button:focus-visible { outline:3px solid #6ca5ff; outline-offset:3px; }
+
+.experience-detail .v13-exp-list { padding-left:42px; margin-left:4px; }
+.experience-detail .v13-exp-card {
+  display:grid; grid-template-columns:minmax(120px,21%) minmax(0,1fr);
+  gap:clamp(18px,3vw,37px);
+  margin:0 0 20px;
+  padding:clamp(24px,2.6vw,34px);
+  color:#182b46 !important;
+  background:rgba(255,255,255,.92) !important;
+  border:1px solid #dae3ee !important;
+  border-radius:17px;
+  box-shadow:0 12px 28px rgba(24,48,82,.035);
+  opacity:1 !important;
+}
+.experience-detail .v13-exp-card:hover {border-color:#8cb3ed !important; box-shadow:0 17px 35px rgba(24,48,82,.075);}
+.experience-detail .v13-exp-card[hidden] {display:none!important;}
+.experience-detail .v13-exp-date { color:#607088 !important; font-size:12px; font-weight:750;line-height:1.55; letter-spacing:.075em; }
+.experience-detail .v13-exp-body h3 {
+  color:#182b46 !important;
+  font-size:clamp(23px,2.25vw,31px);line-height:1.24;letter-spacing:-.036em;
+  margin:0 0 12px;font-weight:740;
+}
+.experience-detail .v13-exp-org {
+  display:block;
+  color:#2459ba !important;
+  font-size:clamp(15px,1.3vw,17px);
+  font-weight:730;line-height:1.45;
+  margin:0 0 17px;
+}
+.experience-detail .v13-exp-place {color:#5b6e86 !important; font-size:13px;line-height:1.7;margin:0 0 17px;}
+.experience-detail .v13-exp-description {color:#34465f !important;opacity:1 !important;font-size:15px;line-height:1.8;max-width:74ch;margin:0 0 23px;}
+.experience-detail .v13-exp-badges { display:flex;flex-wrap:wrap;gap:9px; }
+.experience-detail .v13-exp-badges span {background:#eaf1fd !important;color:#2855a1 !important;border:1px solid #cfdef3 !important; padding:7px 12px;border-radius:6px;}
+.experience-detail .v13-exp-note {color:#66778c !important;}
+
+:root[data-theme="dark"] .experience-detail .v13-exp-filters button,
+:root[data-theme="dark"] .experience-detail .v13-exp-filters button[aria-pressed="false"] {
+  color:#eef5ff !important;
+  background:#263751 !important;
+  border-color:#546b8c !important;
+}
+:root[data-theme="dark"] .experience-detail .v13-exp-filters button[aria-pressed="true"] {
+  color:#081729 !important;
+  background:#afcaff !important;
+  border-color:#afcaff !important;
+  box-shadow:0 5px 25px rgba(157,190,255,.16) !important;
+}
+:root[data-theme="dark"] .experience-detail .v13-exp-filters button:hover:not([aria-pressed="true"]) {
+  background:#324b6b !important;border-color:#8fb3ed !important;
+}
+:root[data-theme="dark"] .experience-detail .v13-exp-card {
+  background:#192a41 !important;
+  color:#f2f6fd !important;
+  border-color:#405571 !important;
+  box-shadow:0 14px 30px rgba(0,0,0,.12);
+}
+:root[data-theme="dark"] .experience-detail .v13-exp-card:hover {
+  background:#20334e !important;
+  border-color:#789ac9 !important;
+}
+:root[data-theme="dark"] .experience-detail .v13-exp-date { color:#bdcce0 !important; }
+:root[data-theme="dark"] .experience-detail .v13-exp-body h3 {color:#f5f8ff !important;}
+:root[data-theme="dark"] .experience-detail .v13-exp-org {color:#b7d1ff !important;}
+:root[data-theme="dark"] .experience-detail .v13-exp-place {color:#c3d0e2 !important;}
+:root[data-theme="dark"] .experience-detail .v13-exp-description {color:#e0e8f3 !important; opacity:1 !important;}
+:root[data-theme="dark"] .experience-detail .v13-exp-badges span {
+  color:#d3e4ff !important;
+  background:#273e5b !important;
+  border-color:#526b90 !important;
+}
+:root[data-theme="dark"] .experience-detail .v13-exp-note {color:#b1c2d8 !important;}
+
+/* Remove the long-lived 58% opacity state from the earlier scroll reveal:
+   the text is legible BEFORE and DURING scroll. The line and markers still animate. */
+html.v14-timeline-ready .experience-detail .v13-exp-card:not([hidden]),
+html.v14-timeline-ready .experience-detail .v13-exp-card:not(.v14-in-view):not([hidden]) {
+  opacity:1 !important;
+}
+@media (prefers-reduced-motion:no-preference) {
+  html.v14-timeline-ready .experience-detail .v13-exp-card.v14-in-view {animation:v15TimelineEnter .75s cubic-bezier(.2,.7,.2,1) both;}
+  @keyframes v15TimelineEnter {from{opacity:.88; transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
+  .experience-detail .v13-exp-card:hover {transform:translateY(-3px) !important;}
+}
+
+/* Hero: deliberate scale, readable line spacing, no compressed or clipped headings */
+.hero .hero-grid {grid-template-columns:minmax(0,1.14fr) minmax(0,.86fr); gap:clamp(26px,5vw,75px);}
+.hero .hero-copy {padding-block:90px 72px;}
+.hero .hero-heading {
+  font-size:clamp(49px,4.55vw,69px) !important;
+  line-height:1.16 !important;
+  letter-spacing:-.052em !important;
+  max-width:780px !important;
+  margin:32px 0 35px !important;
+  font-weight:690;
+  overflow-wrap:normal;
+}
+.hero .hero-heading .line-reveal {display:block; overflow:visible !important;padding:0 0 .09em !important;margin:0 0 -.05em !important;}
+.hero .hero-description {line-height:1.82 !important;max-width:57ch !important;}
+.hero .hero-actions {margin-top:38px;}
+
+/* Consistent smaller layouts */
+@media (max-width:900px) {
+  .hero .hero-grid {display:flex;flex-direction:column;gap:18px;}
+  .hero .hero-copy {padding:60px 0 15px;}
+  .hero .hero-heading {font-size:clamp(44px,6.2vw,65px) !important;line-height:1.13 !important;max-width:740px !important;}
+}
+@media (max-width:760px) {
+  .experience-detail .v13-exp-filters {display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;padding:2px 0 6px;margin-bottom:25px;}
+  .experience-detail .v13-exp-filters button {white-space:normal;min-width:0;width:100%;padding:12px 10px;}
+  .experience-detail .v13-exp-list {padding-left:28px;margin-left:0;}
+  .experience-detail .v13-exp-card {grid-template-columns:1fr;gap:12px;padding:23px 20px;border-radius:14px;margin-bottom:15px;}
+  .experience-detail .v13-exp-card::before {left:-29px;top:32px;}
+  .experience-detail .v13-exp-body h3 {font-size:clamp(21px,5.8vw,27px);margin-bottom:10px;}
+  .experience-detail .v13-exp-description {font-size:14px;line-height:1.75;margin-bottom:19px;}
+  .experience-detail .v13-exp-org {margin-bottom:13px;}
+  .experience-detail .v13-exp-note {margin-left:30px;}
+  .hero .hero-copy {padding:45px 0 17px !important;}
+  .hero .hero-heading {font-size:clamp(35px,8.8vw,51px) !important;line-height:1.16 !important;letter-spacing:-.049em !important;margin:24px 0 27px !important;max-width:100% !important;}
+  .hero .hero-description {line-height:1.72 !important;}
+  .hero .hero-actions {margin-top:28px;}
+}
+@media (max-width:350px) {
+  .experience-detail .v13-exp-card{padding:19px 16px;}
+  .experience-detail .v13-exp-card::before{left:-24px;}
+  .experience-detail .v13-exp-list{padding-left:23px;}
+  .hero .hero-heading{font-size:clamp(32px,9vw,38px) !important;}
+}
+@media (prefers-reduced-motion:reduce) {
+  .experience-detail .v13-exp-card {animation:none !important;transition:none !important;opacity:1 !important;transform:none !important;}
+}
