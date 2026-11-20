@@ -172,7 +172,7 @@ function updateProgress() {
     button.classList.toggle('visited', state.visited.has(key));
   }
   for (const button of shortcuts) {
-    button.querySelector('em').textContent = state.visited.has(button.dataset.goto) ? '✓' : '↗';
+    button.querySelector('em').textContent = state.visited.has(button.dataset.goto) ? '✓' : '›';
   }
 }
 
