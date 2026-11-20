@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en" data-jl-game="portfolio">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>JL Town — Justine Inacay | An Interactive Marketing Portfolio</title>
+<meta name="description" content="Explore Justine Inacay’s marketing portfolio in a playable pixel-art town, or go straight to selected case studies, experience, and résumé.">
+<meta name="theme-color" content="#071431">
+<style>
+:root{--navy:#071431;--blue:#207bff;--electric:#36c6ff;--ink:#102046;--gold:#ffc342;--white:#fffef9;--violet:#a678f8;--border:#133a7a;--font:ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;--pixel:ui-monospace,"SFMono-Regular",Consolas,"Liberation Mono",monospace}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;color:#f5f8ff;font-family:var(--font);background:radial-gradient(circle at 50% -15%,#204c92 0,transparent 45%),#051026;min-height:100vh;overflow-x:hidden}body:before{content:"";position:fixed;inset:0;pointer-events:none;opacity:.23;background-image:linear-gradient(90deg,rgba(90,167,255,.08) 1px,transparent 1px),linear-gradient(rgba(90,167,255,.08) 1px,transparent 1px);background-size:32px 32px;z-index:-1}a{color:inherit;text-decoration:none}button,input{font:inherit}button{cursor:pointer}button:focus-visible,a:focus-visible,input:focus-visible{outline:3px solid #ffdf66;outline-offset:4px}button:disabled{opacity:.55;cursor:not-allowed}.skip{position:absolute;top:-100px;left:12px;z-index:80;background:#fff;color:#071431;padding:12px}.skip:focus{top:10px}
+/* Header / branding */
+.site-header{display:flex;align-items:center;justify-content:space-between;max-width:1440px;padding:17px 28px;margin:auto;gap:24px}.brand{display:flex;align-items:center;gap:14px;min-width:0}.brand img{width:48px;height:48px;object-fit:contain;background:#fff;border:2px solid #fff;border-radius:12px;padding:4px}.brand strong{font-weight:900;font-size:1.14rem;letter-spacing:.08em;display:block;line-height:1.1}.brand small{font-size:.63rem;color:#b8d4fb;letter-spacing:.2em;font-weight:800;display:block;margin-top:5px}.head-nav{display:flex;gap:10px;align-items:center}.head-nav a,.head-nav button{background:transparent;color:#d9e9ff;border:1px solid transparent;font-size:.87rem;font-weight:750;padding:11px 13px;border-radius:10px}.head-nav a:hover,.head-nav button:hover{background:#172b50;border-color:#2c65bc}.head-nav .outline{border:1px solid #6daafa;background:#142849;color:white}.header-chip{font:800 .68rem var(--pixel);border:1px solid #3c77c8;border-radius:6px;background:#112c57;color:#a4d7ff;padding:9px 12px;white-space:nowrap}
+.game-container{width:min(100% - 32px,1370px);margin:auto}.hidden{display:none!important}.scene{animation:scene-in .37s ease-out both}@keyframes scene-in{from{opacity:0;transform:translateY(9px)}to{opacity:1;transform:none}}.pixel-label{display:inline-flex;align-items:center;gap:9px;color:#caf0ff;font:800 .76rem var(--pixel);text-transform:uppercase;letter-spacing:.12em}.pixel-label:before{content:"";height:9px;width:9px;background:var(--gold);box-shadow:2px 2px 0 #b47719}.title{font-weight:950;line-height:1.06;letter-spacing:-.055em}.aqua{color:#38c6ff}.yellow{color:#ffd346}.primary,.secondary,.yellow-button,.quiet{display:inline-flex;align-items:center;justify-content:center;gap:9px;min-height:52px;border-radius:10px;font-weight:900;font-size:.98rem;padding:12px 22px;transition:transform .18s,filter .18s,box-shadow .18s;border:2px solid #7fc7ff}.primary{background:linear-gradient(180deg,#409cfe,#0659dc);box-shadow:0 4px 0 #063c9d,0 12px 28px #0636aa4a;color:#fff}.secondary{background:#102e61;color:white;border-color:#81baff;box-shadow:0 4px 0 #071f47}.yellow-button{background:linear-gradient(#fff28b,#ffbd35);color:#243357;border:2px solid #fff3b4;box-shadow:0 4px 0 #ab6a0f}.quiet{background:#182f53;color:#e8f3ff;border-color:#31578e}.primary:hover,.secondary:hover,.yellow-button:hover,.quiet:hover{filter:brightness(1.1);transform:translateY(-2px)}.btnline{display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+/* Title scene */
+.hero-stage{position:relative;min-height:630px;overflow:hidden;border:4px solid #3b73b8;border-radius:17px;box-shadow:0 10px 0 #091b41,0 34px 90px #0008;background:#0b2d67 url("assets/jl-game/jl-town-map.webp") center 39%/cover no-repeat;isolation:isolate}.hero-stage:before{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(3,13,36,.97) 0%,rgba(4,24,56,.87) 37%,rgba(5,26,63,.24) 73%),linear-gradient(0deg,#071433a8,transparent 48%);z-index:-1}.hero-inner{padding:clamp(24px,5.5vw,84px) clamp(26px,5vw,78px);max-width:850px;position:relative;z-index:2}.hero-title{font-size:clamp(2.7rem,5.4vw,5.7rem);margin:24px 0 18px;text-shadow:0 4px 0 #001236,0 0 25px #0c3c76}.hero-description{max-width:540px;color:#e4f1ff;font-size:clamp(1rem,1.8vw,1.24rem);line-height:1.6;font-weight:550;margin:0 0 26px}.hero-figure{position:absolute;right:6%;bottom:-8%;width:clamp(210px,26%,440px);max-height:95%;object-fit:contain;object-position:bottom;z-index:1;filter:drop-shadow(-18px 16px 0 #04133270) drop-shadow(0 0 22px #59baff44);animation:float 3s ease-in-out infinite}@keyframes float{50%{transform:translateY(-8px)}}
+/* Character selection */
+.scene-head{text-align:center;max-width:740px;margin:30px auto 26px}.scene-head h1{font-size:clamp(2.1rem,4vw,3.65rem);margin:15px 0}.scene-head p{color:#a8c6f0;line-height:1.6;font-size:1rem}.setup-panel{padding:0 0 30px}.avatar-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px;max-width:1110px;margin:0 auto 28px}.avatar-card{position:relative;text-align:left;overflow:hidden;isolation:isolate;background:linear-gradient(155deg,#183f80,#081a39 75%);border:3px solid #4e9fff;border-radius:13px;color:#fff;padding:0;box-shadow:0 7px 0 #05152e,0 15px 30px #0007;transition:transform .2s,box-shadow .2s}.avatar-card[data-avatar="girl"]{border-color:#ffd157;background:linear-gradient(140deg,#6a4610,#241b15 75%)}.avatar-card[data-avatar="scout"]{border-color:#efd0a9;background:linear-gradient(140deg,#65452c,#241d1c 80%)}.avatar-card:hover,.avatar-card[aria-pressed="true"]{transform:translateY(-6px);box-shadow:0 6px 0 #05152e,0 19px 34px #000a}.avatar-card[aria-pressed="true"]:after{content:"SELECTED ✓";position:absolute;right:10px;top:9px;background:#fff1a0;border:2px solid #fff;color:#122144;border-radius:5px;padding:5px 8px;font:900 .64rem var(--pixel)}.avatar-art{height:clamp(185px,25vw,310px);display:flex;align-items:end;justify-content:center;overflow:hidden;background:radial-gradient(circle at 50% 50%,#90dfff44,transparent 65%),linear-gradient(0deg,#ffffff16,transparent 30%)}.avatar-art img{height:120%;max-width:94%;object-fit:contain;object-position:bottom;filter:drop-shadow(0 13px 12px #0006);transform:translateY(27px);transition:transform .25s}.avatar-card:hover img{transform:translateY(13px) scale(1.02)}.avatar-bottom{padding:15px 18px 19px;border-top:2px solid #ffffff33;min-height:115px}.avatar-bottom h3{margin:0;font-size:1.3rem;letter-spacing:-.03em}.avatar-bottom span{display:block;color:#accdf6;margin-top:4px;font-size:.83rem}.avatar-card[data-avatar="girl"] .avatar-bottom span{color:#ffedab}.avatar-card[data-avatar="scout"] .avatar-bottom span{color:#f2d1b2}.avatar-bottom p{font-size:.82rem;color:#dbe9ff;margin:9px 0 0;line-height:1.42}.setup-actions{display:flex;justify-content:center;gap:14px;flex-wrap:wrap}.setup-guide{display:flex;align-items:center;gap:14px;max-width:900px;margin:0 auto 26px;padding:15px;background:#eef6ff;color:#183265;border:4px solid #3d82cc;border-radius:10px;box-shadow:0 5px 0 #0a2b64}.setup-guide img{width:68px;height:68px;object-fit:contain;background:#ccedff;border:2px solid #afd8fa;border-radius:8px}.setup-guide strong{display:block;color:#17458c;font:900 .8rem var(--pixel);margin-bottom:6px}.setup-guide p{margin:0;line-height:1.4;font-weight:650}.naming-panel{max-width:760px;margin:25px auto 50px;background:#f2f7ff;color:#152d59;border:5px solid #4389d1;border-radius:13px;padding:clamp(22px,5vw,46px);box-shadow:0 8px 0 #0a2b63,0 20px 35px #0005}.naming-row{display:flex;align-items:center;gap:26px}.naming-row img{width:130px;height:135px;object-fit:contain}.naming-panel label{display:block;font:900 .88rem var(--pixel);margin:0 0 12px}.naming-panel input{width:100%;height:60px;min-width:0;border:3px solid #426cb0;border-radius:6px;padding:13px 17px;font:700 1.2rem var(--pixel);color:#142d58;background:white;box-shadow:0 5px 0 #d1e3fc}.naming-panel .btnline{margin-top:24px;justify-content:center}.name-note{text-align:center;font-size:.79rem;color:#46608b}
+/* World */
+.world-layout{display:grid;grid-template-columns:minmax(0,1fr) 304px;gap:17px;margin:12px auto 24px;align-items:start}.world-topline{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:14px 0 16px;flex-wrap:wrap}.world-topline h1{font-size:clamp(1.6rem,3vw,2.6rem);margin:0;line-height:1.1}.topline-right{display:flex;align-items:center;gap:9px;flex-wrap:wrap}.world-viewport{overflow:auto;position:relative;border:5px solid #3174c2;border-radius:12px;box-shadow:0 8px 0 #081f4d,0 18px 35px #0005;background:#0b2b61;scrollbar-color:#3982ca #081a3d}.world-map{position:relative;width:100%;aspect-ratio:1672/941;overflow:hidden;background-image:url('assets/jl-game/jl-town-map.webp');background-size:100% 100%;background-repeat:no-repeat;isolation:isolate}.world-map:after{content:"";position:absolute;inset:0;pointer-events:none;border:3px solid #ffffff30;z-index:6}.map-float{position:absolute;z-index:5;background:#061a43eb;border:2px solid #8dccff;color:#f8fcff;padding:6px 10px;font:800 clamp(.52rem,.8vw,.68rem) var(--pixel);border-radius:5px;box-shadow:0 3px 0 #091c49,0 4px 10px #0009}.map-float.titlehud{left:1.3%;top:2%;display:flex;gap:5px;align-items:center}.map-float.progresshud{right:1.3%;top:2%;background:#ffec9e;color:#17294a;border-color:#fff}.hotspot{position:absolute;left:var(--x);top:var(--y);transform:translate(-50%,-50%);z-index:3;background:#062c64ee;border:2px solid #d1ecff;box-shadow:0 3px 0 #071940,0 2px 0 4px #1578e899;border-radius:7px;padding:8px 10px;display:flex;align-items:center;gap:7px;color:#fff;font-size:clamp(.54rem,.76vw,.75rem);font-weight:900;white-space:nowrap;transition:transform .2s,background .2s}.hotspot:hover,.hotspot:focus-visible{transform:translate(-50%,-50%) scale(1.09);background:#0d64b4;z-index:8}.hotspot .poi-icon{font-size:1.3em}.hotspot.visited{border-color:#ffee8a;background:#34521d}.hotspot.visited:after{content:'✓';color:#ffea56;font-size:.9em}.player{position:absolute;left:50%;top:79%;width:clamp(44px,7.7%,75px);height:auto;z-index:4;transform:translate(-50%,-85%);pointer-events:none;filter:drop-shadow(0 6px 2px #071a3270);will-change:left,top}.player img{width:100%;height:auto;object-fit:contain;display:block}.player.is-moving img{animation:walk-bob .22s ease-in-out infinite alternate}@keyframes walk-bob{to{transform:translateY(-5px) rotate(-2deg)}}.player-name{position:absolute;top:-8px;left:50%;transform:translate(-50%,-100%);background:#102b55e8;color:#fff;font:900 .65rem var(--pixel);border:2px solid #fff;border-radius:4px;padding:4px 8px;white-space:nowrap}.world-lower{margin-top:8px}.dialogue{display:grid;grid-template-columns:76px minmax(0,1fr) auto;gap:12px;align-items:center;background:#f7fbff;border:5px solid #4282d7;border-radius:12px;padding:10px 15px;color:#142850;box-shadow:0 5px 0 #102e65;min-height:107px}.dialogue img{width:76px;height:77px;object-fit:contain;background:#e2efff;border:2px solid #bcd4f4;border-radius:6px}.dialogue strong{font:900 .79rem var(--pixel);color:#1455a7}.dialogue p{font-size:.9rem;font-weight:650;line-height:1.48;margin:5px 0 0}.dialogue button{min-width:42px;min-height:40px;background:#ffcf49;border:2px solid #b17819;border-radius:6px;color:#132f53;font:900 1rem var(--pixel)}.world-sidebar{display:flex;flex-direction:column;gap:14px}.sidepanel{background:#0c244a;border:2px solid #346bb0;border-radius:11px;box-shadow:0 6px 0 #05152e;padding:16px}.sidepanel h2{font-size:1rem;margin:0 0 12px;display:flex;align-items:center;justify-content:space-between;gap:6px}.sidepanel p{font-size:.78rem;color:#b7d1f0;line-height:1.6;margin:0 0 13px}.sideguide{display:flex;align-items:center;gap:10px;background:#143464;border-radius:8px;padding:8px;margin:0 0 10px}.sideguide img{width:78px;height:88px;object-fit:contain}.sideguide strong{font-size:.91rem}.sideguide small{display:block;color:#a6cffe;font-size:.73rem;margin-top:3px}.location-list{display:grid;gap:6px}.location-list button{display:flex;align-items:center;gap:8px;text-align:left;min-height:39px;padding:8px 10px;border-radius:7px;border:1px solid #3b6cab;background:#103361;color:#f0f7ff;font-weight:800;font-size:.82rem}.location-list button:hover{background:#1a58a0}.location-list button em{margin-left:auto;font-style:normal;color:#f6ce5f}.controls-note{font:700 .73rem var(--pixel);line-height:1.65;color:#9ccef9}.dpad{display:none;grid-template-areas:'. up .' 'left down right';grid-template-columns:repeat(3,52px);gap:5px;justify-content:center;margin:12px auto 0;touch-action:none;user-select:none}.dpad button{background:#173e78;border:2px solid #65b7ff;color:#fff;border-radius:7px;font-size:1.35rem;font-weight:900;min-height:48px;touch-action:none}.dpad button:active{background:#348ce4}.dpad [data-move="up"]{grid-area:up}.dpad [data-move="left"]{grid-area:left}.dpad [data-move="down"]{grid-area:down}.dpad [data-move="right"]{grid-area:right}
+/* Below map */
+.info-section{margin:40px auto 70px}.info-intro{display:flex;justify-content:space-between;align-items:end;gap:20px;flex-wrap:wrap}.info-section h2{font-size:clamp(1.7rem,3vw,2.7rem);letter-spacing:-.04em;margin:9px 0 8px}.info-section p{color:#adcaeb;font-size:.93rem;line-height:1.6;max-width:630px}.preview-links{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin-top:23px}.preview-link{background:linear-gradient(145deg,#143668,#0a1c3b);border:2px solid #27589a;border-radius:9px;padding:22px;transition:transform .2s,border-color .2s}.preview-link:hover{transform:translateY(-4px);border-color:#60acff}.preview-link strong{display:block;font-size:1rem;margin:12px 0 8px}.preview-link p{font-size:.81rem;margin:0 0 16px}.preview-link span{font-size:.78rem;font-weight:900;color:#63caff}.preview-link .bigicon{font-size:1.8rem}.footer{text-align:center;border-top:1px solid #284b79;padding:23px;margin:22px auto;color:#8eacd1;font-size:.78rem;display:flex;justify-content:center;gap:15px;flex-wrap:wrap}.footer a{color:#bcdcff}
+/* Overlay chapters */
+.modal-card{width:min(100%,760px);max-height:min(92vh,820px);overflow:auto;background:#f8fbff;color:#122952;border:5px solid #3879c8;border-radius:14px;box-shadow:0 0 0 5px #101f53,0 30px 95px #000c;position:relative}.modal-cover{position:relative;height:150px;display:flex;align-items:center;padding:22px 28px;overflow:hidden;background:linear-gradient(115deg,#0b337d,#1769ca 65%,#4acaf9);color:#fff}.modal-cover:after{content:"";position:absolute;inset:0;background:repeating-linear-gradient(90deg,#ffffff13 0 1px,transparent 1px 27px);pointer-events:none}.modal-cover .symbol{font-size:4rem;margin-right:17px;text-shadow:0 5px 0 #04275d}.modal-cover .location-title{font-size:clamp(1.55rem,4vw,2.3rem);line-height:1.1;letter-spacing:-.05em;font-weight:950}.modal-cover small{display:block;font:750 .75rem var(--pixel);color:#caeaff;margin-bottom:9px}.modal-close{position:absolute;z-index:3;right:10px;top:10px;width:40px;height:40px;border:2px solid #ffeeba;border-radius:7px;background:#102a5b;color:white;font-size:1.4rem;font-weight:900}.modal-body{padding:24px 30px 30px}.modal-body p{line-height:1.6;color:#32476c;font-weight:550}.modal-body ul{list-style:none;padding:0;display:grid;gap:11px}.modal-body li{padding:12px 15px;border-left:4px solid #1479dd;background:#eaf4ff;color:#253e69;font-weight:600;border-radius:5px}.modal-body .btnline{margin-top:24px}
+@media(max-width:1050px){.world-layout{grid-template-columns:1fr}.world-sidebar{display:grid;grid-template-columns:1fr 1fr}.hero-stage{min-height:540px}.hero-figure{right:0%;opacity:.78}}@media(max-width:760px){.site-header{padding:14px 16px;flex-wrap:wrap}.brand img{width:40px;height:40px}.brand strong{font-size:.93rem}.header-chip{display:none}.head-nav{width:100%;justify-content:space-between;gap:3px}.head-nav a,.head-nav button{font-size:.76rem;padding:7px 6px}.game-container{width:calc(100% - 20px)}.hero-stage{min-height:570px;border-width:3px}.hero-inner{padding:35px 20px;max-width:100%}.hero-title{font-size:clamp(2.45rem,10vw,4rem);max-width:480px;margin:17px 0}.hero-description{font-size:.95rem;max-width:390px}.hero-figure{width:48%;height:49%;right:-2%;bottom:30px;opacity:.86;object-position:bottom}.hero-inner .btnline{flex-direction:column;align-items:flex-start}.hero-inner .btnline button{padding:10px 16px;min-height:46px}.avatar-grid{grid-template-columns:1fr;max-width:390px;gap:17px}.avatar-art{height:235px}.avatar-bottom{min-height:100px}.setup-guide{margin:0 4px 20px}.naming-row{gap:10px}.naming-row img{width:90px;height:110px}.naming-panel{padding:22px}.world-layout{gap:12px}.world-topline h1{font-size:1.7rem}.world-viewport{max-width:100%;border-width:3px}.world-map{width:760px;min-width:760px}.world-sidebar{grid-template-columns:1fr}.dpad{display:grid}.dialogue{grid-template-columns:48px minmax(0,1fr) 35px;gap:8px;padding:9px;border-width:3px}.dialogue img{width:47px;height:52px}.dialogue p{font-size:.76rem}.dialogue strong{font-size:.69rem}.dialogue button{min-width:32px;min-height:32px}.preview-links{grid-template-columns:1fr}.info-section{margin-top:34px}.modal-body{padding:18px}.modal-cover{height:138px;padding:19px}.modal-cover .symbol{font-size:2.8rem}.footer{font-size:.67rem}}
+@media (prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+/* Shared paths into the game and portfolio. */
+.hero-stage { min-height: clamp(460px, 58vw, 615px); }
+.hero-inner { width: min(100%, 670px); }
+.hero-figure { right: 5%; bottom: -3%; height: auto; }
+.hero-description { max-width: 500px; }
+.head-nav a { display: inline-flex; align-items: center; min-height: 44px; }
+.head-nav .outline { flex: none; }
+.brand small { font-size: .75rem; letter-spacing: .13em; }
+.brand strong { letter-spacing: .05em; }
+[hidden] { display: none !important; }
+#worldViewport:focus-visible { outline: 3px solid #ffdf66; outline-offset: 3px; }
+.hotspot { min-height: 40px; font-size: .75rem; }
+.location-list button { min-height: 44px; }
+#resetGame { min-height: 44px; padding: 7px 12px; font-size: .85rem; }
+.controls-note { margin-bottom: 0 !important; }
+.dpad { grid-template-areas: '. up . visit' 'left down right visit'; grid-template-columns: repeat(3, 48px) minmax(70px, 92px); gap: 6px; }
+.dpad .visit-button { grid-area: visit; min-height: 48px; align-self: end; margin-left: 8px; font-size: .95rem; background: #ffd35e; color: #152b4f; border-color: #fff3ad; }
+.work-links { display: flex; gap: 8px 20px; flex-wrap: wrap; padding-top: 14px; }
+.work-links a { display: inline-flex; align-items: center; min-height: 44px; color: #dbedff; text-decoration: underline; text-underline-offset: 4px; }
+.preview-link .case-category { color: #c7e4ff; font-size: .92rem; margin: 0; }
+.preview-link .case-figure { color: #ffe18a; font-size: clamp(2rem, 4vw, 3rem); line-height: 1; }
+.preview-link p { font-size: .95rem; }
+.preview-link span { font-size: .88rem; }
+.modal-card:not([open]) { display: none; }
+.modal-card { padding: 0; }
+.modal-card::backdrop { background: #020d24d9; backdrop-filter: blur(7px); }
+.modal-cover { height: auto; min-height: 118px; padding: 25px 62px 25px 24px; }
+.modal-cover .location-title { margin: 0; }
+.modal-close { width: 44px; height: 44px; }
+.back-to-town { margin-top: 12px; }
+@media (pointer: coarse) {
+  .dpad { display: grid; }
+  .hotspot { min-height: 44px; }
+}
+@media (max-width: 760px) {
+  .site-header { gap: 10px; }
+  .head-nav { width: auto; }
+  .head-nav a { font-size: .83rem; }
+  .hero-stage { min-height: 490px; }
+  .hero-stage:before { background: linear-gradient(180deg, #041334ed 17%, #061436c4 51%, #07143327 100%); }
+  .hero-figure { width: 42%; height: 40%; right: 0; bottom: 0; }
+  .hero-inner .btnline { flex-direction: row; align-items: stretch; gap: 10px; }
+  .hero-inner .btnline > * { min-height: 48px; font-size: .9rem; padding: 9px 12px; }
+  .info-section { margin: 34px auto 42px; }
+}
+@media (max-width: 400px) {
+  .hero-figure { width: 48%; height: 33%; }
+}
+</style>
+</head>
+<body><a class="skip" href="#main">Skip to content</a>
+<header class="site-header">
+  <a class="brand" id="homeNav" href="#scene-title" aria-label="JL Town title screen">
+    <img src="assets/jl-game/jl-monogram.png" alt="" width="48" height="48">
+    <span><strong>JL TOWN</strong><small>JUSTINE INACAY</small></span>
+  </a>
+  <nav class="head-nav" aria-label="Portfolio navigation">
+    <a class="outline" href="work.html">Selected work</a>
+    <a href="assets/Justine_Inacay_Resume.pdf" download>Résumé</a>
+    <a href="contact.html">Contact</a>
+  </nav>
+</header>
+<main id="main" class="game-container" tabindex="-1">
+<section class="scene" id="scene-title" aria-labelledby="town-title">
+  <div class="hero-stage">
+    <div class="hero-inner">
+      <span class="pixel-label">An interactive marketing portfolio</span>
+      <h1 class="title hero-title" id="town-title">Welcome to <span class="yellow">JL Town.</span></h1>
+      <p class="hero-description">I’m Justine Inacay, a marketing strategist working across performance marketing, brand strategy, and creative direction. Pick an explorer and walk through my work.</p>
+      <div class="btnline">
+        <button class="yellow-button" id="startGame" type="button" hidden><span aria-hidden="true">▶</span> Explore JL Town</button>
+        <a class="secondary" href="work.html">View selected work</a>
+      </div>
+    </div>
+    <img class="hero-figure" src="assets/jl-game/justine/portrait.webp" alt="" width="430" height="500">
+  </div>
+</section>
+<section class="scene setup-panel hidden" id="scene-avatar" aria-label="Choose an explorer"><div class="scene-head"><span class="pixel-label">Step 01 / Character select</span><h1 class="title">Choose your <span class="aqua">explorer.</span></h1><p>Pick a character to walk around town.</p></div><div class="setup-guide"><img src="assets/jl-game/justine/happy.webp" alt="Justine guide"><div><strong>JUSTINE · YOUR GUIDE</strong><p>Welcome! Pick your explorer and I’ll show you the stories behind my work.</p></div></div><div class="avatar-grid" id="avatarGrid"><button class="avatar-card" data-avatar="boy" aria-pressed="true"><div class="avatar-art"><img src="assets/jl-game/boy/portrait.webp" alt="Boy Explorer in blue"></div><div class="avatar-bottom"><h3>Boy Explorer</h3><span>Curious · Energetic · Adventurous</span><p>Jump into challenges and discover what drives growth.</p></div></button><button class="avatar-card" data-avatar="girl" aria-pressed="false"><div class="avatar-art"><img src="assets/jl-game/girl/portrait.webp" alt="Girl Explorer in yellow"></div><div class="avatar-bottom"><h3>Girl Explorer</h3><span>Creative · Thoughtful · Curious</span><p>See the ideas, design, and thinking behind the brands.</p></div></button><button class="avatar-card" data-avatar="scout" aria-pressed="false"><div class="avatar-art"><img src="assets/jl-game/scout/portrait.webp" alt="Scout Girl in tan"></div><div class="avatar-bottom"><h3>Scout Girl</h3><span>Resourceful · Organized · Observant</span><p>Map the details and find the story behind every result.</p></div></button></div><div class="setup-actions"><button class="quiet" id="backToTitle">← Back</button><button class="yellow-button" id="confirmAvatar">Continue →</button></div></section>
+<section class="scene setup-panel hidden" id="scene-name" aria-label="Name your explorer"><div class="scene-head"><span class="pixel-label">Step 02 / Your story</span><h1 class="title">What should I <span class="yellow">call you?</span></h1><p>Enter a nickname or continue as Explorer.</p></div><div class="naming-panel"><div class="naming-row"><img id="nameAvatar" src="assets/jl-game/boy/sprite.png" alt="Selected explorer"><div style="min-width:0;flex:1"><label for="playerName">EXPLORER NAME</label><input id="playerName" type="text" maxlength="18" autocomplete="nickname" placeholder="Enter your name" value="Explorer"></div></div><p class="name-note">Your nickname and character choice are saved on this device.</p><div class="btnline"><button class="quiet" id="backToAvatar">← Back</button><button class="yellow-button" id="enterAdventure">▶ Begin Adventure</button></div></div></section>
+<section class="scene hidden" id="scene-town" aria-label="Interactive JL Town game"><div class="world-topline"><div><span class="pixel-label">Chapter 01 / Your Journey</span><h1 class="title">Welcome to <span class="aqua">JL Town.</span></h1></div><div class="topline-right"><span class="header-chip" id="topPlayerName">PLAYER: EXPLORER</span><button class="quiet" id="resetGame" >↺ New game</button></div></div><div class="world-layout"><div><div class="world-viewport" id="worldViewport" tabindex="0" role="region" aria-label="Town map" aria-describedby="mapControls"><div class="world-map" id="worldMap"><div class="map-float titlehud">◆ JL TOWN · MAP 01</div><div class="map-float progresshud"><span id="progressText">0 / 7 PLACES</span></div>
+<button class="hotspot" data-spot="about" style="--x:50%;--y:30%" aria-label="Visit About Me headquarters"><span class="poi-icon">◆</span>About Me</button>
+<button class="hotspot" data-spot="skills" style="--x:22%;--y:33%" aria-label="Visit Skills workshop"><span class="poi-icon">⚙</span>Skills</button>
+<button class="hotspot" data-spot="experience" style="--x:78%;--y:35%" aria-label="Visit Experience library"><span class="poi-icon">▤</span>Experience</button>
+<button class="hotspot" data-spot="projects" style="--x:20%;--y:59%" aria-label="Visit Projects gallery"><span class="poi-icon">▣</span>Projects</button>
+<button class="hotspot" data-spot="tools" style="--x:80%;--y:59%" aria-label="Visit Tools lab"><span class="poi-icon">⚒</span>Tools</button>
+<button class="hotspot" data-spot="achievements" style="--x:28%;--y:87%" aria-label="Visit Achievements hall"><span class="poi-icon">★</span>Achievements</button>
+<button class="hotspot" data-spot="contact" style="--x:74%;--y:88%" aria-label="Visit Contact post office"><span class="poi-icon">✉</span>Contact</button>
+<div class="player" id="player" aria-label="Your explorer"><span class="player-name" id="spriteName">Explorer</span><img id="playerSprite" src="assets/jl-game/boy/sprite.png" alt="Explorer sprite"></div></div></div>
+<div class="world-lower"><div class="dialogue" role="status" aria-live="polite"><img id="guideFace" src="assets/jl-game/justine/happy.webp" alt="Guide Justine"><div><strong>JUSTINE · YOUR GUIDE</strong><p id="dialogueText">Welcome to JL Town! Use the arrow keys or WASD to move; tap a building label to explore.</p></div><button id="nextDialogue" title="Next hint" aria-label="Next guide hint">▼</button></div><div class="dpad" role="group" aria-label="Movement controls"><button data-move="up" aria-label="Walk up">↑</button><button data-move="left" aria-label="Walk left">←</button><button data-move="down" aria-label="Walk down">↓</button><button data-move="right" aria-label="Walk right">→</button><button class="visit-button" id="visitLocation" type="button" disabled>Visit</button></div></div></div>
+<aside class="world-sidebar"><section class="sidepanel"><h2>YOUR ADVENTURE <span style="color:#ffd15a">✦</span></h2><div class="sideguide"><img src="assets/jl-game/justine/portrait.webp" alt="Guide Justine"><div><strong>Justine Inacay</strong><small>Marketing & Growth Strategist</small></div></div><p>Visit each location to learn about my professional experience, projects, and creative approach.</p><p class="controls-note" id="mapControls">Walk with your arrow keys, WASD, or the touch pad. Use Enter or Visit near an entrance, or select any location on the map.</p></section><section class="sidepanel"><h2>YOUR MAP <span id="sideProgress">0/7</span></h2><div class="location-list" id="destinationList"><button data-goto="about">◆ <span>About Me</span><em>↗</em></button><button data-goto="skills">⚙ <span>Skills</span><em>↗</em></button><button data-goto="experience">▤ <span>Experience</span><em>↗</em></button><button data-goto="projects">▣ <span>Projects</span><em>↗</em></button><button data-goto="tools">⚒ <span>Tools</span><em>↗</em></button><button data-goto="achievements">★ <span>Achievements</span><em>↗</em></button><button data-goto="contact">✉ <span>Contact</span><em>↗</em></button></div></section></aside></div></section>
+<section class="info-section" id="real-work" aria-labelledby="work-heading">
+  <div class="info-intro">
+    <div>
+      <h2 id="work-heading">Selected marketing results</h2>
+      <p>Reported in my résumé. The case studies cover the brief, my role, and the context for each result.</p>
+    </div>
+    <a class="secondary" href="work.html">All case studies</a>
+  </div>
+  <div class="preview-links">
+    <a href="case-studies/lead-generation.html" class="preview-link">
+      <p class="case-category">International lead generation</p>
+      <strong class="case-figure">40–60%</strong>
+      <p>Growth in qualified leads after work on targeting, creative, landing pages, and lead routing.</p>
+      <span>Read the lead generation case</span>
+    </a>
+    <a href="case-studies/hospitality.html" class="preview-link">
+      <p class="case-category">Hospitality marketing</p>
+      <strong class="case-figure">+48%</strong>
+      <p>Delivery-platform revenue growth reported during a hospitality marketing engagement.</p>
+      <span>Read the hospitality case</span>
+    </a>
+    <a href="case-studies/recruitment.html" class="preview-link">
+      <p class="case-category">Recruitment marketing</p>
+      <strong class="case-figure">+75%</strong>
+      <p>Growth in verified applications and walk-ins during peak periods.</p>
+      <span>Read the recruitment case</span>
+    </a>
+  </div>
+  <nav class="work-links" aria-label="Professional portfolio shortcuts">
+    <a href="experience.html">Professional experience</a>
+    <a href="assets/Justine_Inacay_Resume.pdf" download>Download résumé</a>
+    <a href="contact.html">Contact Justine</a>
+  </nav>
+</section>
+</main>
+<dialog id="chapterModal" class="modal-card" aria-labelledby="chapterTitle">
+  <div class="modal-cover">
+    <span class="symbol" id="chapterSymbol" aria-hidden="true"></span>
+    <div><small id="chapterMeta"></small><h2 class="location-title" id="chapterTitle"></h2></div>
+    <form method="dialog">
+      <button class="modal-close" aria-label="Close chapter" autofocus>×</button>
+    </form>
+  </div>
+  <div class="modal-body">
+    <p id="chapterIntro"></p>
+    <ul id="chapterBullets"></ul>
+    <div class="btnline" id="chapterLinks"></div>
+    <form method="dialog" class="back-to-town"><button class="secondary">Back to town</button></form>
+  </div>
+</dialog>
+<footer class="game-container footer"><span>© 2026 Justine Inacay</span><a href="index.html">Portfolio home</a><a href="contact.html">Contact</a></footer>
+<script src="assets/jl-game/game.js" defer></script>
+</body>
+</html>

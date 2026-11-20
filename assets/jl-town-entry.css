@@ -1,0 +1,53 @@
+.hero-actions .jl-town-cta {
+  gap: 9px;
+  color: var(--ink);
+  background: var(--surface);
+  border: 1px solid var(--line);
+}
+
+.hero-actions .jl-town-cta:hover {
+  color: var(--ink);
+  border-color: currentColor;
+}
+
+.hero-actions .jl-town-cta svg {
+  flex: none;
+}
+
+.hero-resume {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 20px;
+}
+
+.work-shortcuts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 20px;
+  margin-top: 20px;
+}
+
+.work-shortcuts a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  font-weight: 650;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+#selected-cases {
+  scroll-margin-top: 78px;
+}
+
+@media (max-width: 760px) {
+  .hero-actions .jl-town-cta {
+    min-height: 50px;
+  }
+
+  .hero-resume {
+    min-height: 44px;
+    margin-top: 8px;
+  }
+}
